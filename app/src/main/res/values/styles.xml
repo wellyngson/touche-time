@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowMinWidthMajor">500dp</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+    </style>
+
+    <style name="ScoreTextView">
+        <item name="android:textSize">@dimen/font_title_score</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AddScoreTextView">
+        <item name="android:layout_marginBottom">@dimen/spacing_large</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="RemoveScoreTextView">
+        <item name="android:layout_marginTop">@dimen/spacing_large</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextChronometer">
+        <item name="android:textSize">@dimen/font_chronometer_size</item>
+        <item name="android:textColor">@color/text_individual_score</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/spacing_middle</item>
+        <item name="background">@drawable/background_item_chronometer</item>
+    </style>
+</resources>

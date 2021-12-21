@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="IndividualScore">
+        <attr name="name" format="string"/>
+        <attr name="score" format="string"/>
+        <attr name="foul" format="string"/>
+        <attr name="backgroundComponent" format="reference" />
+        <attr name="backgroundComponentsAddRemove" format="reference" />
+        <attr name="android:icon" format="reference"/>
+    </declare-styleable>
+</resources>

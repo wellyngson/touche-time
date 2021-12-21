@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chronometer_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:background="@color/black_background">
+
+    <TextView
+        android:id="@+id/round"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_individual_score"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        android:textSize="@dimen/font_title_normal"
+        android:text="@string/round_1"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ten_minutes_chronometer"
+            style="@style/TextChronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:background="@drawable/background_item_chronometer"
+            android:text="0" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/minutes_chronometer"
+            style="@style/TextChronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:background="@drawable/background_item_chronometer"
+            android:text="3" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="@dimen/spacing_normal"
+                android:layout_height="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:background="@drawable/background_point_chronometer" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="@dimen/spacing_normal"
+                android:layout_height="@dimen/spacing_normal"
+                android:background="@drawable/background_point_chronometer" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ten_seconds_chronometer"
+            style="@style/TextChronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:background="@drawable/background_item_chronometer"
+            android:text="0" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/seconds_chronometer"
+            style="@style/TextChronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_item_chronometer"
+            android:text="0" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/chronometer_controller_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/refresh"
+            android:layout_width="@dimen/spacing_big"
+            android:layout_height="@dimen/spacing_big"
+            android:background="@drawable/background_settings_chronometer"
+            android:src="@drawable/ic_refresh" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/play_or_pause"
+            android:layout_width="@dimen/ic_play_chronometer"
+            android:layout_height="@dimen/ic_play_chronometer"
+            android:layout_marginHorizontal="@dimen/spacing_normal"
+            android:background="@drawable/background_settings_chronometer"
+            android:src="@drawable/icon_play_pause" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/edit"
+            android:layout_width="@dimen/spacing_big"
+            android:layout_height="@dimen/spacing_big"
+            android:background="@drawable/background_settings_chronometer"
+            android:src="@drawable/ic_edit_text" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</LinearLayout>
