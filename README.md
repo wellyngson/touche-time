@@ -1,9 +1,9 @@
 WRESTLING SCORE
 
-Aplicativo desenvolvido inicialmente em kotlin e futuramente será implementado para IOS.
+Application initially developed in kotlin and in the future will be implemented for IOS.
 
-O projeto está sendo pensado com:
-  1. Arquitetura MVVM
+The project is being designed with:
+  1. MVVM Architecture
   2. Retrofit
   4. Room Database
   5. Koin
