@@ -29,11 +29,10 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/foul"
+            style="@style/TextViewIndividualScoreFoul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
-            android:textColor="@color/text_individual_score"
-            android:textSize="@dimen/font_foul_size" />
+            android:text="0"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -76,6 +75,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/nationality"
+            android:fontFamily="@font/inter_medium"
             android:layout_width="40dp"
             android:layout_height="29dp"
             android:layout_marginEnd="@dimen/spacing_small"
@@ -83,11 +83,10 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/name"
+            style="@style/TextViewIndividualScoreName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gabriel_ferreira"
-            android:textColor="@color/text_individual_score"
-            android:textSize="@dimen/font_title_normal" />
+            android:text="@string/gabriel_ferreira"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -97,8 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/spacing_xx_large"
         android:text="12"
-        android:textColor="@color/text_individual_score"
-        android:textSize="@dimen/font_score_size"
+        style="@style/TextViewIndividualScore"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/score_container"
         app:layout_constraintTop_toBottomOf="@id/name_container" />
