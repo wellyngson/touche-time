@@ -5,7 +5,7 @@
     </style>
 
     <style name="TextViewIndividualScoreName" parent="TextViewBasic">
-        <item name="android:fontFamily">@font/inter_medium"</item>
+        <item name="android:fontFamily">@font/inter_medium</item>
         <item name="android:textSize">@dimen/font_title_normal</item>
     </style>
 
@@ -14,7 +14,7 @@
     </style>
 
     <style name="TextViewIndividualScore" parent="TextViewBasic">
-        <item name="android:fontFamily">@font/inter_bold"</item>
+        <item name="android:fontFamily">@font/inter_bold</item>
         <item name="android:textSize">@dimen/font_score_size</item>
     </style>
 
