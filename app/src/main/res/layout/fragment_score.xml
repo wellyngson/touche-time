@@ -1,46 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:clipChildren="false"
     android:background="@color/black_background"
+    android:orientation="vertical"
     android:paddingHorizontal="@dimen/spacing_normal">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/settings_container"
+        android:layout_marginTop="@dimen/spacing_xx_large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_arrow_left"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:text="FS Sênior"
+            android:background="@drawable/background_category"
+            android:textColor="@color/text_individual_score"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:paddingVertical="@dimen/spacing_middle"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="65KG"
+            android:textSize="@dimen/font_title_big"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:textColor="@color/text_individual_score"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <br.wrestling.ui.common.IndividualScore
         android:id="@+id/red"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_normal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:backgroundComponent="@drawable/background_score_red"
         app:backgroundComponentsAddRemove="@drawable/background_components_red"
-        app:name="Wellyngson Elias"
-        app:foul="0"/>
+        app:foul="0"
+        app:name="Wellyngson Elias" />
 
     <br.wrestling.ui.common.IndividualScore
         android:id="@+id/blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_normal"
-        app:layout_constraintTop_toBottomOf="@id/red"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:backgroundComponent="@drawable/background_score_blue"
         app:backgroundComponentsAddRemove="@drawable/background_components_blue"
-        app:name="Wellyngson Elias"
-        app:foul="0"/>
+        app:foul="0"
+        app:name="Wellyngson Elias" />
 
     <FrameLayout
         android:id="@+id/chronometer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_middle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/blue"/>
+        android:layout_marginTop="@dimen/spacing_middle" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>
