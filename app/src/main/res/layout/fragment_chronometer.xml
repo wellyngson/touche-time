@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/text_individual_score"
+        android:fontFamily="@font/inter_thin"
         android:layout_marginBottom="@dimen/spacing_normal"
         android:textSize="@dimen/font_title_normal"
         android:text="@string/round_1"/>
