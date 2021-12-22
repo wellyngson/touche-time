@@ -2,6 +2,17 @@
 <resources>
     <style name="TextViewBasic">
         <item name="android:textColor">@color/text_individual_score</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+
+    <style name="TextViewWeight" parent="TextViewBasic">
+        <item name="android:textSize">@dimen/font_title_big</item>
+        <item name="fontFamily">@font/inter_bold</item>
+    </style>
+
+    <style name="TextViewCategory" parent="TextViewBasic">
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">@dimen/font_title_large</item>
     </style>
 
     <style name="TextViewIndividualScoreName" parent="TextViewBasic">

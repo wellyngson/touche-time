@@ -9,9 +9,9 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/settings_container"
-        android:layout_marginTop="@dimen/spacing_xx_large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xx_large"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -20,25 +20,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_arrow_left"/>
+            android:src="@drawable/ic_arrow_left" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextViewCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
-            android:text="FS Sênior"
+            android:elevation="@dimen/spacing_tiny"
             android:background="@drawable/background_category"
-            android:textColor="@color/text_individual_score"
             android:paddingHorizontal="@dimen/spacing_normal"
-            android:paddingVertical="@dimen/spacing_middle"/>
+            android:paddingVertical="@dimen/spacing_middle"
+            android:text="FS Sênior" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextViewWeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="65KG"
-            android:textSize="@dimen/font_title_big"
             android:layout_marginStart="@dimen/spacing_normal"
-            android:textColor="@color/text_individual_score"/>
+            android:text="65KG"
+            android:textColor="@color/text_individual_score"
+            android:textSize="@dimen/font_title_big" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
