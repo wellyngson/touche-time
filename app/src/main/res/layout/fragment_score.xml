@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
-            android:text="65KG"
+            android:text="65kg"
             android:textColor="@color/text_individual_score"
             android:textSize="@dimen/font_title_big" />
 

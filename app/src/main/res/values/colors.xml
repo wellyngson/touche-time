@@ -16,10 +16,12 @@
     <color name="blue_background_components">#2F76FF</color>
     <color name="gray">#222222</color>
     <color name="gray_secondary">#A5A5A5</color>
+    <color name="orange">#FE7E16</color>
 
     <color name="black_background">@color/black_primary</color>
     <color name="black_background_secondary">@color/black_secondary</color>
     <color name="text_individual_score">@color/white</color>
     <color name="text_color_description_choose_fight">@color/gray_secondary</color>
     <color name="background_view_chronomether">#272727</color>
+    <color name="progress_bar_color">@color/orange</color>
 </resources>
