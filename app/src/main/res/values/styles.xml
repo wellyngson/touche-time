@@ -5,6 +5,20 @@
         <item name="android:letterSpacing">0.02</item>
     </style>
 
+    <style name="TextViewTitleHome" parent="TextViewBasic">
+        <item name="fontFamily">@font/inter_bold</item>
+        <item name="android:textSize">@dimen/spacing_x_large</item>
+    </style>
+
+    <style name="TextViewTitleChooseFight" parent="TextViewBasic">
+        <item name="fontFamily">@font/inter_bold</item>
+    </style>
+
+    <style name="TextViewDescriptionChooseFight">
+        <item name="android:textColor">@color/text_color_description_choose_fight</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+
     <style name="TextViewWeight" parent="TextViewBasic">
         <item name="android:textSize">@dimen/font_title_big</item>
         <item name="fontFamily">@font/inter_bold</item>
@@ -35,5 +49,10 @@
         <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/spacing_middle</item>
         <item name="background">@drawable/background_item_chronometer</item>
+    </style>
+
+    <style name="TextViewTitleFragmentCategory" parent="TextViewBasic">
+        <item name="android:fontFamily">@font/inter_bold</item>
+        <item name="android:textSize">@dimen/font_title_large</item>
     </style>
 </resources>

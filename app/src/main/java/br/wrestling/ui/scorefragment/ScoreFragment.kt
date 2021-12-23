@@ -4,17 +4,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
+import br.wrestling.MainActivity
 import br.wrestling.databinding.FragmentScoreBinding
 import br.wrestling.ui.chronometerfragment.ChronometerFragment
+import br.wrestling.ui.homefragment.HomeFragment
 
 class ScoreFragment : Fragment() {
 
     private lateinit var viewBinding: FragmentScoreBinding
-
     private val viewModel: ScoreViewModel by viewModels()
+    private val mainActivity: MainActivity?
+        get() = activity as? MainActivity
+    private val onBackPressedCallback: OnBackPressedCallback by lazy {
+        object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                closeItSelf()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +47,30 @@ class ScoreFragment : Fragment() {
         setupRedListeners()
         setupBlueListeners()
         setupChronometer()
+        setupScoreFragment()
+
+        activity?.onBackPressedDispatcher?.addCallback(onBackPressedCallback)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        onBackPressedCallback.isEnabled = true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        onBackPressedCallback.isEnabled = false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        onBackPressedCallback.remove()
+    }
+
+    private fun setupScoreFragment() {
+        viewBinding.back.setOnClickListener {
+            closeItSelf()
+        }
     }
 
     private fun setupChronometer() {
@@ -97,6 +133,13 @@ class ScoreFragment : Fragment() {
                 viewBinding.blue.viewBindingComponent.foul.text = it.toString()
             }
         }
+    }
+
+    private fun closeItSelf() {
+        parentFragmentManager.popBackStackImmediate(
+            TAG,
+            FragmentManager.POP_BACK_STACK_INCLUSIVE
+        )
     }
 
     companion object {

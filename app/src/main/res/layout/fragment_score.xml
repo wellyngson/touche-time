@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_background"
+    android:clipToPadding="false"
+    android:clipChildren="false"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/spacing_normal">
 
@@ -35,7 +37,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/TextViewWeight"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
             android:text="65KG"

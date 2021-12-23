@@ -8,12 +8,18 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="black_background">#151515</color>
+    <color name="black_primary">#151515</color>
+    <color name="black_secondary">#222222</color>
     <color name="red_background">#EA222D</color>
     <color name="red_background_components">#FF424C</color>
     <color name="blue_background">#1565FF</color>
     <color name="blue_background_components">#2F76FF</color>
     <color name="gray">#222222</color>
+    <color name="gray_secondary">#A5A5A5</color>
 
+    <color name="black_background">@color/black_primary</color>
+    <color name="black_background_secondary">@color/black_secondary</color>
     <color name="text_individual_score">@color/white</color>
+    <color name="text_color_description_choose_fight">@color/gray_secondary</color>
+    <color name="background_view_chronomether">#272727</color>
 </resources>

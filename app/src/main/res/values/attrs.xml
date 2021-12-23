@@ -8,4 +8,10 @@
         <attr name="backgroundComponentsAddRemove" format="reference" />
         <attr name="android:icon" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="ChooseFight">
+        <attr name="title" format="string"/>
+        <attr name="icon" format="reference"/>
+        <attr name="description" format="string"/>
+    </declare-styleable>
 </resources>

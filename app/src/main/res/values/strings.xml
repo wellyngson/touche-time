@@ -3,5 +3,11 @@
     <string name="gabriel_ferreira">Gabriel Ferreira</string>
     <string name="round_1">ROUND 1</string>
     <string name="round_2">ROUND 2</string>
-    <string name="interval">INTERVAL</string>
+    <string name="interval">INTERVALO</string>
+    <string name="category">Categoria</string>
+    <string name="go_fight_today">Vamos lutar \nhoje?</string>
+    <string name="official_fight">Luta oficial</string>
+    <string name="choose_fight_description">Informe o nome dos atletas e utilize as regras oficiais para cada categoria</string>
+    <string name="custom_fight">Personalize sua luta</string>
+    <string name="custom_fight_description">Defina o tempo, superioridade técnica e quantidade de rounds</string>
 </resources>

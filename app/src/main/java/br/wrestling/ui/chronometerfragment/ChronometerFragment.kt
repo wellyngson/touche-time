@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.wrestling.R
 import br.wrestling.databinding.FragmentChronometerBinding
+import com.airbnb.paris.utils.setPaddingStart
 import kotlinx.android.synthetic.main.fragment_chronometer.view.*
 
 class ChronometerFragment : Fragment() {
@@ -41,14 +42,11 @@ class ChronometerFragment : Fragment() {
                 setupStateButtonPlayPause()
 
                 if (chronometerRoundIsFinished) {
-//                    changeVisibilitySettingsChronometer(false)
                     setupStartChronometerInterval(timerInterval)
                 } else {
                     if (isSelected) {
-//                        changeVisibilitySettingsChronometer(false)
                         setupStartChronometer(timerRound)
                     } else {
-//                        changeVisibilitySettingsChronometer(false)
                         pauseTimer()
                     }
                 }
@@ -77,7 +75,6 @@ class ChronometerFragment : Fragment() {
                     round.setText(R.string.interval)
                 }
                 this@ChronometerFragment.timerInterval = START_INTERVAL
-//                changeVisibilitySettingsChronometer(true)
             }
 
             override fun onTick(millisUntilFinished: Long) {
@@ -105,7 +102,6 @@ class ChronometerFragment : Fragment() {
                     round.setText(R.string.round_2)
                 }
                 this@ChronometerFragment.timerRound = START_ROUND
-//                changeVisibilitySettingsChronometer(true)
             }
 
             override fun onTick(millisUntilFinished: Long) {

@@ -4,6 +4,7 @@
     <dimen name="size_score">200dp</dimen>
     <dimen name="ic_foul_margins">6dp</dimen>
     <dimen name="ic_play_chronometer">64dp</dimen>
+    <dimen name="min_width_number_chronometer">72dp</dimen>
 
     <dimen name="font_title_score">64sp</dimen>
     <dimen name="font_foul_size">40sp</dimen>
