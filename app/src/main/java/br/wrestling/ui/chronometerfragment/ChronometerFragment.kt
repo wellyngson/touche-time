@@ -5,10 +5,10 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import br.wrestling.R
 import br.wrestling.databinding.FragmentChronometerBinding
-import com.airbnb.paris.utils.setPaddingStart
 import kotlinx.android.synthetic.main.fragment_chronometer.view.*
 
 class ChronometerFragment : Fragment() {
@@ -32,6 +32,7 @@ class ChronometerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupChronometer()
+        setupListenersRefreshAndEdit()
     }
 
     private fun setupChronometer() {
@@ -54,13 +55,15 @@ class ChronometerFragment : Fragment() {
         }
     }
 
-    private fun changeVisibilitySettingsChronometer(condition: Boolean) {
-        if (condition) {
-            viewBinding.refresh.visibility = View.VISIBLE
-            viewBinding.edit.visibility = View.VISIBLE
-        } else {
-            viewBinding.refresh.visibility = View.GONE
-            viewBinding.edit.visibility = View.GONE
+    private fun setupListenersRefreshAndEdit() {
+        viewBinding.apply {
+            refresh.setOnClickListener {
+                Toast.makeText(context, "Refresh clicado", Toast.LENGTH_SHORT).show()
+            }
+
+            edit.setOnClickListener {
+                Toast.makeText(context, "Edit clicado", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -86,8 +89,11 @@ class ChronometerFragment : Fragment() {
 
     private fun setupStateButtonPlayPause() {
         viewBinding.apply {
-            playOrPause.isSelected = !playOrPause.isSelected
-            changeVisibilitySettingsChronometer(!playOrPause.isSelected)
+            playOrPause.isSelected.let { boolean ->
+                playOrPause.isSelected = !boolean
+                edit.isEnabled = boolean
+                refresh.isEnabled = boolean
+            }
         }
     }
 

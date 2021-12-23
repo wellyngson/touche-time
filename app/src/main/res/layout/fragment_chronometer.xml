@@ -118,7 +118,7 @@
             android:layout_width="@dimen/spacing_big"
             android:layout_height="@dimen/spacing_big"
             android:background="@drawable/background_settings_chronometer"
-            android:src="@drawable/ic_refresh" />
+            android:src="@drawable/refresh_enabled_or_disabled" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/play_or_pause"
@@ -133,7 +133,7 @@
             android:layout_width="@dimen/spacing_big"
             android:layout_height="@dimen/spacing_big"
             android:background="@drawable/background_settings_chronometer"
-            android:src="@drawable/ic_edit_text" />
+            android:src="@drawable/edit_enabled_or_disabled" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
