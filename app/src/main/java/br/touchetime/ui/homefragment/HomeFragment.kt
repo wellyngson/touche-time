@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
 import br.touchetime.MainActivity
 import br.touchetime.R
@@ -28,35 +29,50 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        setupScoreFragment()
+        setupScoreFragmentDefault()
+        setupScoreFragmentCustom()
         setupChooseFightAndCustom()
     }
 
-    private fun setupChooseFightAndCustom() {
-        viewBinding.customFight.apply {
-            setTitle(context.getString(R.string.custom_fight))
-            setDescription(context.getString(R.string.custom_fight_description))
-            setIcon(context.getDrawable(drawable.ic_edit_fight))
-        }
-
-        viewBinding.fight.apply {
-            setTitle(context.getString(R.string.official_fight))
-            setDescription(context.getString(R.string.choose_fight_description))
-            setIcon(context.getDrawable(drawable.ic_users_fight))
+    private fun setupScoreFragmentCustom() {
+        viewBinding.customFight.setOnClickListener {
+            navigateToScoreFragment()
+            mainActivity?.typeFight = CUSTOM_FIGHT
         }
     }
 
-    private fun setupScoreFragment() {
-        viewBinding.fight.setOnClickListener {
-            mainActivity?.navigateToFragment(
-                ScoreFragment.newInstance(),
-                ScoreFragment.TAG
-            )
+    private fun setupChooseFightAndCustom() {
+        viewBinding.fight.apply {
+            setTitle(context.getString(R.string.official_fight))
+            setDescription(context.getString(R.string.choose_fight_description))
+            setIcon(getDrawable(context, drawable.ic_users_fight))
         }
+
+        viewBinding.customFight.apply {
+            setTitle(context.getString(R.string.custom_fight))
+            setDescription(context.getString(R.string.custom_fight_description))
+            setIcon(getDrawable(context, drawable.ic_edit_fight))
+        }
+    }
+
+    private fun setupScoreFragmentDefault() {
+        viewBinding.fight.setOnClickListener {
+            navigateToScoreFragment()
+            mainActivity?.typeFight = DEFAULT_FIGHT
+        }
+    }
+
+    private fun navigateToScoreFragment() {
+        mainActivity?.navigateToFragment(
+            ScoreFragment.newInstance(),
+            ScoreFragment.TAG
+        )
     }
 
     companion object {
         const val TAG = "br.wrestling.ui.homefragment"
+        const val DEFAULT_FIGHT = "DEFAULT_FIGHT"
+        const val CUSTOM_FIGHT = "CUSTOM_FIGHT"
 
         fun newInstance() = HomeFragment()
     }

@@ -10,6 +10,7 @@ import br.touchetime.ui.homefragment.HomeFragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewBinding: ActivityMainBinding
+    var typeFight: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

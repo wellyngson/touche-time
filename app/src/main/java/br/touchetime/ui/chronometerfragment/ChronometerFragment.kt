@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import br.touchetime.MainActivity
 import br.touchetime.R
 import br.touchetime.databinding.FragmentChronometerBinding
+import br.touchetime.ui.homefragment.HomeFragment
 import kotlinx.android.synthetic.main.fragment_chronometer.view.*
 
 class ChronometerFragment : Fragment() {
@@ -16,6 +18,8 @@ class ChronometerFragment : Fragment() {
     private lateinit var viewBinding: FragmentChronometerBinding
     private lateinit var chronometerRound: CountDownTimer
     private lateinit var chronometerInterval: CountDownTimer
+    private val mainActivity: MainActivity?
+        get() = activity as? MainActivity
 
     private var chronometerRoundIsFinished: Boolean = false
     private var timerRound = START_ROUND
@@ -32,7 +36,19 @@ class ChronometerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupChronometer()
+        setupTypeFight()
         setupListenersRefreshAndEdit()
+    }
+
+    private fun setupTypeFight() {
+        if (mainActivity?.typeFight == HomeFragment.DEFAULT_FIGHT) {
+            View.GONE.let {
+                viewBinding.apply {
+                    refresh.visibility = it
+                    edit.visibility = it
+                }
+            }
+        }
     }
 
     private fun setupChronometer() {
