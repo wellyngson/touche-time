@@ -8,10 +8,18 @@
     android:paddingHorizontal="@dimen/spacing_normal"
     android:paddingTop="@dimen/spacing_x_large">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/spacing_xx_large"
+        app:srcCompat="@drawable/ic_touche_time"/>
+
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/TextViewTitleHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xxx_large"
         android:layout_marginBottom="@dimen/spacing_x_large"
         android:text="@string/go_fight_today" />
 
