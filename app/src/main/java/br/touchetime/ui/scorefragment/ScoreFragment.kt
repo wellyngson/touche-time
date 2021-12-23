@@ -1,4 +1,4 @@
-package br.wrestling.ui.scorefragment
+package br.touchetime.ui.scorefragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,10 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
-import br.wrestling.MainActivity
-import br.wrestling.databinding.FragmentScoreBinding
-import br.wrestling.ui.chronometerfragment.ChronometerFragment
-import br.wrestling.ui.homefragment.HomeFragment
+import br.touchetime.MainActivity
+import br.touchetime.databinding.FragmentScoreBinding
+import br.touchetime.ui.chronometerfragment.ChronometerFragment
 
 class ScoreFragment : Fragment() {
 

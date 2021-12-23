@@ -1,4 +1,4 @@
-package br.wrestling
+package br.touchetime
 
 import org.junit.Test
 

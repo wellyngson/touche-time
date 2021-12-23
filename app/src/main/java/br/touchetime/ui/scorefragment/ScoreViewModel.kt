@@ -1,4 +1,4 @@
-package br.wrestling.ui.scorefragment
+package br.touchetime.ui.scorefragment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

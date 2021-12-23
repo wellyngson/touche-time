@@ -1,4 +1,4 @@
-package br.wrestling.data.model
+package br.touchetime.data.model
 
 data class Athlete(
     private val name: String,

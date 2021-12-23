@@ -1,11 +1,11 @@
-package br.wrestling
+package br.touchetime
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import br.wrestling.databinding.ActivityMainBinding
-import br.wrestling.ui.homefragment.HomeFragment
+import br.touchetime.databinding.ActivityMainBinding
+import br.touchetime.ui.homefragment.HomeFragment
 
 class MainActivity : AppCompatActivity() {
 

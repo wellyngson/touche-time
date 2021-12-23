@@ -1,15 +1,15 @@
-package br.wrestling.ui.homefragment
+package br.touchetime.ui.homefragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import br.wrestling.MainActivity
-import br.wrestling.R
-import br.wrestling.R.drawable
-import br.wrestling.databinding.FragmentHomeBinding
-import br.wrestling.ui.scorefragment.ScoreFragment
+import br.touchetime.MainActivity
+import br.touchetime.R
+import br.touchetime.R.drawable
+import br.touchetime.databinding.FragmentHomeBinding
+import br.touchetime.ui.scorefragment.ScoreFragment
 
 class HomeFragment : Fragment() {
 

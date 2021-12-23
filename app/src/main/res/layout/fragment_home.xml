@@ -15,13 +15,13 @@
         android:layout_marginBottom="@dimen/spacing_x_large"
         android:text="@string/go_fight_today" />
 
-    <br.wrestling.ui.common.ChooseFight
+    <br.touchetime.ui.common.ChooseFight
         android:id="@+id/fight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_normal" />
 
-    <br.wrestling.ui.common.ChooseFight
+    <br.touchetime.ui.common.ChooseFight
         android:id="@+id/custom_fight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

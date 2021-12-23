@@ -1,12 +1,12 @@
-package br.wrestling.ui.common
+package br.touchetime.ui.common
 
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import br.wrestling.R
-import br.wrestling.databinding.IndividualScoreBinding
+import br.touchetime.R
+import br.touchetime.databinding.IndividualScoreBinding
 import com.airbnb.paris.annotations.Attr
 import com.airbnb.paris.annotations.Styleable
 import com.airbnb.paris.extensions.style

@@ -1,4 +1,4 @@
-package br.wrestling.ui.chronometerfragment
+package br.touchetime.ui.chronometerfragment
 
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import br.wrestling.R
-import br.wrestling.databinding.FragmentChronometerBinding
+import br.touchetime.R
+import br.touchetime.databinding.FragmentChronometerBinding
 import kotlinx.android.synthetic.main.fragment_chronometer.view.*
 
 class ChronometerFragment : Fragment() {
