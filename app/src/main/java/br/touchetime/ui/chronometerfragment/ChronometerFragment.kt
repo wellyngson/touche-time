@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import br.touchetime.MainActivity
 import br.touchetime.R
 import br.touchetime.databinding.FragmentChronometerBinding
+import br.touchetime.ui.editfightfragment.EditFightFragment
 import br.touchetime.ui.homefragment.HomeFragment
 import kotlinx.android.synthetic.main.fragment_chronometer.view.*
 
@@ -78,7 +79,9 @@ class ChronometerFragment : Fragment() {
             }
 
             edit.setOnClickListener {
-                Toast.makeText(context, "Edit clicado", Toast.LENGTH_SHORT).show()
+                EditFightFragment.show(
+                    childFragmentManager
+                )
             }
         }
     }

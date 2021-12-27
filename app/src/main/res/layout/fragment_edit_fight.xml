@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<br.touchetime.ui.common.DefaultBottomSheetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/TextViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/set_rules_of_the_fight" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Superioridade técnica"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/spacing_x_large"/>
+
+</br.touchetime.ui.common.DefaultBottomSheetLayout>

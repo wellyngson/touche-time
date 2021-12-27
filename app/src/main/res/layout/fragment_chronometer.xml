@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical"
-    tools:background="@color/black_background">
+    tools:background="?background">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
@@ -18,18 +18,16 @@
 
         <TextView
             android:id="@+id/round"
+            style="@style/TextViewRoundChronometer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_thin"
-            android:paddingEnd="@dimen/spacing_normal"
-            android:text="@string/round_1"
-            android:textColor="@color/text_individual_score"
-            android:textSize="@dimen/font_title_normal" />
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:text="@string/round_1" />
 
         <View
             android:layout_width="wrap_content"
             android:layout_height="2dp"
-            android:background="@color/gray" />
+            android:background="@color/gray_primary" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

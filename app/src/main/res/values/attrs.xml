@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="colorBackgroundDefault" format="color" />
+    <attr name="colorBackgroundComponents" format="color" />
+    <attr name="colorBackgroundComponentsGray" format="color" />
+    <attr name="colorBackgroundCategory" format="color" />
+    <attr name="colorTextPrimary" format="color" />
+    <attr name="colorDescriptionChooseFight" format="color" />
+    <attr name="colorDialogBackground" format="color"/>
+    <attr name="colorBottomSheetThumbIndicator" format="color"/>
+
     <declare-styleable name="IndividualScore">
         <attr name="name" format="string"/>
         <attr name="score" format="string"/>

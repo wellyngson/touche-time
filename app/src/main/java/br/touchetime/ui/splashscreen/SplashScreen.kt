@@ -6,13 +6,13 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import br.touchetime.MainActivity
-import br.touchetime.R
+import br.touchetime.extension.setupFullScreenSystemUiFlags
 
-class SplashScreenActivity : AppCompatActivity() {
+class SplashScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        setupFullScreenSystemUiFlags()
 
         goToMainScreen()
     }
@@ -29,6 +29,6 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val OPEN_DELAY = 3000L
+        private const val OPEN_DELAY = 1500L
     }
 }

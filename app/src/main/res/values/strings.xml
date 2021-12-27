@@ -10,4 +10,5 @@
     <string name="choose_fight_description">Informe o nome dos atletas e utilize as regras oficiais para cada categoria</string>
     <string name="custom_fight">Personalize sua luta</string>
     <string name="custom_fight_description">Defina o tempo, superioridade técnica e quantidade de rounds</string>
+    <string name="set_rules_of_the_fight">Defina as regras da luta</string>
 </resources>
