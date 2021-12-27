@@ -11,4 +11,8 @@
     <string name="custom_fight">Personalize sua luta</string>
     <string name="custom_fight_description">Defina o tempo, superioridade técnica e quantidade de rounds</string>
     <string name="set_rules_of_the_fight">Defina as regras da luta</string>
+    <string name="technical_superiority">Superioridade técnica</string>
+    <string name="number_rounds">Quantidade de rounds</string>
+    <string name="time_rounds">Tempo de cada rounds</string>
+    <string name="time_interval_of_round">Tempo de cada intervalo</string>
 </resources>

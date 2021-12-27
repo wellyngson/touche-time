@@ -17,6 +17,7 @@
         <item name="colorBackgroundDefault">@color/color_default_background</item>
         <item name="colorBackgroundComponents">@color/black_secondary</item>
         <item name="colorBackgroundComponentsGray">@color/gray_primary</item>
+        <item name="colorBackgroundComponentsGraySecondary">@color/gray_quaternary</item>
         <item name="colorBackgroundCategory">@color/gray_background_category</item>
         <item name="colorTextPrimary">@color/white</item>
         <item name="colorDescriptionChooseFight">@color/gray_secondary</item>
@@ -79,7 +80,7 @@
         <item name="android:textSize">@dimen/font_chronometer_size</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/spacing_middle</item>
-        <item name="background">@drawable/background_item_chronometer</item>
+        <item name="background">@drawable/item_chronometer_background</item>
     </style>
 
     <style name="TextViewRoundChronometer" parent="TextViewBasic">
@@ -98,6 +99,16 @@
 
     <style name="TransparentBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/TransparentBottomSheetDialogStyle</item>
+    </style>
+
+    <style name="TextViewTitleEditCharacteristics" parent="TextViewBasic">
+        <item name="android:textSize">@dimen/font_title_normal</item>
+        <item name="fontFamily">@font/inter_bold</item>
+    </style>
+
+    <style name="TextViewEditTextCharacteristics" parent="TextViewBasic">
+        <item name="android:textSize">@dimen/font_title_x_large</item>
+        <item name="fontFamily">@font/inter_bold</item>
     </style>
 
 </resources>

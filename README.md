@@ -1,4 +1,4 @@
-WRESTLING SCORE
+TOUCHE TIME
 
 Application initially developed in kotlin and in the future will be implemented for IOS.
 

@@ -3,6 +3,7 @@
     <attr name="colorBackgroundDefault" format="color" />
     <attr name="colorBackgroundComponents" format="color" />
     <attr name="colorBackgroundComponentsGray" format="color" />
+    <attr name="colorBackgroundComponentsGraySecondary" format="color" />
     <attr name="colorBackgroundCategory" format="color" />
     <attr name="colorTextPrimary" format="color" />
     <attr name="colorDescriptionChooseFight" format="color" />
@@ -22,5 +23,13 @@
         <attr name="title" format="string"/>
         <attr name="icon" format="reference"/>
         <attr name="description" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="EditFightCharacteristics">
+        <attr name="titleEditFight" format="string"/>
+        <attr name="text" format="string" />
+        <attr name="addFoul" format="reference"/>
+        <attr name="removeFoul" format="reference"/>
+        <attr name="isScore" format="boolean" />
     </declare-styleable>
 </resources>
