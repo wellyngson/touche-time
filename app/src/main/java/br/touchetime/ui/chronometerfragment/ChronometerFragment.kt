@@ -154,8 +154,8 @@ class ChronometerFragment : Fragment() {
 
     companion object {
         const val TAG = "br.wrestling.ui.chronometerfragment"
-        const val START_ROUND = 10000L // 180000L
-        const val START_INTERVAL = 5000L // 30000L
+        const val START_ROUND = 180000L // 10000L - 180000L
+        const val START_INTERVAL = 30000L // 5000L - 30000L
 
         fun newInstance() = ChronometerFragment()
     }

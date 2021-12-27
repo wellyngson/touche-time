@@ -1,27 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <br.touchetime.ui.common.DefaultBottomSheetLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/spacing_x_large">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_x_large">
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/TextViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_x_large"
             android:text="@string/set_rules_of_the_fight" />
 
         <br.touchetime.ui.common.EditFightCharacteristics
+            android:id="@+id/technical_superiority"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:title="@string/technical_superiority"
-            app:text="02"/>
+            android:layout_marginTop="@dimen/spacing_x_large" />
+
+        <br.touchetime.ui.common.EditFightCharacteristics
+            android:id="@+id/number_rounds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_x_large" />
+
+        <br.touchetime.ui.common.EditFightCharacteristics
+            android:id="@+id/time_round"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_x_large" />
+
+        <br.touchetime.ui.common.EditFightCharacteristics
+            android:id="@+id/time_interval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_x_large" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/ButtonAppCompat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_x_large"
+            android:background="@drawable/background_button"
+            android:text="@string/start_fight" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
