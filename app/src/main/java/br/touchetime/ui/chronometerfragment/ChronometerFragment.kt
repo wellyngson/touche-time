@@ -12,7 +12,6 @@ import br.touchetime.R
 import br.touchetime.databinding.FragmentChronometerBinding
 import br.touchetime.ui.editfightfragment.EditFightFragment
 import br.touchetime.ui.homefragment.HomeFragment
-import kotlinx.android.synthetic.main.fragment_chronometer.view.*
 
 class ChronometerFragment : Fragment() {
 
