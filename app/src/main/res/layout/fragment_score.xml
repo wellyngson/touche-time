@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="false"
     android:clipChildren="false"
+    android:clipToPadding="false"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/spacing_normal">
 
@@ -28,8 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
-            android:elevation="@dimen/spacing_tiny"
             android:background="@drawable/background_category"
+            android:elevation="@dimen/spacing_tiny"
             android:paddingHorizontal="@dimen/spacing_normal"
             android:paddingVertical="@dimen/spacing_middle"
             android:text="FS Sênior" />
@@ -51,7 +51,8 @@
         app:backgroundComponent="@drawable/background_score_red"
         app:backgroundComponentsAddRemove="@drawable/background_components_red"
         app:foul="0"
-        app:name="Wellyngson Elias" />
+        app:name="Wellyngson Elias"
+        app:score="0" />
 
     <br.touchetime.ui.common.IndividualScore
         android:id="@+id/blue"
@@ -61,7 +62,8 @@
         app:backgroundComponent="@drawable/background_score_blue"
         app:backgroundComponentsAddRemove="@drawable/background_components_blue"
         app:foul="0"
-        app:name="Wellyngson Elias" />
+        app:name="Wellyngson Elias"
+        app:score="0" />
 
     <FrameLayout
         android:id="@+id/chronometer"

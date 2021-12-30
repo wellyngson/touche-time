@@ -5,15 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import br.touchetime.MainActivity
 import br.touchetime.databinding.FragmentScoreBinding
 import br.touchetime.ui.chronometerfragment.ChronometerFragment
 import br.touchetime.ui.homefragment.HomeFragment
+import kotlinx.coroutines.flow.collect
 
 class ScoreFragment : Fragment() {
 
@@ -37,21 +37,80 @@ class ScoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        parentFragmentManager.setFragmentResult(DISMISS_RESULT, bundleOf())
-
-        setupObservers()
-        setupRedListeners()
-        setupBlueListeners()
+        setupListenersRed()
+        setupListenersBlue()
         setupChronometer()
         setupScoreFragment()
+        setupObservers()
     }
 
-    private fun setupScoreFragment() {
-        viewBinding.back.setOnClickListener {
-            mainActivity?.navigateToFragment(
-                HomeFragment.newInstance(),
-                HomeFragment.TAG
-            )
+    private fun setupListenersRed() {
+        viewBinding.red.viewBindingComponent.addScore.setOnClickListener {
+            viewModel.addScoreRed()
+        }
+
+        viewBinding.red.viewBindingComponent.removeScore.setOnClickListener {
+            viewModel.removeScoreRed()
+        }
+    }
+
+    private fun setupListenersBlue() {
+        viewBinding.blue.viewBindingComponent.addScore.setOnClickListener {
+            viewModel.addScoreBlue()
+        }
+
+        viewBinding.blue.viewBindingComponent.removeScore.setOnClickListener {
+            viewModel.removeScoreBlue()
+        }
+    }
+
+    private fun setupObservers() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.scoreRed.collect { scoreRedState ->
+                when (scoreRedState) {
+                    is ScoreViewModel.UiState.Success -> {
+                        viewBinding.red.viewBindingComponent.score.text =
+                            scoreRedState.score.toString()
+                    }
+                    is ScoreViewModel.UiState.Error -> {
+                        Toast.makeText(
+                            context,
+                            "O atleta não tem ponto para ser retirado",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    is ScoreViewModel.UiState.Finish -> {
+                        viewBinding.red.viewBindingComponent.score.text =
+                            scoreRedState.scoreFinal.toString()
+
+                        showWinner(RED)
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.scoreBlue.collect { scoreBlueState ->
+                when (scoreBlueState) {
+                    is ScoreViewModel.UiState.Success -> {
+                        viewBinding.blue.viewBindingComponent.score.text =
+                            scoreBlueState.score.toString()
+                    }
+                    is ScoreViewModel.UiState.Error -> {
+                        Toast.makeText(
+                            context,
+                            "O atleta não tem ponto para ser retirado",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    is ScoreViewModel.UiState.Finish -> {
+                        viewBinding.blue.viewBindingComponent.score.text =
+                            scoreBlueState.scoreFinal.toString()
+
+                        showWinner(BLUE)
+                    }
+                }
+            }
         }
     }
 
@@ -65,73 +124,13 @@ class ScoreFragment : Fragment() {
         }
     }
 
-    private fun setupBlueListeners() {
-        viewBinding.blue.viewBindingComponent.apply {
-            addScore.setOnClickListener {
-                viewModel.addScore(BLUE)
-            }
-
-            removeScore.setOnClickListener {
-                viewModel.removeScore(BLUE)
-            }
-
-            foulContainer.setOnClickListener {
-                viewModel.addFoul(BLUE)
-            }
+    private fun setupScoreFragment() {
+        viewBinding.back.setOnClickListener {
+            mainActivity?.navigateToFragment(
+                HomeFragment.newInstance(),
+                HomeFragment.TAG
+            )
         }
-    }
-
-    private fun setupRedListeners() {
-        viewBinding.red.viewBindingComponent.apply {
-            addScore.setOnClickListener {
-                viewModel.addScore(RED)
-            }
-
-            removeScore.setOnClickListener {
-                viewModel.removeScore(RED)
-            }
-
-            foulContainer.setOnClickListener {
-                viewModel.addFoul(RED)
-            }
-        }
-    }
-
-    private fun setupObservers() {
-        viewModel.apply {
-            scoreRed.observe(viewLifecycleOwner) {
-                viewBinding.red
-                    .viewBindingComponent.score.text = it.toString()
-
-                checkVictory()
-            }
-
-            scoreBlue.observe(viewLifecycleOwner) {
-                viewBinding.blue
-                    .viewBindingComponent.score.text = it.toString()
-
-                checkVictory()
-            }
-
-            foulRed.observe(viewLifecycleOwner) {
-                viewBinding.red
-                    .viewBindingComponent.foul.text = it.toString()
-            }
-
-            foulBlue.observe(viewLifecycleOwner) {
-                viewBinding.blue
-                    .viewBindingComponent.foul.text = it.toString()
-            }
-        }
-    }
-
-    private fun checkVictory() {
-        val scoreRed = viewModel.scoreRed.value!!
-        val scoreBlue = viewModel.scoreBlue.value!!
-        val technicalSuperiority = viewModel.technicalSuperiority.value!!
-
-        if (scoreRed - scoreBlue >= technicalSuperiority) showWinner("Red")
-        else if (scoreBlue - scoreRed >= technicalSuperiority) showWinner("Blue")
     }
 
     private fun showWinner(athlete: String) {
