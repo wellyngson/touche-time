@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import br.touchetime.MainActivity
 import br.touchetime.databinding.FragmentScoreBinding
+import br.touchetime.ui.chronometerfragment.ChronometerFragment
 import br.touchetime.ui.homefragment.HomeFragment
 import kotlinx.coroutines.flow.collect
 
@@ -37,6 +39,7 @@ class ScoreFragment : Fragment() {
 
         setupListenersRed()
         setupListenersBlue()
+        setupChronometer()
         setupScoreFragment()
         setupObservers()
     }
@@ -108,6 +111,16 @@ class ScoreFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun setupChronometer() {
+        childFragmentManager.commit(true) {
+            replace(
+                viewBinding.chronometer.id,
+                ChronometerFragment.newInstance(),
+                ChronometerFragment.TAG
+            )
         }
     }
 
