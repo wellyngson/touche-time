@@ -11,10 +11,14 @@ class ScoreViewModel : ViewModel() {
     private val mutableFoulRed = MutableLiveData(0)
     private val mutableFoulBlue = MutableLiveData(0)
 
+    private val mutableTechnicalSuperiority = MutableLiveData(10)
+
     val scoreRed: LiveData<Int> = mutableScoreRed
     val scoreBlue: LiveData<Int> = mutableScoreBlue
     val foulRed: LiveData<Int> = mutableFoulRed
     val foulBlue: LiveData<Int> = mutableFoulBlue
+
+    val technicalSuperiority: LiveData<Int> = mutableTechnicalSuperiority
 
     fun addScore(color: String) {
         val scoreFinal: Int
@@ -29,8 +33,8 @@ class ScoreViewModel : ViewModel() {
     }
 
     fun removeScore(color: String) {
-        var scoreFinal: Int
-        var scoreInitial: Int
+        val scoreFinal: Int
+        val scoreInitial: Int
 
         if (color == "red") {
             scoreInitial = mutableScoreRed.value!!
@@ -49,13 +53,6 @@ class ScoreViewModel : ViewModel() {
         }
     }
 
-    fun resetScore() {
-        mutableScoreRed.postValue(0)
-        mutableScoreBlue.postValue(0)
-        mutableFoulRed.postValue(0)
-        mutableFoulBlue.postValue(0)
-    }
-
     fun addFoul(athleteColor: String) {
         if (athleteColor == "red") {
             mutableFoulRed.postValue(mutableFoulRed.value!! + 1)
@@ -66,20 +63,6 @@ class ScoreViewModel : ViewModel() {
         } else {
             mutableFoulBlue.postValue(mutableFoulBlue.value!! + 1)
 
-            if (mutableFoulBlue.value!! == 2) {
-                addScore(athleteColor)
-            }
-        }
-    }
-
-    fun removeFoul(athleteColor: String) {
-        if (athleteColor == "red") {
-            mutableFoulRed.postValue(mutableFoulRed.value!! - 1)
-            if (mutableFoulRed.value!! == 2) {
-                addScore(athleteColor)
-            }
-        } else {
-            mutableFoulBlue.postValue(mutableFoulBlue.value!! - 1)
             if (mutableFoulBlue.value!! == 2) {
                 addScore(athleteColor)
             }

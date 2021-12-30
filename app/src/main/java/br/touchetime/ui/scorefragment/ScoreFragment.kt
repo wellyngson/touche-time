@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import br.touchetime.MainActivity
 import br.touchetime.databinding.FragmentScoreBinding
@@ -22,7 +25,7 @@ class ScoreFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         viewBinding = FragmentScoreBinding.inflate(
             layoutInflater,
@@ -33,6 +36,8 @@ class ScoreFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        parentFragmentManager.setFragmentResult(DISMISS_RESULT, bundleOf())
 
         setupObservers()
         setupRedListeners()
@@ -95,27 +100,53 @@ class ScoreFragment : Fragment() {
     private fun setupObservers() {
         viewModel.apply {
             scoreRed.observe(viewLifecycleOwner) {
-                viewBinding.red.viewBindingComponent.score.text = it.toString()
+                viewBinding.red
+                    .viewBindingComponent.score.text = it.toString()
+
+                checkVictory()
             }
 
             scoreBlue.observe(viewLifecycleOwner) {
-                viewBinding.blue.viewBindingComponent.score.text = it.toString()
+                viewBinding.blue
+                    .viewBindingComponent.score.text = it.toString()
+
+                checkVictory()
             }
 
             foulRed.observe(viewLifecycleOwner) {
-                viewBinding.red.viewBindingComponent.foul.text = it.toString()
+                viewBinding.red
+                    .viewBindingComponent.foul.text = it.toString()
             }
 
             foulBlue.observe(viewLifecycleOwner) {
-                viewBinding.blue.viewBindingComponent.foul.text = it.toString()
+                viewBinding.blue
+                    .viewBindingComponent.foul.text = it.toString()
             }
         }
+    }
+
+    private fun checkVictory() {
+        val scoreRed = viewModel.scoreRed.value!!
+        val scoreBlue = viewModel.scoreBlue.value!!
+        val technicalSuperiority = viewModel.technicalSuperiority.value!!
+
+        if (scoreRed - scoreBlue >= technicalSuperiority) showWinner("Red")
+        else if (scoreBlue - scoreRed >= technicalSuperiority) showWinner("Blue")
+    }
+
+    private fun showWinner(athlete: String) {
+        Toast.makeText(
+            context,
+            "Atleta $athlete venceu",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     companion object {
         const val TAG = "br.wrestling.ui.scorefragment"
         const val RED = "red"
         const val BLUE = "blue"
+        const val DISMISS_RESULT = "DISMISS_RESULT"
 
         fun newInstance() = ScoreFragment()
     }

@@ -35,6 +35,7 @@ class ChronometerFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         setupChronometer()
         setupTypeFight()
         setupListenersRefreshAndEdit()
