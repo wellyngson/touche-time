@@ -5,29 +5,30 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.touchetime.extension.changeTimer
+import br.touchetime.model.UiStateScore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class ScoreViewModel : ViewModel() {
 
-    private val mutableScoreRed = MutableStateFlow<UiState>(UiState.Initial(0))
-    private val mutableScoreBlue = MutableStateFlow<UiState>(UiState.Initial(0))
-    private val mutableTechnicalSuperiority = MutableStateFlow<UiState>(UiState.Initial(8))
+    private val mutableScoreRed = MutableStateFlow<UiStateScore>(UiStateScore.Initial(0))
+    private val mutableScoreBlue = MutableStateFlow<UiStateScore>(UiStateScore.Initial(0))
+    private val mutableTechnicalSuperiority = MutableStateFlow<UiStateScore>(UiStateScore.Initial(8))
 
-    val scoreRed: StateFlow<UiState> get() = mutableScoreRed
-    val scoreBlue: StateFlow<UiState> get() = mutableScoreBlue
-    val technicalSuperiority: StateFlow<UiState> get() = mutableTechnicalSuperiority
+    val scoreRed: StateFlow<UiStateScore> get() = mutableScoreRed
+    val scoreBlue: StateFlow<UiStateScore> get() = mutableScoreBlue
+    val technicalSuperiority: StateFlow<UiStateScore> get() = mutableTechnicalSuperiority
 
     // Change Red
 
     fun addScoreRed() = viewModelScope.launch {
         var scoreRedInitial = mutableScoreRed.value.hashCode()
 
-        mutableScoreRed.value = UiState.Success(++scoreRedInitial)
+        mutableScoreRed.value = UiStateScore.Success(++scoreRedInitial)
 
         if (checkVictory(scoreRedInitial, mutableScoreBlue.value.hashCode())) {
-            mutableScoreRed.value = UiState.Finish(scoreRedInitial)
+            mutableScoreRed.value = UiStateScore.Finish(scoreRedInitial)
         }
     }
 
@@ -35,9 +36,9 @@ class ScoreViewModel : ViewModel() {
         val scoreRedInitial = mutableScoreRed.value.hashCode()
 
         if (scoreRedInitial > 0) {
-            mutableScoreRed.value = UiState.Success(scoreRedInitial - 1)
+            mutableScoreRed.value = UiStateScore.Success(scoreRedInitial - 1)
         } else {
-            mutableScoreRed.value = UiState.Error(scoreRedInitial)
+            mutableScoreRed.value = UiStateScore.Error(scoreRedInitial)
         }
     }
 
@@ -46,10 +47,10 @@ class ScoreViewModel : ViewModel() {
     fun addScoreBlue() = viewModelScope.launch {
         var scoreBlueInitial = mutableScoreBlue.value.hashCode()
 
-        mutableScoreBlue.value = UiState.Success(++scoreBlueInitial)
+        mutableScoreBlue.value = UiStateScore.Success(++scoreBlueInitial)
 
         if (checkVictory(scoreBlueInitial, mutableScoreRed.value.hashCode())) {
-            mutableScoreBlue.value = UiState.Finish(scoreBlueInitial)
+            mutableScoreBlue.value = UiStateScore.Finish(scoreBlueInitial)
         }
     }
 
@@ -57,13 +58,26 @@ class ScoreViewModel : ViewModel() {
         val scoreBlueInitial = mutableScoreBlue.value.hashCode()
 
         if (scoreBlueInitial > 0) {
-            mutableScoreBlue.value = UiState.Success(scoreBlueInitial - 1)
+            mutableScoreBlue.value = UiStateScore.Success(scoreBlueInitial - 1)
         } else {
-            mutableScoreBlue.value = UiState.Error(scoreBlueInitial)
+            mutableScoreBlue.value = UiStateScore.Error(scoreBlueInitial)
         }
     }
 
-    // Technical Superiority
+    // Technical Superiority Change
+
+    fun changeParameters() {
+        val scoreRedInitial = scoreRed.value.hashCode()
+        val scoreBlueInitial = scoreBlue.value.hashCode()
+
+        mutableTechnicalSuperiority.value = UiStateScore.Success(technicalSuperiorityEditFight.value!!)
+
+        if (checkVictory(scoreRedInitial, scoreBlueInitial)) {
+            mutableScoreRed.value = UiStateScore.Finish(scoreRedInitial)
+        } else if (checkVictory(scoreBlueInitial, scoreRedInitial)) {
+            mutableScoreBlue.value = UiStateScore.Finish(scoreBlueInitial)
+        }
+    }
 
     private fun checkVictory(scoreAthleteOne: Int, scoreAthleteTwo: Int): Boolean {
         val technicalSuperiorityInitial = mutableTechnicalSuperiority.value.hashCode()
@@ -71,27 +85,7 @@ class ScoreViewModel : ViewModel() {
         return (scoreAthleteOne - scoreAthleteTwo) >= technicalSuperiorityInitial
     }
 
-    fun changeParameters() {
-        val scoreRedInitial = scoreRed.value.hashCode()
-        val scoreBlueInitial = scoreBlue.value.hashCode()
-
-        mutableTechnicalSuperiority.value = UiState.Success(technicalSuperiorityEditFight.value!!)
-
-        if (checkVictory(scoreRedInitial, scoreBlueInitial)) {
-            mutableScoreRed.value = UiState.Finish(scoreRedInitial)
-        } else if (checkVictory(scoreBlueInitial, scoreRedInitial)) {
-            mutableScoreBlue.value = UiState.Finish(scoreBlueInitial)
-        }
-    }
-
-    sealed class UiState {
-        data class Initial(val scoreInitial: Int) : UiState()
-        data class Success(val score: Int) : UiState()
-        data class Finish(val scoreFinal: Int) : UiState()
-        data class Error(val score: Int) : UiState()
-    }
-
-// EditFightFragment
+    // EditFightFragment
 
     private val mutableTechnicalSuperiorityEditFight = MutableLiveData(1)
     private val mutableNumberRoundEditFight = MutableLiveData(1)

@@ -11,6 +11,7 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import br.touchetime.MainActivity
 import br.touchetime.databinding.FragmentScoreBinding
+import br.touchetime.model.UiStateScore
 import br.touchetime.ui.chronometerfragment.ChronometerFragment
 import br.touchetime.ui.homefragment.HomeFragment
 import kotlinx.coroutines.flow.collect
@@ -68,18 +69,18 @@ class ScoreFragment : Fragment() {
         lifecycleScope.launchWhenStarted {
             viewModel.scoreRed.collect { scoreRedState ->
                 when (scoreRedState) {
-                    is ScoreViewModel.UiState.Success -> {
+                    is UiStateScore.Success -> {
                         viewBinding.red.viewBindingComponent.score.text =
                             scoreRedState.score.toString()
                     }
-                    is ScoreViewModel.UiState.Error -> {
+                    is UiStateScore.Error -> {
                         Toast.makeText(
                             context,
                             "O atleta não tem ponto para ser retirado",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    is ScoreViewModel.UiState.Finish -> {
+                    is UiStateScore.Finish -> {
                         viewBinding.red.viewBindingComponent.score.text =
                             scoreRedState.scoreFinal.toString()
 
@@ -92,18 +93,18 @@ class ScoreFragment : Fragment() {
         lifecycleScope.launchWhenStarted {
             viewModel.scoreBlue.collect { scoreBlueState ->
                 when (scoreBlueState) {
-                    is ScoreViewModel.UiState.Success -> {
+                    is UiStateScore.Success -> {
                         viewBinding.blue.viewBindingComponent.score.text =
                             scoreBlueState.score.toString()
                     }
-                    is ScoreViewModel.UiState.Error -> {
+                    is UiStateScore.Error -> {
                         Toast.makeText(
                             context,
                             "O atleta não tem ponto para ser retirado",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    is ScoreViewModel.UiState.Finish -> {
+                    is UiStateScore.Finish -> {
                         viewBinding.blue.viewBindingComponent.score.text =
                             scoreBlueState.scoreFinal.toString()
 
