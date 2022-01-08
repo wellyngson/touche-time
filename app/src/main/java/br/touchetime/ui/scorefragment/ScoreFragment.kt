@@ -70,8 +70,7 @@ class ScoreFragment : Fragment() {
             viewModel.scoreRed.collect { scoreRedState ->
                 when (scoreRedState) {
                     is UiStateScore.Success -> {
-                        viewBinding.red.viewBindingComponent.score.text =
-                            scoreRedState.score.toString()
+                        viewBinding.red.setScore(scoreRedState.score.toString())
                     }
                     is UiStateScore.Error -> {
                         Toast.makeText(
@@ -81,8 +80,7 @@ class ScoreFragment : Fragment() {
                         ).show()
                     }
                     is UiStateScore.Finish -> {
-                        viewBinding.red.viewBindingComponent.score.text =
-                            scoreRedState.scoreFinal.toString()
+                        viewBinding.red.setScore(scoreRedState.scoreFinal.toString())
 
                         showWinner(RED)
                     }
@@ -94,8 +92,7 @@ class ScoreFragment : Fragment() {
             viewModel.scoreBlue.collect { scoreBlueState ->
                 when (scoreBlueState) {
                     is UiStateScore.Success -> {
-                        viewBinding.blue.viewBindingComponent.score.text =
-                            scoreBlueState.score.toString()
+                        viewBinding.blue.setScore(scoreBlueState.score.toString())
                     }
                     is UiStateScore.Error -> {
                         Toast.makeText(
@@ -105,8 +102,7 @@ class ScoreFragment : Fragment() {
                         ).show()
                     }
                     is UiStateScore.Finish -> {
-                        viewBinding.blue.viewBindingComponent.score.text =
-                            scoreBlueState.scoreFinal.toString()
+                        viewBinding.blue.setScore(scoreBlueState.scoreFinal.toString())
 
                         showWinner(BLUE)
                     }
