@@ -5,17 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import br.touchetime.R
 import br.touchetime.databinding.FragmentEditFightBinding
-import br.touchetime.extension.setFragmentResultsListeners
 import br.touchetime.ui.bottomcontrol.BottomSheetDialogTransparentBackgroundFragment
-import br.touchetime.ui.scorefragment.ScoreFragment
+import br.touchetime.ui.scorefragment.ScoreViewModel
 
 class EditFightFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
     private lateinit var viewBinding: FragmentEditFightBinding
-    private val viewModel: EditFightViewModel by viewModels()
+    private val viewModel: ScoreViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,31 +36,27 @@ class EditFightFragment : BottomSheetDialogTransparentBackgroundFragment() {
     }
 
     private fun setupObservers() {
-        viewModel.technicalSuperiority.observe(viewLifecycleOwner) {
-            viewBinding.technicalSuperiority
-                .viewBindingComponent.text.text = it.toString()
+        viewModel.technicalSuperiorityEditFight.observe(viewLifecycleOwner) {
+            viewBinding.technicalSuperiority.setText(it.toString())
         }
 
-        viewModel.numberRound.observe(viewLifecycleOwner) {
-            viewBinding.numberRounds
-                .viewBindingComponent.text.text = it.toString()
+        viewModel.numberRoundEditFight.observe(viewLifecycleOwner) {
+            viewBinding.numberRounds.setText(it.toString())
         }
 
-        viewModel.timeRound.observe(viewLifecycleOwner) {
-            viewBinding.timeRound
-                .viewBindingComponent.text.text = it
+        viewModel.timeRoundEditFight.observe(viewLifecycleOwner) {
+            viewBinding.numberRounds.setText(it.toString())
         }
 
-        viewModel.timeInterval.observe(viewLifecycleOwner) {
-            viewBinding.timeInterval
-                .viewBindingComponent.text.text = it
+        viewModel.timeIntervalEditFight.observe(viewLifecycleOwner) {
+            viewBinding.numberRounds.setText(it.toString())
         }
     }
 
     private fun setupTechnicalSuperiority() {
         viewBinding.technicalSuperiority.apply {
             setTitle(context.getString(R.string.technical_superiority))
-            setText(viewModel.technicalSuperiority.value.toString())
+            setText(viewModel.technicalSuperiorityEditFight.value.toString())
 
             viewBindingComponent.apply {
                 remove.setOnClickListener {
@@ -77,7 +72,7 @@ class EditFightFragment : BottomSheetDialogTransparentBackgroundFragment() {
     private fun setupNumberRounds() {
         viewBinding.numberRounds.apply {
             setTitle(context.getString(R.string.number_rounds))
-            setText(viewModel.numberRound.value.toString())
+            setText(viewModel.numberRoundEditFight.value.toString())
 
             viewBindingComponent.apply {
                 remove.setOnClickListener {
@@ -124,20 +119,13 @@ class EditFightFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
     private fun finishConfiguration() {
         viewBinding.finish.setOnClickListener {
-            setFragmentResultsListeners(
-                childFragmentManager,
-                arrayOf(ScoreFragment.DISMISS_RESULT)
-            ) { key, bundle ->
-                if (key == ScoreFragment.DISMISS_RESULT) {
-                    dismiss()
-                }
-            }
+            viewModel.changeParameters()
+            dismiss()
         }
     }
 
     companion object {
         const val TAG = "br.touchetime.ui.editfightfragment"
-        const val EDIT_FIGHT_DISMISS_RESULT = "EDIT_FIGHT_DISMISS_RESULT"
 
         private fun newInstance() = EditFightFragment()
 
