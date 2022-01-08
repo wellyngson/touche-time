@@ -43,27 +43,19 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <br.touchetime.ui.common.IndividualScore
+    <include
         android:id="@+id/red"
+        layout="@layout/view_individual_score_red"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_normal"
-        app:backgroundComponent="@drawable/background_score_red"
-        app:backgroundComponentsAddRemove="@drawable/background_components_red"
-        app:foul="0"
-        app:name="Wellyngson Elias"
-        app:score="0" />
+        android:layout_marginTop="@dimen/spacing_x_large"
+        android:layout_marginBottom="@dimen/spacing_normal" />
 
-    <br.touchetime.ui.common.IndividualScore
+    <include
         android:id="@+id/blue"
+        layout="@layout/view_individual_score_blue"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_normal"
-        app:backgroundComponent="@drawable/background_score_blue"
-        app:backgroundComponentsAddRemove="@drawable/background_components_blue"
-        app:foul="0"
-        app:name="Wellyngson Elias"
-        app:score="0" />
+        android:layout_height="wrap_content" />
 
     <FrameLayout
         android:id="@+id/chronometer"

@@ -5,10 +5,9 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="@dimen/spacing_middle"
     android:paddingStart="@dimen/spacing_x_large"
     android:paddingEnd="@dimen/spacing_normal"
-    tools:background="@drawable/background_score_red">
+    android:background="@drawable/background_score_red">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/foul_container"
@@ -53,14 +52,14 @@
             android:layout_height="@dimen/spacing_xxx_large"
             android:layout_marginBottom="@dimen/spacing_small"
             android:src="@drawable/ic_add"
-            tools:background="@drawable/background_components_red" />
+            android:background="@drawable/background_components_red" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/remove_score"
             android:layout_width="@dimen/spacing_xxx_large"
             android:layout_height="@dimen/spacing_xxx_large"
             android:src="@drawable/ic_remove"
-            tools:background="@drawable/background_components_red" />
+            android:background="@drawable/background_components_red" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -96,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/spacing_xx_large"
-        android:text="12"
+        android:text="0"
         style="@style/TextViewIndividualScore"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/score_container"

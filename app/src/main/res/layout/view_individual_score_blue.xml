@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/spacing_x_large"
+    android:paddingEnd="@dimen/spacing_normal"
+    android:background="@drawable/background_score_blue">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/foul_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/icon_foul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/ic_foul_margins"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_foul" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/foul"
+            style="@style/TextViewIndividualScoreFoul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/score_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/score"
+        app:layout_constraintBottom_toBottomOf="@id/score">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/add_score"
+            android:layout_width="@dimen/spacing_xxx_large"
+            android:layout_height="@dimen/spacing_xxx_large"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:src="@drawable/ic_add"
+            android:background="@drawable/background_components_blue" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/remove_score"
+            android:layout_width="@dimen/spacing_xxx_large"
+            android:layout_height="@dimen/spacing_xxx_large"
+            android:src="@drawable/ic_remove"
+            android:background="@drawable/background_components_blue" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/name_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/nationality"
+            android:fontFamily="@font/inter_medium"
+            android:layout_width="40dp"
+            android:layout_height="29dp"
+            android:layout_marginEnd="@dimen/spacing_small"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
+            style="@style/TextViewIndividualScoreName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gabriel_ferreira"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_xx_large"
+        android:text="0"
+        style="@style/TextViewIndividualScore"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/score_container"
+        app:layout_constraintTop_toBottomOf="@id/name_container" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

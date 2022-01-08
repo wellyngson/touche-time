@@ -11,15 +11,6 @@
     <attr name="colorDialogBackground" format="color"/>
     <attr name="colorBottomSheetThumbIndicator" format="color"/>
 
-    <declare-styleable name="IndividualScore">
-        <attr name="name" format="string"/>
-        <attr name="score" format="string"/>
-        <attr name="foul" format="string"/>
-        <attr name="backgroundComponent" format="reference" />
-        <attr name="backgroundComponentsAddRemove" format="reference" />
-        <attr name="android:icon" format="reference"/>
-    </declare-styleable>
-
     <declare-styleable name="ChooseFight">
         <attr name="title" format="string"/>
         <attr name="icon" format="reference"/>
