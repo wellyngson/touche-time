@@ -6,10 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import br.touchetime.R
 import br.touchetime.databinding.FragmentEditFightBinding
+import br.touchetime.model.UiStateScore
 import br.touchetime.ui.bottomcontrol.BottomSheetDialogTransparentBackgroundFragment
 import br.touchetime.ui.scorefragment.ScoreViewModel
+import kotlinx.android.synthetic.main.edit_fight_characteristics.view.*
+import kotlinx.coroutines.flow.collect
 
 class EditFightFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
@@ -36,27 +40,36 @@ class EditFightFragment : BottomSheetDialogTransparentBackgroundFragment() {
     }
 
     private fun setupObservers() {
-        viewModel.technicalSuperiorityEditFight.observe(viewLifecycleOwner) {
-            viewBinding.technicalSuperiority.setText(it.toString())
+        lifecycleScope.launchWhenCreated {
+            viewModel.technicalSuperiorityEditFight.collect { technicalSuperiority ->
+                when (technicalSuperiority) {
+                    is UiStateScore.Initial -> {
+                        viewBinding.technicalSuperiority.setText(technicalSuperiority.scoreInitial.toString())
+                    }
+                    is UiStateScore.Success -> {
+                        viewBinding.technicalSuperiority.setText(technicalSuperiority.score.toString())
+                    }
+                }
+            }
         }
 
-        viewModel.numberRoundEditFight.observe(viewLifecycleOwner) {
-            viewBinding.numberRounds.setText(it.toString())
-        }
-
-        viewModel.timeRoundEditFight.observe(viewLifecycleOwner) {
-            viewBinding.numberRounds.setText(it.toString())
-        }
-
-        viewModel.timeIntervalEditFight.observe(viewLifecycleOwner) {
-            viewBinding.numberRounds.setText(it.toString())
+        lifecycleScope.launchWhenCreated {
+            viewModel.numberRoundEditFight.collect { numberRounds ->
+                when (numberRounds) {
+                    is UiStateScore.Initial -> {
+                        viewBinding.numberRounds.setText(numberRounds.scoreInitial.toString())
+                    }
+                    is UiStateScore.Success -> {
+                        viewBinding.numberRounds.setText(numberRounds.score.toString())
+                    }
+                }
+            }
         }
     }
 
     private fun setupTechnicalSuperiority() {
         viewBinding.technicalSuperiority.apply {
             setTitle(context.getString(R.string.technical_superiority))
-            setText(viewModel.technicalSuperiorityEditFight.value.toString())
 
             viewBindingComponent.apply {
                 remove.setOnClickListener {
@@ -72,7 +85,6 @@ class EditFightFragment : BottomSheetDialogTransparentBackgroundFragment() {
     private fun setupNumberRounds() {
         viewBinding.numberRounds.apply {
             setTitle(context.getString(R.string.number_rounds))
-            setText(viewModel.numberRoundEditFight.value.toString())
 
             viewBindingComponent.apply {
                 remove.setOnClickListener {

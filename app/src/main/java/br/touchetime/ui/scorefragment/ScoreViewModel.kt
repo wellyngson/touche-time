@@ -66,11 +66,11 @@ class ScoreViewModel : ViewModel() {
 
     // Technical Superiority Change
 
-    fun changeParameters() {
+    fun changeParameters() = viewModelScope.launch {
         val scoreRedInitial = scoreRed.value.hashCode()
         val scoreBlueInitial = scoreBlue.value.hashCode()
 
-        mutableTechnicalSuperiority.value = UiStateScore.Success(technicalSuperiorityEditFight.value!!)
+        mutableTechnicalSuperiority.value = UiStateScore.Success(technicalSuperiorityEditFight.value.hashCode())
 
         if (checkVictory(scoreRedInitial, scoreBlueInitial)) {
             mutableScoreRed.value = UiStateScore.Finish(scoreRedInitial)
@@ -87,45 +87,45 @@ class ScoreViewModel : ViewModel() {
 
     // EditFightFragment
 
-    private val mutableTechnicalSuperiorityEditFight = MutableLiveData(1)
-    private val mutableNumberRoundEditFight = MutableLiveData(1)
+    private val mutableTechnicalSuperiorityEditFight = MutableStateFlow<UiStateScore>(UiStateScore.Initial(8))
+    private val mutableNumberRoundEditFight = MutableStateFlow<UiStateScore>(UiStateScore.Initial(2))
     private val mutableTimeRoundEditFight = MutableLiveData("03:00")
     private val mutableTimeIntervalEditFight = MutableLiveData("00:30")
 
-    val technicalSuperiorityEditFight: LiveData<Int> = mutableTechnicalSuperiorityEditFight
-    val numberRoundEditFight: LiveData<Int> = mutableNumberRoundEditFight
+    val technicalSuperiorityEditFight: StateFlow<UiStateScore> get() = mutableTechnicalSuperiorityEditFight
+    val numberRoundEditFight: StateFlow<UiStateScore> get() = mutableNumberRoundEditFight
     val timeRoundEditFight: LiveData<String> = mutableTimeRoundEditFight
     val timeIntervalEditFight: LiveData<String> = mutableTimeIntervalEditFight
 
-    fun addTechnicalSuperiority() {
-        var technicalSuperiorityFinal = mutableTechnicalSuperiorityEditFight.value!!
+    fun addTechnicalSuperiority() = viewModelScope.launch {
+        var technicalSuperiorityFinal = mutableTechnicalSuperiorityEditFight.value.hashCode()
 
-        mutableTechnicalSuperiorityEditFight.postValue(++technicalSuperiorityFinal)
+        mutableTechnicalSuperiorityEditFight.value = UiStateScore.Success(++technicalSuperiorityFinal)
     }
 
-    fun removeTechnicalSuperiority() {
-        var technicalSuperiorityFinal = mutableTechnicalSuperiorityEditFight.value!!
+    fun removeTechnicalSuperiority() = viewModelScope.launch {
+        var technicalSuperiorityFinal = mutableTechnicalSuperiorityEditFight.value.hashCode()
 
         if (technicalSuperiorityFinal > 1) {
-            mutableTechnicalSuperiorityEditFight.postValue(--technicalSuperiorityFinal)
+            mutableTechnicalSuperiorityEditFight.value = UiStateScore.Success(--technicalSuperiorityFinal)
         } else {
-            mutableTechnicalSuperiorityEditFight.postValue(1)
+            mutableTechnicalSuperiorityEditFight.value = UiStateScore.Success(1)
         }
     }
 
-    fun addNumberRounds() {
-        var numberRoundFinal = mutableNumberRoundEditFight.value!!
+    fun addNumberRounds() = viewModelScope.launch {
+        var numberRoundFinal = mutableNumberRoundEditFight.value.hashCode()
 
-        mutableNumberRoundEditFight.postValue(++numberRoundFinal)
+        mutableNumberRoundEditFight.value = UiStateScore.Success(++numberRoundFinal)
     }
 
-    fun removeNumberRound() {
-        var numberRoundFinal = mutableNumberRoundEditFight.value!!
+    fun removeNumberRound() = viewModelScope.launch {
+        var numberRoundFinal = mutableNumberRoundEditFight.value.hashCode()
 
         if (numberRoundFinal > 1) {
-            mutableNumberRoundEditFight.postValue(--numberRoundFinal)
+            mutableNumberRoundEditFight.value = UiStateScore.Success(--numberRoundFinal)
         } else {
-            mutableNumberRoundEditFight.postValue(1)
+            mutableNumberRoundEditFight.value = UiStateScore.Success(1)
         }
     }
 
