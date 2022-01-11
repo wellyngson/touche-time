@@ -9,13 +9,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import br.touchetime.R
 import br.touchetime.databinding.FragmentEditFightBinding
-import br.touchetime.model.UiStateScore
+import br.touchetime.model.UiState
 import br.touchetime.ui.bottomcontrol.BottomSheetDialogTransparentBackgroundFragment
 import br.touchetime.ui.scorefragment.ScoreViewModel
-import kotlinx.android.synthetic.main.edit_fight_characteristics.view.*
 import kotlinx.coroutines.flow.collect
 
-class EditFightFragment : BottomSheetDialogTransparentBackgroundFragment() {
+class EditFightBottomSheetFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
     private lateinit var viewBinding: FragmentEditFightBinding
     private val viewModel: ScoreViewModel by activityViewModels()
@@ -42,11 +41,8 @@ class EditFightFragment : BottomSheetDialogTransparentBackgroundFragment() {
     private fun setupObservers() {
         lifecycleScope.launchWhenCreated {
             viewModel.technicalSuperiorityEditFight.collect { technicalSuperiority ->
-                when (technicalSuperiority) {
-                    is UiStateScore.Initial -> {
-                        viewBinding.technicalSuperiority.setText(technicalSuperiority.scoreInitial.toString())
-                    }
-                    is UiStateScore.Success -> {
+                when (technicalSuperiority.state) {
+                    UiState.Initial, UiState.Success -> {
                         viewBinding.technicalSuperiority.setText(technicalSuperiority.score.toString())
                     }
                 }
@@ -55,12 +51,29 @@ class EditFightFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
         lifecycleScope.launchWhenCreated {
             viewModel.numberRoundEditFight.collect { numberRounds ->
-                when (numberRounds) {
-                    is UiStateScore.Initial -> {
-                        viewBinding.numberRounds.setText(numberRounds.scoreInitial.toString())
-                    }
-                    is UiStateScore.Success -> {
+                when (numberRounds.state) {
+                    UiState.Initial, UiState.Success -> {
                         viewBinding.numberRounds.setText(numberRounds.score.toString())
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.timeRoundEditFight.collect { timeRound ->
+                when (timeRound.state) {
+                    UiState.Initial, UiState.Success -> {
+                        viewBinding.timeRound.setText(timeRound.score)
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.timeIntervalEditFight.collect { timeInterval ->
+                when (timeInterval.state) {
+                    UiState.Initial, UiState.Success -> {
+                        viewBinding.timeInterval.setText(timeInterval.score)
                     }
                 }
             }
@@ -100,7 +113,6 @@ class EditFightFragment : BottomSheetDialogTransparentBackgroundFragment() {
     private fun setupTimeRound() {
         viewBinding.timeRound.apply {
             setTitle(context.getString(R.string.time_rounds))
-            setText(context.getString(R.string.time_of_round))
 
             viewBindingComponent.apply {
                 remove.setOnClickListener {
@@ -116,7 +128,6 @@ class EditFightFragment : BottomSheetDialogTransparentBackgroundFragment() {
     private fun setupTimeInterval() {
         viewBinding.timeInterval.apply {
             setTitle(context.getString(R.string.time_interval_of_round))
-            setText(context.getString(R.string.time_of_round))
 
             viewBindingComponent.apply {
                 remove.setOnClickListener {
@@ -139,7 +150,7 @@ class EditFightFragment : BottomSheetDialogTransparentBackgroundFragment() {
     companion object {
         const val TAG = "br.touchetime.ui.editfightfragment"
 
-        private fun newInstance() = EditFightFragment()
+        private fun newInstance() = EditFightBottomSheetFragment()
 
         fun show(fragmentManager: FragmentManager) = newInstance().show(fragmentManager, TAG)
     }

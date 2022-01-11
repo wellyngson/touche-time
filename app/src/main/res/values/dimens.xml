@@ -5,6 +5,7 @@
     <dimen name="ic_foul_margins">6dp</dimen>
     <dimen name="ic_play_chronometer">64dp</dimen>
     <dimen name="min_width_number_chronometer">72dp</dimen>
+    <dimen name="padding_item_chronometer">14dp</dimen>
     <dimen name="bottom_sheet_thumb_indicator_height">4dp</dimen>
     <dimen name="bottom_sheet_thumb_indicator_width">64dp</dimen>
     <dimen name="bottom_sheet_thumb_indicator_top_offset">14dp</dimen>
