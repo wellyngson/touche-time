@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.touchetime.extension.changeTimer
+import br.touchetime.model.UiState
 import br.touchetime.model.UiStateScore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,148 +13,151 @@ import kotlinx.coroutines.launch
 
 class ScoreViewModel : ViewModel() {
 
-    private val mutableScoreRed = MutableStateFlow<UiStateScore>(UiStateScore.Initial(0))
-    private val mutableScoreBlue = MutableStateFlow<UiStateScore>(UiStateScore.Initial(0))
-    private val mutableTechnicalSuperiority = MutableStateFlow<UiStateScore>(UiStateScore.Initial(8))
+    private val _scoreRed = MutableStateFlow(UiStateScore(0, UiState.Initial))
+    private val _scoreBlue = MutableStateFlow(UiStateScore(0, UiState.Initial))
+    private val _technicalSuperiority = MutableStateFlow(UiStateScore(8, UiState.Initial))
 
-    val scoreRed: StateFlow<UiStateScore> get() = mutableScoreRed
-    val scoreBlue: StateFlow<UiStateScore> get() = mutableScoreBlue
-    val technicalSuperiority: StateFlow<UiStateScore> get() = mutableTechnicalSuperiority
+    val scoreRed: StateFlow<UiStateScore<Int>> get() = _scoreRed
+    val scoreBlue: StateFlow<UiStateScore<Int>> get() = _scoreBlue
+    val technicalSuperiority: StateFlow<UiStateScore<Int>> get() = _technicalSuperiority
 
     // Change Red
 
     fun addScoreRed() = viewModelScope.launch {
-        var scoreRedInitial = mutableScoreRed.value.hashCode()
+        var scoreRedInitial = _scoreRed.value.score
 
-        mutableScoreRed.value = UiStateScore.Success(++scoreRedInitial)
+        _scoreRed.value = UiStateScore(++scoreRedInitial, UiState.Success)
 
-        if (checkVictory(scoreRedInitial, mutableScoreBlue.value.hashCode())) {
-            mutableScoreRed.value = UiStateScore.Finish(scoreRedInitial)
+        if (checkVictory(scoreRedInitial, _scoreBlue.value.score)) {
+            _scoreRed.value = UiStateScore(scoreRedInitial, UiState.Finish)
         }
     }
 
     fun removeScoreRed() = viewModelScope.launch {
-        val scoreRedInitial = mutableScoreRed.value.hashCode()
+        val scoreRedInitial = _scoreRed.value.score
 
         if (scoreRedInitial > 0) {
-            mutableScoreRed.value = UiStateScore.Success(scoreRedInitial - 1)
+            _scoreRed.value = UiStateScore(scoreRedInitial - 1, UiState.Success)
         } else {
-            mutableScoreRed.value = UiStateScore.Error(scoreRedInitial)
+            _scoreRed.value = UiStateScore(scoreRedInitial, UiState.Error)
         }
     }
 
     // Change Blue
 
     fun addScoreBlue() = viewModelScope.launch {
-        var scoreBlueInitial = mutableScoreBlue.value.hashCode()
+        var scoreBlueInitial = _scoreBlue.value.score
 
-        mutableScoreBlue.value = UiStateScore.Success(++scoreBlueInitial)
+        _scoreBlue.value = UiStateScore(++scoreBlueInitial, UiState.Success)
 
-        if (checkVictory(scoreBlueInitial, mutableScoreRed.value.hashCode())) {
-            mutableScoreBlue.value = UiStateScore.Finish(scoreBlueInitial)
+        if (checkVictory(scoreBlueInitial, _scoreRed.value.score)) {
+            _scoreBlue.value = UiStateScore(scoreBlueInitial, UiState.Finish)
         }
     }
 
     fun removeScoreBlue() = viewModelScope.launch {
-        val scoreBlueInitial = mutableScoreBlue.value.hashCode()
+        val scoreBlueInitial = _scoreBlue.value.score
 
         if (scoreBlueInitial > 0) {
-            mutableScoreBlue.value = UiStateScore.Success(scoreBlueInitial - 1)
+            _scoreBlue.value = UiStateScore(scoreBlueInitial - 1, UiState.Success)
         } else {
-            mutableScoreBlue.value = UiStateScore.Error(scoreBlueInitial)
+            _scoreBlue.value = UiStateScore(scoreBlueInitial, UiState.Error)
         }
     }
 
     // Technical Superiority Change
 
     fun changeParameters() = viewModelScope.launch {
-        val scoreRedInitial = scoreRed.value.hashCode()
-        val scoreBlueInitial = scoreBlue.value.hashCode()
+        val scoreRedInitial = scoreRed.value.score
+        val scoreBlueInitial = scoreBlue.value.score
 
-        mutableTechnicalSuperiority.value = UiStateScore.Success(technicalSuperiorityEditFight.value.hashCode())
+        _technicalSuperiority.value = UiStateScore(
+            technicalSuperiorityEditFight.value.score,
+            UiState.Success
+        )
 
         if (checkVictory(scoreRedInitial, scoreBlueInitial)) {
-            mutableScoreRed.value = UiStateScore.Finish(scoreRedInitial)
+            _scoreRed.value = UiStateScore(scoreRedInitial, UiState.Finish)
         } else if (checkVictory(scoreBlueInitial, scoreRedInitial)) {
-            mutableScoreBlue.value = UiStateScore.Finish(scoreBlueInitial)
+            _scoreBlue.value = UiStateScore(scoreBlueInitial, UiState.Finish)
         }
     }
 
     private fun checkVictory(scoreAthleteOne: Int, scoreAthleteTwo: Int): Boolean {
-        val technicalSuperiorityInitial = mutableTechnicalSuperiority.value.hashCode()
+        val technicalSuperiorityInitial = _technicalSuperiority.value.score
 
         return (scoreAthleteOne - scoreAthleteTwo) >= technicalSuperiorityInitial
     }
 
     // EditFightFragment
 
-    private val mutableTechnicalSuperiorityEditFight = MutableStateFlow<UiStateScore>(UiStateScore.Initial(8))
-    private val mutableNumberRoundEditFight = MutableStateFlow<UiStateScore>(UiStateScore.Initial(2))
-    private val mutableTimeRoundEditFight = MutableLiveData("03:00")
-    private val mutableTimeIntervalEditFight = MutableLiveData("00:30")
+    private val _technicalSuperiorityEditFight = MutableStateFlow(UiStateScore(8, UiState.Initial))
+    private val _numberRoundEditFight = MutableStateFlow(UiStateScore(2, UiState.Initial))
+    private val _timeRoundEditFight = MutableStateFlow(UiStateScore("03:00", UiState.Initial))
+    private val _timeIntervalEditFight = MutableStateFlow(UiStateScore("00:30", UiState.Initial))
 
-    val technicalSuperiorityEditFight: StateFlow<UiStateScore> get() = mutableTechnicalSuperiorityEditFight
-    val numberRoundEditFight: StateFlow<UiStateScore> get() = mutableNumberRoundEditFight
-    val timeRoundEditFight: LiveData<String> = mutableTimeRoundEditFight
-    val timeIntervalEditFight: LiveData<String> = mutableTimeIntervalEditFight
+    val technicalSuperiorityEditFight: StateFlow<UiStateScore<Int>> get() = _technicalSuperiorityEditFight
+    val numberRoundEditFight: StateFlow<UiStateScore<Int>> get() = _numberRoundEditFight
+    val timeRoundEditFight: StateFlow<UiStateScore<String>> get() = _timeRoundEditFight
+    val timeIntervalEditFight: StateFlow<UiStateScore<String>> = _timeIntervalEditFight
 
     fun addTechnicalSuperiority() = viewModelScope.launch {
-        var technicalSuperiorityFinal = mutableTechnicalSuperiorityEditFight.value.hashCode()
+        var technicalSuperiorityFinal = _technicalSuperiorityEditFight.value.score
 
-        mutableTechnicalSuperiorityEditFight.value = UiStateScore.Success(++technicalSuperiorityFinal)
+        _technicalSuperiorityEditFight.value = UiStateScore(++technicalSuperiorityFinal, UiState.Success)
     }
 
     fun removeTechnicalSuperiority() = viewModelScope.launch {
-        var technicalSuperiorityFinal = mutableTechnicalSuperiorityEditFight.value.hashCode()
+        var technicalSuperiorityFinal = _technicalSuperiorityEditFight.value.score
 
         if (technicalSuperiorityFinal > 1) {
-            mutableTechnicalSuperiorityEditFight.value = UiStateScore.Success(--technicalSuperiorityFinal)
+            _technicalSuperiorityEditFight.value = UiStateScore(--technicalSuperiorityFinal, UiState.Success)
         } else {
-            mutableTechnicalSuperiorityEditFight.value = UiStateScore.Success(1)
+            _technicalSuperiorityEditFight.value = UiStateScore(1, UiState.Success)
         }
     }
 
     fun addNumberRounds() = viewModelScope.launch {
-        var numberRoundFinal = mutableNumberRoundEditFight.value.hashCode()
+        var numberRoundFinal = _numberRoundEditFight.value.score
 
-        mutableNumberRoundEditFight.value = UiStateScore.Success(++numberRoundFinal)
+        _numberRoundEditFight.value = UiStateScore(++numberRoundFinal, UiState.Success)
     }
 
     fun removeNumberRound() = viewModelScope.launch {
-        var numberRoundFinal = mutableNumberRoundEditFight.value.hashCode()
+        var numberRoundFinal = _numberRoundEditFight.value.score
 
         if (numberRoundFinal > 1) {
-            mutableNumberRoundEditFight.value = UiStateScore.Success(--numberRoundFinal)
+            _numberRoundEditFight.value = UiStateScore(--numberRoundFinal, UiState.Success)
         } else {
-            mutableNumberRoundEditFight.value = UiStateScore.Success(1)
+            _numberRoundEditFight.value = UiStateScore(1, UiState.Success)
         }
     }
 
-    fun addTimeRound() {
-        val minutes = mutableTimeRoundEditFight.value!!.substring(0, 2).toInt()
-        val seconds = mutableTimeRoundEditFight.value!!.substring(3).toInt()
+    fun addTimeRound() = viewModelScope.launch {
+        val minutes = _timeRoundEditFight.value.score.substring(0, 2).toInt()
+        val seconds = _timeRoundEditFight.value.score.substring(3).toInt()
 
-        mutableTimeRoundEditFight.postValue(changeTimer(minutes, seconds, 10))
+        _timeRoundEditFight.value = UiStateScore(changeTimer(minutes, seconds, 10), UiState.Success)
+    }
+
+    fun removeTimeRound() = viewModelScope.launch {
+        val minutes = _timeRoundEditFight.value.score.substring(0, 2).toInt()
+        val seconds = _timeRoundEditFight.value.score.substring(3).toInt()
+
+        _timeRoundEditFight.value = UiStateScore(changeTimer(minutes, seconds, -10), UiState.Success)
     }
 
     fun addTimeInterval() {
-        val minutes = mutableTimeIntervalEditFight.value!!.substring(0, 2).toInt()
-        val seconds = mutableTimeIntervalEditFight.value!!.substring(3).toInt()
+        val minutes = _timeIntervalEditFight.value.score.substring(0, 2).toInt()
+        val seconds = _timeIntervalEditFight.value.score.substring(3).toInt()
 
-        mutableTimeIntervalEditFight.postValue(changeTimer(minutes, seconds, 10))
-    }
-
-    fun removeTimeRound() {
-        val minutes = mutableTimeRoundEditFight.value!!.substring(0, 2).toInt()
-        val seconds = mutableTimeRoundEditFight.value!!.substring(3).toInt()
-
-        mutableTimeRoundEditFight.postValue(changeTimer(minutes, seconds, -10))
+        _timeIntervalEditFight.value = UiStateScore(changeTimer(minutes, seconds, 10), UiState.Success)
     }
 
     fun removeTimeInterval() {
-        val minutes = mutableTimeIntervalEditFight.value!!.substring(0, 2).toInt()
-        val seconds = mutableTimeIntervalEditFight.value!!.substring(3).toInt()
+        val minutes = _timeIntervalEditFight.value.score.substring(0, 2).toInt()
+        val seconds = _timeIntervalEditFight.value.score.substring(3).toInt()
 
-        mutableTimeIntervalEditFight.postValue(changeTimer(minutes, seconds, -10))
+        _timeIntervalEditFight.value = UiStateScore(changeTimer(minutes, seconds, -10), UiState.Success)
     }
 }
