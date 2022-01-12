@@ -1,4 +1,4 @@
-package br.touchetime.model
+package br.touchetime.data.model
 
 data class UiStateScore<T> (
     val score: T,

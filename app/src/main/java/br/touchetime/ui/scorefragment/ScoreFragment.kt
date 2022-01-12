@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import br.touchetime.MainActivity
 import br.touchetime.R
 import br.touchetime.databinding.FragmentScoreBinding
-import br.touchetime.model.UiState
+import br.touchetime.data.model.UiState
 import br.touchetime.ui.editfightfragment.EditFightBottomSheetFragment
 import br.touchetime.ui.homefragment.HomeFragment
 import kotlinx.coroutines.flow.collect

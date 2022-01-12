@@ -1,12 +1,10 @@
 package br.touchetime.ui.scorefragment
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.touchetime.extension.changeTimer
-import br.touchetime.model.UiState
-import br.touchetime.model.UiStateScore
+import br.touchetime.data.model.UiState
+import br.touchetime.data.model.UiStateScore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import br.touchetime.R
 import br.touchetime.databinding.FragmentEditFightBinding
-import br.touchetime.model.UiState
+import br.touchetime.data.model.UiState
 import br.touchetime.ui.bottomcontrol.BottomSheetDialogTransparentBackgroundFragment
 import br.touchetime.ui.scorefragment.ScoreViewModel
 import kotlinx.coroutines.flow.collect
