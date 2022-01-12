@@ -5,19 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import br.touchetime.R
-import br.touchetime.databinding.FragmentEditFightBinding
 import br.touchetime.data.model.UiState
+import br.touchetime.databinding.FragmentEditFightBinding
 import br.touchetime.ui.bottomcontrol.BottomSheetDialogTransparentBackgroundFragment
 import br.touchetime.ui.scorefragment.ScoreViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
+@AndroidEntryPoint
 class EditFightBottomSheetFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
     private lateinit var viewBinding: FragmentEditFightBinding
-    private val viewModel: ScoreViewModel by activityViewModels()
+    private val viewModel: ScoreViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

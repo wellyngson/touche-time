@@ -2,14 +2,20 @@ package br.touchetime.ui.scorefragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.touchetime.extension.changeTimer
 import br.touchetime.data.model.UiState
 import br.touchetime.data.model.UiStateScore
+import br.touchetime.data.repository.ScoreRepository
+import br.touchetime.extension.changeTimer
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ScoreViewModel : ViewModel() {
+@HiltViewModel
+class ScoreViewModel @Inject constructor(
+    private val scoreRepository: ScoreRepository
+) : ViewModel() {
 
     private val _scoreRed = MutableStateFlow(UiStateScore(0, UiState.Initial))
     private val _scoreBlue = MutableStateFlow(UiStateScore(0, UiState.Initial))
@@ -22,9 +28,9 @@ class ScoreViewModel : ViewModel() {
     // Change Red
 
     fun addScoreRed() = viewModelScope.launch {
-        var scoreRedInitial = _scoreRed.value.score
+        val scoreRedInitial = _scoreRed.value.score
 
-        _scoreRed.value = UiStateScore(++scoreRedInitial, UiState.Success)
+        _scoreRed.value = UiStateScore(scoreRedInitial, UiState.Success)
 
         if (checkVictory(scoreRedInitial, _scoreBlue.value.score)) {
             _scoreRed.value = UiStateScore(scoreRedInitial, UiState.Finish)

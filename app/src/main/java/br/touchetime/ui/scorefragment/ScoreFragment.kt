@@ -7,20 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import br.touchetime.MainActivity
 import br.touchetime.R
-import br.touchetime.databinding.FragmentScoreBinding
 import br.touchetime.data.model.UiState
+import br.touchetime.databinding.FragmentScoreBinding
 import br.touchetime.ui.editfightfragment.EditFightBottomSheetFragment
 import br.touchetime.ui.homefragment.HomeFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
+@AndroidEntryPoint
 class ScoreFragment : Fragment() {
 
     private lateinit var viewBinding: FragmentScoreBinding
-    private val viewModel: ScoreViewModel by activityViewModels()
+    private val viewModel: ScoreViewModel by viewModels()
     private val mainActivity: MainActivity?
         get() = activity as? MainActivity
 
