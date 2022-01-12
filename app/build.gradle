@@ -59,6 +59,11 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
 
+    // Room
+    implementation "androidx.room:room-ktx:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$roomVersion"
+
     // Paris
     implementation 'com.airbnb.android:paris:2.0.0'
     kapt 'com.airbnb.android:paris-processor:2.0.0'
@@ -69,9 +74,6 @@ dependencies {
     kaptTest "com.google.dagger:hilt-android-compiler:$hilt_version"
     androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
-
-    def work_version = "2.5.0"
-
     implementation "androidx.work:work-runtime-ktx:$work_version"
     implementation 'androidx.hilt:hilt-work:1.0.0'
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
