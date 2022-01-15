@@ -15,4 +15,7 @@
     <string name="time_rounds">Tempo de cada rounds</string>
     <string name="time_interval_of_round">Tempo de cada intervalo</string>
     <string name="start_fight">Iniciar luta</string>
+    <string name="greco_roman">Greco Roman</string>
+    <string name="free_style">Free Style</string>
+    <string name="woman_wrestling">Woman Wrestling</string>
 </resources>
