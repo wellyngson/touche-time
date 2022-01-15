@@ -37,7 +37,7 @@ class ScoreViewModel @Inject constructor(
     }
 
     fun removeScoreRed() = viewModelScope.launch {
-        val scoreRedInitial = _scoreRed.value.score
+        val scoreRedInitial = scoreRepository.getScoreRed()
 
         if (scoreRedInitial > 0) {
             _scoreRed.value = UiStateScore(scoreRepository.removeScoreRed(), UiState.Success)
@@ -58,7 +58,7 @@ class ScoreViewModel @Inject constructor(
     }
 
     fun removeScoreBlue() = viewModelScope.launch {
-        val scoreBlueInitial = _scoreBlue.value.score
+        val scoreBlueInitial = scoreRepository.getScoreBlue()
 
         if (scoreBlueInitial > 0) {
             _scoreBlue.value = UiStateScore(scoreRepository.removeScoreBlue(), UiState.Success)
