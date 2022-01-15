@@ -10,6 +10,7 @@ import br.touchetime.MainActivity
 import br.touchetime.R
 import br.touchetime.R.drawable
 import br.touchetime.databinding.FragmentHomeBinding
+import br.touchetime.ui.createfight.CreateFightFragment
 import br.touchetime.ui.scorefragment.ScoreFragment
 
 class HomeFragment : Fragment() {
@@ -36,8 +37,8 @@ class HomeFragment : Fragment() {
 
     private fun setupScoreFragmentCustom() {
         viewBinding.customFight.setOnClickListener {
-            navigateToScoreFragment()
             mainActivity?.typeFight = CUSTOM_FIGHT
+            navigateToFragment(ScoreFragment.newInstance(), ScoreFragment.TAG)
         }
     }
 
@@ -46,26 +47,28 @@ class HomeFragment : Fragment() {
             setTitle(context.getString(R.string.official_fight))
             setDescription(context.getString(R.string.choose_fight_description))
             setIcon(getDrawable(context, drawable.ic_users_fight))
+            setIconVisibility(true)
         }
 
         viewBinding.customFight.apply {
             setTitle(context.getString(R.string.custom_fight))
             setDescription(context.getString(R.string.custom_fight_description))
             setIcon(getDrawable(context, drawable.ic_edit_fight))
+            setIconVisibility(true)
         }
     }
 
     private fun setupScoreFragmentDefault() {
         viewBinding.fight.setOnClickListener {
-            navigateToScoreFragment()
             mainActivity?.typeFight = DEFAULT_FIGHT
+            navigateToFragment(CreateFightFragment.newInstance(), CreateFightFragment.TAG)
         }
     }
 
-    private fun navigateToScoreFragment() {
+    private fun navigateToFragment(fragment: Fragment, key: String) {
         mainActivity?.navigateToFragment(
-            ScoreFragment.newInstance(),
-            ScoreFragment.TAG
+            fragment,
+            key
         )
     }
 
