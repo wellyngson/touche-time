@@ -26,4 +26,11 @@
     <string name="style_description">Escolha entre Estilo Livre, Greco-Romana e Livre Feminino</string>
     <string name="weight_title">Escolha o peso</string>
     <string name="weight_description">Escolha entre os pesos oficiais de cada categoria</string>
+    <string name="choose">Escolher</string>
+    <string name="category_childish">Infantil</string>
+    <string name="category_u13">U13</string>
+    <string name="category_u15">U15</string>
+    <string name="category_u18">U18</string>
+    <string name="category_u21">U21</string>
+    <string name="category_senior">Sênior</string>
 </resources>

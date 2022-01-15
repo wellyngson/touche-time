@@ -6,6 +6,8 @@
     <attr name="colorBackgroundComponentsGraySecondary" format="color" />
     <attr name="colorBackgroundCategory" format="color" />
     <attr name="colorBackgroundButton" format="color" />
+    <attr name="colorBackgroundButtonSelected" format="color" />
+    <attr name="colorBackgroundButtonItem" format="color" />
     <attr name="colorTextPrimary" format="color" />
     <attr name="colorDescriptionChooseFight" format="color" />
     <attr name="colorDialogBackground" format="color"/>

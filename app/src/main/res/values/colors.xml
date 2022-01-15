@@ -29,6 +29,7 @@
     <color name="gray_tertiary">#272727</color>
     <color name="gray_quaternary">#343434</color>
     <color name="gray_background_category">#1C1C1C</color>
+    <color name="gray_background_category_item">#3A3A3A</color>
     <color name="orange_primary">#FE7E16</color>
     <color name="smoke">#666666</color>
     <color name="color_control_highlight">#40FFFFFF</color>
