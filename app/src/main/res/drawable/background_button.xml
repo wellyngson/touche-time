@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="?colorBackgroundButton" />
-    <corners android:radius="@dimen/spacing_small" />
-</shape>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/colorRippleEffect">
+    <item>
+        <shape>
+            <solid android:color="?colorBackgroundButton" />
+            <corners android:radius="@dimen/spacing_small" />
+        </shape>
+    </item>
+</ripple>
