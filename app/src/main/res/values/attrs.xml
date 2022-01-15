@@ -15,6 +15,7 @@
         <attr name="title" format="string"/>
         <attr name="icon" format="reference"/>
         <attr name="description" format="string"/>
+        <attr name="visible" format="boolean" />    
     </declare-styleable>
 
     <declare-styleable name="EditFightCharacteristics">
