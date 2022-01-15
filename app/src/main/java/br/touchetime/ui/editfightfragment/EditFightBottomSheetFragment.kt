@@ -8,10 +8,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import br.touchetime.R
+import br.touchetime.data.model.ParamsFight
 import br.touchetime.data.model.UiState
 import br.touchetime.databinding.FragmentEditFightBinding
 import br.touchetime.ui.bottomcontrol.BottomSheetDialogTransparentBackgroundFragment
-import br.touchetime.ui.scorefragment.ScoreViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.collect
 class EditFightBottomSheetFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
     private lateinit var viewBinding: FragmentEditFightBinding
-    private val viewModel: ScoreViewModel by viewModels()
+    private val viewModel: EditFightViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -144,7 +144,17 @@ class EditFightBottomSheetFragment : BottomSheetDialogTransparentBackgroundFragm
 
     private fun finishConfiguration() {
         viewBinding.finish.setOnClickListener {
-            viewModel.changeParameters()
+            viewModel.apply {
+                changeParameters(
+                    ParamsFight(
+                        technicalSuperiorityEditFight.value.score,
+                        numberRoundEditFight.value.score,
+                        timeRoundEditFight.value.score,
+                        timeIntervalEditFight.value.score
+                    )
+                )
+            }
+
             dismiss()
         }
     }
