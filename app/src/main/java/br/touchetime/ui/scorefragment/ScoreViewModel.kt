@@ -28,12 +28,11 @@ class ScoreViewModel @Inject constructor(
     // Change Red
 
     fun addScoreRed() = viewModelScope.launch {
-        val scoreRedInitial = _scoreRed.value.score
+        val scoreRedRepository = scoreRepository.addScoreRed()
+        _scoreRed.value = UiStateScore(scoreRedRepository, UiState.Success)
 
-        _scoreRed.value = UiStateScore(scoreRedInitial, UiState.Success)
-
-        if (checkVictory(scoreRedInitial, _scoreBlue.value.score)) {
-            _scoreRed.value = UiStateScore(scoreRedInitial, UiState.Finish)
+        if (checkVictory(scoreRedRepository, _scoreBlue.value.score)) {
+            _scoreRed.value = UiStateScore(scoreRedRepository, UiState.Finish)
         }
     }
 
@@ -41,7 +40,7 @@ class ScoreViewModel @Inject constructor(
         val scoreRedInitial = _scoreRed.value.score
 
         if (scoreRedInitial > 0) {
-            _scoreRed.value = UiStateScore(scoreRedInitial - 1, UiState.Success)
+            _scoreRed.value = UiStateScore(scoreRepository.removeScoreRed(), UiState.Success)
         } else {
             _scoreRed.value = UiStateScore(scoreRedInitial, UiState.Error)
         }
@@ -50,12 +49,11 @@ class ScoreViewModel @Inject constructor(
     // Change Blue
 
     fun addScoreBlue() = viewModelScope.launch {
-        var scoreBlueInitial = _scoreBlue.value.score
+        val scoreBlueRepository = scoreRepository.addScoreBlue()
+        _scoreBlue.value = UiStateScore(scoreBlueRepository, UiState.Success)
 
-        _scoreBlue.value = UiStateScore(++scoreBlueInitial, UiState.Success)
-
-        if (checkVictory(scoreBlueInitial, _scoreRed.value.score)) {
-            _scoreBlue.value = UiStateScore(scoreBlueInitial, UiState.Finish)
+        if (checkVictory(scoreBlueRepository, _scoreRed.value.score)) {
+            _scoreBlue.value = UiStateScore(scoreBlueRepository, UiState.Finish)
         }
     }
 
@@ -63,7 +61,7 @@ class ScoreViewModel @Inject constructor(
         val scoreBlueInitial = _scoreBlue.value.score
 
         if (scoreBlueInitial > 0) {
-            _scoreBlue.value = UiStateScore(scoreBlueInitial - 1, UiState.Success)
+            _scoreBlue.value = UiStateScore(scoreRepository.removeScoreBlue(), UiState.Success)
         } else {
             _scoreBlue.value = UiStateScore(scoreBlueInitial, UiState.Error)
         }
