@@ -12,6 +12,9 @@ interface ScoreRepository {
     fun removeScoreBlue(): Int
 
     fun getTechnicalSuperiority(): Int
+    fun getNumberRounds(): Int
+    fun getTimeRound(): String
+    fun getTimeInterval(): String
 
     fun changeParams(paramsFight: ParamsFight)
 }

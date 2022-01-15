@@ -76,4 +76,10 @@ class ScoreViewModel @Inject constructor(
             _scoreBlue.value = UiStateScore(scoreBlueInitial, UiState.Error)
         }
     }
+
+    // Params
+
+    fun getTimeRound(): String = scoreRepository.getTimeRound()
+
+    fun getTimeInterval(): String = scoreRepository.getTimeInterval()
 }
