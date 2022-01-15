@@ -17,8 +17,8 @@ class ScoreViewModel @Inject constructor(
     private val scoreRepository: ScoreRepository
 ) : ViewModel() {
 
-    private val _scoreRed = MutableStateFlow(UiStateScore(0, UiState.Initial))
-    private val _scoreBlue = MutableStateFlow(UiStateScore(0, UiState.Initial))
+    private val _scoreRed = MutableStateFlow(UiStateScore(scoreRepository.getScoreRed(), UiState.Initial))
+    private val _scoreBlue = MutableStateFlow(UiStateScore(scoreRepository.getScoreBlue(), UiState.Initial))
     private val _technicalSuperiority = MutableStateFlow(UiStateScore(8, UiState.Initial))
 
     val scoreRed: StateFlow<UiStateScore<Int>> get() = _scoreRed

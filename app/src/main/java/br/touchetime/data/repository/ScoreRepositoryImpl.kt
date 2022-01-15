@@ -6,9 +6,11 @@ class ScoreRepositoryImpl @Inject constructor() : ScoreRepository {
     private var scoreRedInitial = 0
     private var scoreBlueInitial = 0
 
-    override fun addScoreRed(): Int = scoreRedInitial++
-    override fun removeScoreRed(): Int = scoreRedInitial--
+    override fun getScoreRed(): Int = scoreRedInitial
+    override fun addScoreRed(): Int = ++scoreRedInitial
+    override fun removeScoreRed(): Int = --scoreRedInitial
 
-    override fun addScoreBlue(): Int = scoreBlueInitial++
-    override fun removeScoreBlue(): Int = scoreBlueInitial--
+    override fun getScoreBlue(): Int = scoreBlueInitial
+    override fun addScoreBlue(): Int = ++scoreBlueInitial
+    override fun removeScoreBlue(): Int = --scoreBlueInitial
 }

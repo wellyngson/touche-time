@@ -69,22 +69,26 @@ class ScoreFragment : Fragment() {
     }
 
     private fun setupListenersRed() {
-        viewBinding.red.addScore.setOnClickListener {
-            viewModel.addScoreRed()
-        }
+        viewBinding.red.apply {
+            addScore.setOnClickListener {
+                viewModel.addScoreRed()
+            }
 
-        viewBinding.red.removeScore.setOnClickListener {
-            viewModel.removeScoreRed()
+            removeScore.setOnClickListener {
+                viewModel.removeScoreRed()
+            }
         }
     }
 
     private fun setupListenersBlue() {
-        viewBinding.blue.addScore.setOnClickListener {
-            viewModel.addScoreBlue()
-        }
+        viewBinding.blue.apply {
+            addScore.setOnClickListener {
+                viewModel.addScoreBlue()
+            }
 
-        viewBinding.blue.removeScore.setOnClickListener {
-            viewModel.removeScoreBlue()
+            removeScore.setOnClickListener {
+                viewModel.removeScoreBlue()
+            }
         }
     }
 
@@ -126,7 +130,7 @@ class ScoreFragment : Fragment() {
         lifecycleScope.launchWhenStarted {
             viewModel.scoreRed.collect { scoreRed ->
                 when (scoreRed.state) {
-                    UiState.Success -> {
+                    UiState.Initial, UiState.Success -> {
                         viewBinding.red.score.text = scoreRed.score.toString()
                     }
                     UiState.Error -> {
@@ -148,7 +152,7 @@ class ScoreFragment : Fragment() {
         lifecycleScope.launchWhenStarted {
             viewModel.scoreBlue.collect { scoreBlueState ->
                 when (scoreBlueState.state) {
-                    UiState.Success -> {
+                    UiState.Initial, UiState.Success -> {
                         viewBinding.blue.score.text = scoreBlueState.score.toString()
                     }
                     UiState.Error -> {
