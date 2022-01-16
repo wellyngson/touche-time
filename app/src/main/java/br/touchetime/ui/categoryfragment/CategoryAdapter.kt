@@ -32,13 +32,15 @@ class CategoryAdapter(
         private val viewBinding = CategoryItemBinding.bind(view)
 
         init {
-            view.setOnClickListener { onItemClicked(adapterPosition) }
+            view.setOnClickListener {
+                onItemClicked(adapterPosition)
+                it.isSelected = !it.isSelected
+            }
         }
 
         fun bind(category: Int) {
             viewBinding.apply {
                 text.setText(category)
-                root.isSelected = true
             }
         }
     }
