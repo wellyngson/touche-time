@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import br.touchetime.MainActivity
 import br.touchetime.R
 import br.touchetime.databinding.FragmentCreateFightBinding
+import br.touchetime.ui.categoryfragment.CategoryFragment
 import br.touchetime.ui.homefragment.HomeFragment
 
 class CreateFightFragment : Fragment() {
@@ -45,6 +46,7 @@ class CreateFightFragment : Fragment() {
             setIconVisibility(false)
 
             setOnClickListener {
+                CategoryFragment.show(parentFragmentManager)
             }
         }
     }

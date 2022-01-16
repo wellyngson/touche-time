@@ -9,6 +9,7 @@
     <attr name="colorBackgroundButtonSelected" format="color" />
     <attr name="colorBackgroundButtonItem" format="color" />
     <attr name="colorTextPrimary" format="color" />
+    <attr name="colorTextSecondary" format="color" />
     <attr name="colorDescriptionChooseFight" format="color" />
     <attr name="colorDialogBackground" format="color"/>
     <attr name="colorBottomSheetThumbIndicator" format="color"/>
