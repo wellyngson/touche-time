@@ -10,7 +10,7 @@ object StyleFight {
         R.string.woman_wrestling
     )
 
-    fun getStyle(): List<Int> {
+    fun getListStyle(): List<Int> {
         return styles
     }
 }
