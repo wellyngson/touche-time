@@ -10,6 +10,7 @@ import br.touchetime.R
 import br.touchetime.databinding.FragmentCreateFightBinding
 import br.touchetime.ui.categoryfragment.CategoryFragment
 import br.touchetime.ui.homefragment.HomeFragment
+import br.touchetime.ui.stylefragment.StyleFragment
 
 class CreateFightFragment : Fragment() {
 
@@ -58,6 +59,7 @@ class CreateFightFragment : Fragment() {
             setIconVisibility(false)
 
             setOnClickListener {
+                StyleFragment.show(parentFragmentManager)
             }
         }
     }
