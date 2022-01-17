@@ -23,7 +23,7 @@ class CategoryAdapter(
         }
     }
 
-    override fun getItemCount(): Int = CategoryFight.getListCategory().size
+    override fun getItemCount(): Int = listCategory.size
 
     class ViewHolder(
         view: View,
