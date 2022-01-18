@@ -7,11 +7,9 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
-import br.touchetime.data.model.Category
 import br.touchetime.data.model.Fight
 import br.touchetime.databinding.FragmentCategoryBinding
 import br.touchetime.ui.bottomcontrol.BottomSheetDialogTransparentBackgroundFragment
-import br.touchetime.utils.CategoryHandler
 
 class CategoryFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
@@ -50,12 +48,10 @@ class CategoryFragment : BottomSheetDialogTransparentBackgroundFragment() {
             viewModel.getListCategory(it)
         }?.let { listCategory ->
             CategoryAdapter(
-                listCategory,
-                object : CategoryHandler {
-                    override fun onClick(category: Category) {
-                        category.
-                    }
-                }
+                listCategory
+            ) { category ->
+                onCategorySelected(getString(category))
+            }
         }
     }
 
