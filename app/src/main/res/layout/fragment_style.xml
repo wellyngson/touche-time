@@ -36,5 +36,4 @@
             android:text="@string/choose" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-
 </br.touchetime.ui.common.DefaultBottomSheetLayout>
