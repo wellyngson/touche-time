@@ -1,16 +1,17 @@
 package br.touchetime.data.model
 
+import android.content.Context
 import br.touchetime.R
 
 object CategoryFight {
-    private val categoryList = listOf(
-        R.string.category_childish,
-        R.string.category_u13,
-        R.string.category_u15,
-        R.string.category_u18,
-        R.string.category_u21,
-        R.string.category_senior
-    )
-
-    fun getListCategory(): List<Int> = categoryList
+    fun getListCategory(context: Context): List<String> {
+        return listOf(
+            context.getString(R.string.category_childish),
+            context.getString(R.string.category_u13),
+            context.getString(R.string.category_u15),
+            context.getString(R.string.category_u17),
+            context.getString(R.string.category_u20),
+            context.getString(R.string.category_senior)
+        )
+    }
 }
