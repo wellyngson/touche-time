@@ -30,7 +30,7 @@
     <string name="category_childish">Infantil</string>
     <string name="category_u13">U13</string>
     <string name="category_u15">U15</string>
-    <string name="category_u18">U18</string>
-    <string name="category_u21">U21</string>
+    <string name="category_u17">U17</string>
+    <string name="category_u20">U20</string>
     <string name="category_senior">Sênior</string>
 </resources>
