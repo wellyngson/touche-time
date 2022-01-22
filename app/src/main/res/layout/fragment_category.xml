@@ -20,12 +20,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/category"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_height="?maxHeightRecyclerViewBottomSheet"
             android:overScrollMode="never"
+            android:layout_marginTop="@dimen/spacing_small"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="5"
-            tools:listitem="@layout/category_item" />
+            tools:listitem="@layout/category_item"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/finish"

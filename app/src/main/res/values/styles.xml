@@ -27,6 +27,7 @@
         <item name="colorDescriptionChooseFight">@color/gray_secondary</item>
         <item name="colorDialogBackground">@color/gray_quaternary</item>
         <item name="colorBottomSheetThumbIndicator">@color/smoke</item>
+        <item name="maxHeightRecyclerViewBottomSheet">@dimen/max_height_bottom_sheet</item>
     </style>
 
     <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">

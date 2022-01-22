@@ -13,6 +13,7 @@
     <attr name="colorDescriptionChooseFight" format="color" />
     <attr name="colorDialogBackground" format="color"/>
     <attr name="colorBottomSheetThumbIndicator" format="color"/>
+    <attr name="maxHeightRecyclerViewBottomSheet" format="integer" />
 
     <declare-styleable name="ChooseFight">
         <attr name="title" format="string"/>

@@ -24,7 +24,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/weight"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="?attr/maxHeightRecyclerViewBottomSheet"
                 android:layout_marginTop="@dimen/spacing_small"
                 android:overScrollMode="never"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
