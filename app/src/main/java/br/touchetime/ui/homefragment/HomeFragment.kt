@@ -48,6 +48,7 @@ class HomeFragment : Fragment() {
             setDescription(context.getString(R.string.choose_fight_description))
             setIcon(getDrawable(context, drawable.ic_users_fight))
             setIconVisibility(true)
+            setComponentEnabled(true)
         }
 
         viewBinding.customFight.apply {
@@ -55,6 +56,7 @@ class HomeFragment : Fragment() {
             setDescription(context.getString(R.string.custom_fight_description))
             setIcon(getDrawable(context, drawable.ic_edit_fight))
             setIconVisibility(true)
+            setComponentEnabled(true)
         }
     }
 

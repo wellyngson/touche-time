@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_x_large"
         android:text="@string/official_fight"
+        android:textColor="@color/text_color_enabled_disabled_primary"
         app:layout_constraintStart_toEndOf="@id/icon"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,6 +38,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/choose_fight_description"
+        android:textColor="@color/text_color_enabled_disabled_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/next"
         app:layout_constraintStart_toStartOf="@id/title"

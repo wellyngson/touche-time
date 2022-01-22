@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -29,6 +30,7 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_category"
         style="@style/TextViewTitleFragmentCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,29 +45,37 @@
         android:layout_marginTop="@dimen/spacing_normal" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_style"
         style="@style/TextViewTitleFragmentCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_x_large"
-        android:text="@string/style" />
+        android:enabled="false"
+        android:text="@string/style"
+        android:textColor="@color/text_color_enabled_disabled_primary" />
 
     <br.touchetime.ui.common.ChooseFight
         android:id="@+id/style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_normal" />
+        android:layout_marginTop="@dimen/spacing_normal"
+        app:enabled="false" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_weight"
         style="@style/TextViewTitleFragmentCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_x_large"
-        android:text="@string/weight" />
+        android:enabled="false"
+        android:text="@string/weight"
+        android:textColor="@color/text_color_enabled_disabled_primary" />
 
     <br.touchetime.ui.common.ChooseFight
         android:id="@+id/weight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_normal" />
+        android:layout_marginTop="@dimen/spacing_normal"
+        app:enabled="false"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -20,6 +20,7 @@
     // Colors
     <color name="black_primary">#151515</color>
     <color name="black_secondary">#222222</color>
+    <color name="black_tertiary">#191919</color>
     <color name="red_primary">#EA222D</color>
     <color name="red_secondary">#FF424C</color>
     <color name="blue_primary">#1565FF</color>

@@ -2,6 +2,7 @@
 <resources>
     <attr name="colorBackgroundDefault" format="color" />
     <attr name="colorBackgroundComponents" format="color" />
+    <attr name="colorBackgroundComponentsDisable" format="color" />
     <attr name="colorBackgroundComponentsGray" format="color" />
     <attr name="colorBackgroundComponentsGraySecondary" format="color" />
     <attr name="colorBackgroundCategory" format="color" />
@@ -11,6 +12,7 @@
     <attr name="colorTextPrimary" format="color" />
     <attr name="colorTextSecondary" format="color" />
     <attr name="colorDescriptionChooseFight" format="color" />
+    <attr name="colorDescriptionChooseFightDisabled" format="color" />
     <attr name="colorDialogBackground" format="color"/>
     <attr name="colorBottomSheetThumbIndicator" format="color"/>
     <attr name="maxHeightRecyclerViewBottomSheet" format="integer" />
@@ -19,7 +21,8 @@
         <attr name="title" format="string"/>
         <attr name="icon" format="reference"/>
         <attr name="description" format="string"/>
-        <attr name="visible" format="boolean" />    
+        <attr name="visible" format="boolean" />
+        <attr name="enabled" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="EditFightCharacteristics">

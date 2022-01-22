@@ -52,4 +52,15 @@ class ChooseFight @JvmOverloads constructor(
             View.GONE
         }
     }
+
+    @Attr(R.styleable.ChooseFight_enabled)
+    fun setComponentEnabled(condition: Boolean) {
+        condition.let {
+            viewBindingComponent.apply {
+                container.isEnabled = it
+                title.isEnabled = it
+                description.isEnabled = it
+            }
+        }
+    }
 }

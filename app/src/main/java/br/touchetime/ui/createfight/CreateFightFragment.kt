@@ -14,8 +14,6 @@ import br.touchetime.ui.categoryfragment.CategoryFragment
 import br.touchetime.ui.homefragment.HomeFragment
 import br.touchetime.ui.stylefragment.StyleFragment
 import br.touchetime.ui.weightfragment.WeightFragment
-import kotlinx.android.synthetic.main.fragment_category.view.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class CreateFightFragment : Fragment() {
 
@@ -60,6 +58,12 @@ class CreateFightFragment : Fragment() {
             setIconVisibility(false)
 
             setOnClickListener {
+                viewBinding.apply {
+                    style.setComponentEnabled(true)
+                    style.isEnabled = true
+                    textStyle.isEnabled = true
+                }
+
                 CategoryFragment.show(
                     childFragmentManager,
                     viewModel.getFight()
@@ -73,12 +77,22 @@ class CreateFightFragment : Fragment() {
             setTitle(getString(R.string.style_title))
             setDescription(getString(R.string.style_description))
             setIconVisibility(false)
+            setComponentEnabled(false)
+            isEnabled = false
 
             setOnClickListener {
-                StyleFragment.show(
-                    childFragmentManager,
-                    viewModel.getFight()
-                )
+                if (isEnabled) {
+                    viewBinding.apply {
+                        weight.setComponentEnabled(true)
+                        weight.isEnabled = true
+                        textWeight.isEnabled = true
+                    }
+
+                    StyleFragment.show(
+                        childFragmentManager,
+                        viewModel.getFight()
+                    )
+                }
             }
         }
     }
@@ -88,12 +102,16 @@ class CreateFightFragment : Fragment() {
             setTitle(getString(R.string.weight_title))
             setDescription(getString(R.string.weight_description))
             setIconVisibility(false)
+            setComponentEnabled(false)
+            isEnabled = false
 
             setOnClickListener {
-                WeightFragment.show(
-                    childFragmentManager,
-                    viewModel.getFight()
-                )
+                if (isEnabled) {
+                    WeightFragment.show(
+                        childFragmentManager,
+                        viewModel.getFight()
+                    )
+                }
             }
         }
     }
