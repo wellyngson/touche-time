@@ -44,39 +44,46 @@ class CategoryFragment : BottomSheetDialogTransparentBackgroundFragment() {
     }
 
     private fun setupAdapter() {
-        viewBinding.category.adapter = context?.let {
-            viewModel.getListCategory(it)
-        }?.let { listCategory ->
-            CategoryAdapter(
-                listCategory
-            ) { category ->
-                onCategorySelected(getString(category))
+        val listCategory = viewModel.getListCategory()
+
+        viewBinding.category.adapter = CategoryAdapter(
+            listCategory
+        ) { position ->
+
+            viewModel.setCategorySelected(
+                getString(listCategory[position])
+            )
+
+            viewModel.getFight()?.let { fight ->
+                onCategorySelected(
+                    fight
+                )
             }
         }
     }
 
     private fun setupChooseCategory() {
         viewBinding.finish.setOnClickListener {
-            onCategorySelectedResult()
+            dismiss()
         }
     }
 
-    private fun onCategorySelected(category: String) {
-        viewModel.setCategorySelected(category)
+    private fun onCategorySelected(fight: Fight) {
+        onCategorySelectedResult(fight)
     }
 
-    private fun onCategorySelectedResult() {
+    private fun onCategorySelectedResult(fight: Fight) {
         parentFragmentManager.setFragmentResult(
             CATEGORY_SELECTED,
             bundleOf(
-                FIGHT to viewModel.getFight()
+                CATEGORY to fight
             )
         )
     }
 
     companion object {
         const val TAG = "br.touchetime.ui.categoryfragment"
-        const val FIGHT = "FIGHT"
+        const val CATEGORY = "CATEGORY"
         const val CATEGORY_SELECTED = "CATEGORY_SELECTED"
         private const val ARG_FIGHT = "ARG_FIGHT"
 

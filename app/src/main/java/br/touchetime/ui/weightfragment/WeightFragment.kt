@@ -44,32 +44,36 @@ class WeightFragment : BottomSheetDialogTransparentBackgroundFragment() {
     }
 
     private fun setupAdapter() {
-        viewBinding.style.adapter = context?.let { context ->
-            viewModel.getListWeight(context)?.let { listWeight ->
-                WeightAdapter(
-                    listWeight
-                ) { weight ->
-                    onWeightSelected(weight)
-                }
+        val listWeight = viewModel.getListWeight(requireContext())
+
+        viewBinding.weight.adapter = WeightAdapter(
+            listWeight
+        ) { position ->
+            viewModel.setWeightSelected(listWeight[position])
+
+            viewModel.getFight()?.let { fight ->
+                onWeightSelected(
+                    fight
+                )
             }
         }
     }
 
     private fun setupFinishBottomSheet() {
         viewBinding.finish.setOnClickListener {
-            onWeightSelected()
+            dismiss()
         }
     }
 
-    private fun onWeightSelected(weight: Int) {
-        viewModel.setWeightSelected(weight)
+    private fun onWeightSelected(fight: Fight) {
+        onWeightSelectedResult(fight)
     }
 
-    private fun onWeightSelected() {
+    private fun onWeightSelectedResult(fight: Fight) {
         parentFragmentManager.setFragmentResult(
             WEIGHT_SELECTED,
             bundleOf(
-                FIGHT to viewModel.getFight()
+                FIGHT to fight
             )
         )
     }

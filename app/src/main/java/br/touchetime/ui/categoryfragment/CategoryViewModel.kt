@@ -19,6 +19,6 @@ class CategoryViewModel : ViewModel() {
         this.fight?.category = category
     }
 
-    fun getListCategory(context: Context): List<String> =
-        CategoryFight.getListCategory(context)
+    fun getListCategory(): List<Int> =
+        CategoryFight.getListCategory()
 }

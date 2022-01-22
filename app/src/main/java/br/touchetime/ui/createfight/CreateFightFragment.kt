@@ -14,6 +14,8 @@ import br.touchetime.ui.categoryfragment.CategoryFragment
 import br.touchetime.ui.homefragment.HomeFragment
 import br.touchetime.ui.stylefragment.StyleFragment
 import br.touchetime.ui.weightfragment.WeightFragment
+import kotlinx.android.synthetic.main.fragment_category.view.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class CreateFightFragment : Fragment() {
 
@@ -118,18 +120,24 @@ class CreateFightFragment : Fragment() {
     private fun handleFragmentResult(key: String, bundle: Bundle) {
         when (key) {
             CategoryFragment.CATEGORY_SELECTED -> {
-                bundle.getParcelable<Fight>(CategoryFragment.FIGHT)?.let { fight ->
-                    viewModel.setFight(fight)
+                bundle.getParcelable<Fight>(CategoryFragment.CATEGORY)?.let { fight ->
+                    fight.category?.let {
+                        viewModel.setCategory(it)
+                    }
                 }
             }
             StyleFragment.STYLE_SELECTED -> {
                 bundle.getParcelable<Fight>(StyleFragment.FIGHT)?.let { fight ->
-                    viewModel.setFight(fight)
+                    fight.style?.let {
+                        viewModel.setStyle(it)
+                    }
                 }
             }
             WeightFragment.WEIGHT_SELECTED -> {
                 bundle.getParcelable<Fight>(WeightFragment.FIGHT)?.let { fight ->
-                    viewModel.setFight(fight)
+                    fight.weight?.let {
+                        viewModel.setWeight(it)
+                    }
                 }
             }
         }

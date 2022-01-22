@@ -37,9 +37,9 @@ class WeightAdapter(
             }
         }
 
-        fun bind(style: Int) {
+        fun bind(weight: Int) {
             viewBinding.apply {
-                text.setText(style)
+                text.text = "$weight KG"
             }
         }
     }

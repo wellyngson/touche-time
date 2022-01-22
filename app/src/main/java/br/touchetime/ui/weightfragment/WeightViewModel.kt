@@ -19,7 +19,6 @@ class WeightViewModel : ViewModel() {
         this.fight?.weight = weight
     }
 
-    fun getListWeight(context: Context): List<Int>? = fight?.let { fight ->
+    fun getListWeight(context: Context): List<Int> =
         WeightFight.getListWeight(fight, context)
-    }
 }

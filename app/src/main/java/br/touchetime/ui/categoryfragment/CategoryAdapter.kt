@@ -8,7 +8,7 @@ import br.touchetime.databinding.CategoryItemBinding
 import br.touchetime.extension.inflate
 
 class CategoryAdapter(
-    private val listCategory: List<String>,
+    private val listCategory: List<Int>,
     private val onItemClicked: (position: Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -37,9 +37,9 @@ class CategoryAdapter(
             }
         }
 
-        fun bind(category: String) {
+        fun bind(category: Int) {
             viewBinding.apply {
-                text.text = category
+                text.setText(category)
             }
         }
     }

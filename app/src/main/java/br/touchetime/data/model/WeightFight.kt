@@ -17,8 +17,8 @@ object WeightFight {
         57, 61, 65, 70, 74, 79, 86, 92, 97, 125
     )
 
-    fun getListWeight(fight: Fight, context: Context): List<Int> {
-        return when (fight.category) {
+    fun getListWeight(fight: Fight?, context: Context): List<Int> =
+        when (fight?.style) {
             context.getString(R.string.greco_roman) -> {
                 grecoRomanJrSenior
             }
@@ -29,8 +29,7 @@ object WeightFight {
                 womanWrestlingJrSenior
             }
             else -> {
-                listOf(555555555)
+                listOf(55555)
             }
         }
-    }
 }

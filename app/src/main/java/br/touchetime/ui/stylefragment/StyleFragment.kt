@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
+import br.touchetime.R
 import br.touchetime.data.model.Fight
 import br.touchetime.databinding.FragmentStyleBinding
 import br.touchetime.ui.bottomcontrol.BottomSheetDialogTransparentBackgroundFragment
@@ -44,28 +45,36 @@ class StyleFragment : BottomSheetDialogTransparentBackgroundFragment() {
     }
 
     private fun setupAdapter() {
+        val listStyle = viewModel.getListStyle()
+
         viewBinding.style.adapter = StyleAdapter(
-            viewModel.getListStyle()
-        ) { style ->
-            onStyleSelected(getString(style))
+            listStyle
+        ) { position ->
+            viewModel.setStyleSelected(getString(listStyle[position]))
+
+            viewModel.getFight()?.let { fight ->
+                onStyleSelected(
+                    fight
+                )
+            }
         }
     }
 
     private fun setupFinishBottomSheet() {
         viewBinding.finish.setOnClickListener {
-            onStyleSelectedResult()
+            dismiss()
         }
     }
 
-    private fun onStyleSelected(style: String) {
-        viewModel.setStyleSelected(style)
+    private fun onStyleSelected(fight: Fight) {
+        onStyleSelectedResult(fight)
     }
 
-    private fun onStyleSelectedResult() {
+    private fun onStyleSelectedResult(fight: Fight) {
         parentFragmentManager.setFragmentResult(
             STYLE_SELECTED,
             bundleOf(
-                FIGHT to viewModel.getFight()
+                FIGHT to fight
             )
         )
     }
