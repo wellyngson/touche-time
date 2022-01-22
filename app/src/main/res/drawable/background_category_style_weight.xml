@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="@color/colorRippleEffect"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <selector>
+            <item android:state_enabled="true">
+                <shape>
+                    <solid android:color="?attr/colorBackgroundButtonSelected" />
+                    <corners android:radius="@dimen/spacing_small" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+</ripple>
