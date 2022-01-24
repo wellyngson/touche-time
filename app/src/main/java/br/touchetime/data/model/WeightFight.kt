@@ -17,6 +17,7 @@ object WeightFight {
         57, 61, 65, 70, 74, 79, 86, 92, 97, 125
     )
 
+    // TODO: Adjust this return to delete else branch
     fun getListWeight(fight: Fight?, context: Context): List<Int> =
         when (fight?.style) {
             context.getString(R.string.greco_roman) -> {
