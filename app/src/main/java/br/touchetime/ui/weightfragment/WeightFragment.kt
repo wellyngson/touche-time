@@ -61,6 +61,7 @@ class WeightFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
     private fun setupFinishBottomSheet() {
         viewBinding.finish.setOnClickListener {
+            parentFragmentManager.setFragmentResult(VIEW_WEIGHT_SELECTED, bundleOf())
             dismiss()
         }
     }
@@ -82,6 +83,7 @@ class WeightFragment : BottomSheetDialogTransparentBackgroundFragment() {
         const val TAG = "br.touchetime.ui.stylefragment"
         const val FIGHT = "FIGHT"
         const val WEIGHT_SELECTED = "WEIGHT_SELECTED"
+        const val VIEW_WEIGHT_SELECTED = "VIEW_WEIGHT_SELECTED"
         private const val ARG_FIGHT = "ARG_FIGHT"
 
         private fun newInstance(fight: Fight?) = WeightFragment().apply {

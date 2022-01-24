@@ -24,8 +24,11 @@ class CreateFightFragment : Fragment() {
 
     private val resultKeys = arrayOf(
         CategoryFragment.CATEGORY_SELECTED,
+        CategoryFragment.VIEW_CATEGORY,
         StyleFragment.STYLE_SELECTED,
-        WeightFragment.WEIGHT_SELECTED
+        StyleFragment.VIEW_STYLE_SELECTED,
+        WeightFragment.WEIGHT_SELECTED,
+        WeightFragment.VIEW_WEIGHT_SELECTED
     )
 
     override fun onCreateView(
@@ -144,6 +147,9 @@ class CreateFightFragment : Fragment() {
                     }
                 }
             }
+            CategoryFragment.VIEW_CATEGORY -> {
+                viewCategorySelected()
+            }
             StyleFragment.STYLE_SELECTED -> {
                 bundle.getParcelable<Fight>(StyleFragment.FIGHT)?.let { fight ->
                     fight.style?.let {
@@ -151,12 +157,51 @@ class CreateFightFragment : Fragment() {
                     }
                 }
             }
+            StyleFragment.VIEW_STYLE_SELECTED -> {
+                viewStyleSelected()
+            }
             WeightFragment.WEIGHT_SELECTED -> {
                 bundle.getParcelable<Fight>(WeightFragment.FIGHT)?.let { fight ->
                     fight.weight?.let {
                         viewModel.setWeight(it)
                     }
                 }
+            }
+            WeightFragment.VIEW_WEIGHT_SELECTED -> {
+                viewWeightSelected()
+            }
+        }
+    }
+
+    private fun viewCategorySelected() {
+        viewBinding.apply {
+            category.visibility = View.INVISIBLE
+
+            categorySelected.apply {
+                text = viewModel.getFight()?.category
+                visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun viewStyleSelected() {
+        viewBinding.apply {
+            style.visibility = View.INVISIBLE
+
+            styleSelected.apply {
+                text = viewModel.getFight()?.style
+                visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun viewWeightSelected() {
+        viewBinding.apply {
+            weight.visibility = View.INVISIBLE
+
+            weightSelected.apply {
+                text = viewModel.getFight()?.weight.toString()
+                visibility = View.VISIBLE
             }
         }
     }

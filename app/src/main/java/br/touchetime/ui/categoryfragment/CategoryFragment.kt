@@ -64,6 +64,7 @@ class CategoryFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
     private fun setupChooseCategory() {
         viewBinding.finish.setOnClickListener {
+            parentFragmentManager.setFragmentResult(VIEW_CATEGORY, bundleOf())
             dismiss()
         }
     }
@@ -85,6 +86,7 @@ class CategoryFragment : BottomSheetDialogTransparentBackgroundFragment() {
         const val TAG = "br.touchetime.ui.categoryfragment"
         const val CATEGORY = "CATEGORY"
         const val CATEGORY_SELECTED = "CATEGORY_SELECTED"
+        const val VIEW_CATEGORY = "VIEW_CATEGORY"
         private const val ARG_FIGHT = "ARG_FIGHT"
 
         private fun newInstance(fight: Fight?) = CategoryFragment().apply {

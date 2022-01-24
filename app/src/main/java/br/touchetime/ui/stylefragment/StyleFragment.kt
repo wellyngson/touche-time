@@ -62,6 +62,7 @@ class StyleFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
     private fun setupFinishBottomSheet() {
         viewBinding.finish.setOnClickListener {
+            parentFragmentManager.setFragmentResult(VIEW_STYLE_SELECTED, bundleOf())
             dismiss()
         }
     }
@@ -83,6 +84,7 @@ class StyleFragment : BottomSheetDialogTransparentBackgroundFragment() {
         const val TAG = "br.touchetime.ui.stylefragment"
         const val FIGHT = "FIGHT"
         const val STYLE_SELECTED = "STYLE_SELECTED"
+        const val VIEW_STYLE_SELECTED = "VIEW_STYLE_SELECTED"
         private const val ARG_FIGHT = "ARG_FIGHT"
 
         private fun newInstance(fight: Fight?) = StyleFragment().apply {

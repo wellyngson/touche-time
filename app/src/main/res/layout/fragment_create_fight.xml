@@ -45,36 +45,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_normal">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <br.touchetime.ui.common.ChooseFight
+            android:id="@+id/category"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content" />
 
-            <br.touchetime.ui.common.ChooseFight
-                android:id="@+id/category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/category_selected"
-                style="@style/TextViewCategory"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@drawable/background_category_style_weight"
-                android:gravity="center"
-                android:text="Sênior"
-                android:textColor="?colorTextSecondary"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/category"
-                app:layout_constraintEnd_toEndOf="@id/category"
-                app:layout_constraintStart_toStartOf="@id/category"
-                app:layout_constraintTop_toTopOf="@id/category"
-                tools:visibility="visible" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/category_selected"
+            style="@style/TextViewCategory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_category_style_weight"
+            android:gravity="center"
+            android:text="Sênior"
+            android:textColor="?colorTextSecondary"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
     </FrameLayout>
 
@@ -94,37 +80,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_normal">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <br.touchetime.ui.common.ChooseFight
+            android:id="@+id/style"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:enabled="false" />
 
-            <br.touchetime.ui.common.ChooseFight
-                android:id="@+id/style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:enabled="false"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/style_selected"
-                style="@style/TextViewCategory"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@drawable/background_category_style_weight"
-                android:gravity="center"
-                android:text="Greco-Roman"
-                android:textColor="?colorTextSecondary"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/style"
-                app:layout_constraintEnd_toEndOf="@id/style"
-                app:layout_constraintStart_toStartOf="@id/style"
-                app:layout_constraintTop_toTopOf="@id/style"
-                tools:visibility="visible" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/style_selected"
+            style="@style/TextViewCategory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_category_style_weight"
+            android:gravity="center"
+            android:text="Greco-Roman"
+            android:textColor="?colorTextSecondary"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
     </FrameLayout>
 
@@ -144,37 +116,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_normal">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <br.touchetime.ui.common.ChooseFight
+            android:id="@+id/weight"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:enabled="false" />
 
-            <br.touchetime.ui.common.ChooseFight
-                android:id="@+id/weight"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:enabled="false"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/weight_selected"
-                style="@style/TextViewCategory"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@drawable/background_category_style_weight"
-                android:gravity="center"
-                android:text="72 KG"
-                android:textColor="?colorTextSecondary"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/weight"
-                app:layout_constraintEnd_toEndOf="@id/weight"
-                app:layout_constraintStart_toStartOf="@id/weight"
-                app:layout_constraintTop_toTopOf="@id/weight"
-                tools:visibility="visible" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/weight_selected"
+            style="@style/TextViewCategory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_category_style_weight"
+            android:gravity="center"
+            android:text="72 KG"
+            android:textColor="?colorTextSecondary"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
     </FrameLayout>
 
