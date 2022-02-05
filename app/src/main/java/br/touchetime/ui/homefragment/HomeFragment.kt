@@ -33,10 +33,6 @@ class HomeFragment : Fragment() {
         setupScoreFragmentDefault()
         setupScoreFragmentCustom()
         setupChooseFightAndCustom()
-
-        viewBinding.crash.setOnClickListener {
-            throw RuntimeException("Test Crash")
-        }
     }
 
     private fun setupScoreFragmentCustom() {
