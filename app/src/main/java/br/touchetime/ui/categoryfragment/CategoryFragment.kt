@@ -34,7 +34,6 @@ class CategoryFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
         readArgs()
         setupAdapter()
-        setupChooseCategory()
     }
 
     private fun readArgs() {
@@ -59,11 +58,7 @@ class CategoryFragment : BottomSheetDialogTransparentBackgroundFragment() {
                     fight
                 )
             }
-        }
-    }
 
-    private fun setupChooseCategory() {
-        viewBinding.finish.setOnClickListener {
             parentFragmentManager.setFragmentResult(VIEW_CATEGORY, bundleOf())
             dismiss()
         }

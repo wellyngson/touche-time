@@ -6,14 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import br.touchetime.MainActivity
 import br.touchetime.R
 import br.touchetime.data.model.Fight
+import br.touchetime.data.model.UiStateFight
 import br.touchetime.databinding.FragmentCreateFightBinding
 import br.touchetime.ui.categoryfragment.CategoryFragment
 import br.touchetime.ui.homefragment.HomeFragment
 import br.touchetime.ui.stylefragment.StyleFragment
 import br.touchetime.ui.weightfragment.WeightFragment
+import kotlinx.coroutines.flow.collect
 
 class CreateFightFragment : Fragment() {
 
@@ -50,22 +53,23 @@ class CreateFightFragment : Fragment() {
         setupCategory()
         setupStyle()
         setupWeight()
+        setupObservers()
         setupFragmentResultListeners()
         setupBack()
     }
 
     private fun setupCategory() {
-        viewBinding.category.apply {
-            setTitle(getString(R.string.category_title))
-            setDescription(getString(R.string.category_description))
-            setIconVisibility(false)
+        viewBinding.containerCategory.apply {
+            viewBinding.category.apply {
+                setTitle(getString(R.string.category_title))
+                setDescription(getString(R.string.category_description))
+                setIconVisibility(false)
+            }
 
             setOnClickListener {
-                viewBinding.apply {
-                    style.setComponentEnabled(true)
-                    style.isEnabled = true
-                    textStyle.isEnabled = true
-                }
+                deselectedStyle()
+                setupStateStyle(false)
+                setupStateWeight(false)
 
                 CategoryFragment.show(
                     childFragmentManager,
@@ -76,21 +80,20 @@ class CreateFightFragment : Fragment() {
     }
 
     private fun setupStyle() {
-        viewBinding.style.apply {
-            setTitle(getString(R.string.style_title))
-            setDescription(getString(R.string.style_description))
-            setIconVisibility(false)
-            setComponentEnabled(false)
-            isEnabled = false
+        viewBinding.containerStyle.apply {
+            viewBinding.style.apply {
+                setTitle(getString(R.string.style_title))
+                setDescription(getString(R.string.style_description))
+                setIconVisibility(false)
+                setComponentEnabled(false)
+                isEnabled = false
+            }
 
             setOnClickListener {
-                if (isEnabled) {
-                    viewBinding.apply {
-                        weight.setComponentEnabled(true)
-                        weight.isEnabled = true
-                        textWeight.isEnabled = true
-                    }
+                deselectedWeight()
+                setupStateWeight(false)
 
+                if (viewBinding.style.isEnabled) {
                     StyleFragment.show(
                         childFragmentManager,
                         viewModel.getFight()
@@ -101,19 +104,37 @@ class CreateFightFragment : Fragment() {
     }
 
     private fun setupWeight() {
-        viewBinding.weight.apply {
-            setTitle(getString(R.string.weight_title))
-            setDescription(getString(R.string.weight_description))
-            setIconVisibility(false)
-            setComponentEnabled(false)
-            isEnabled = false
+        viewBinding.containerWeight.apply {
+            viewBinding.weight.apply {
+                setTitle(getString(R.string.weight_title))
+                setDescription(getString(R.string.weight_description))
+                setIconVisibility(false)
+                setComponentEnabled(false)
+                isEnabled = false
+            }
 
             setOnClickListener {
-                if (isEnabled) {
+                if (viewBinding.weight.isEnabled) {
                     WeightFragment.show(
                         childFragmentManager,
                         viewModel.getFight()
                     )
+                }
+            }
+        }
+    }
+
+    private fun setupObservers() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.fightStateFlow.collect {
+                when (it.state) {
+                    UiStateFight.Changed -> {
+                        setupStateStyle(true)
+                    }
+                }
+
+                if (it.style != "") {
+                    setupStateWeight(true)
                 }
             }
         }
@@ -127,6 +148,40 @@ class CreateFightFragment : Fragment() {
                 ::handleFragmentResult
             )
         }
+    }
+
+    private fun setupStateStyle(condition: Boolean) {
+        viewBinding.apply {
+            style.setComponentEnabled(condition)
+            style.isEnabled = condition
+            textStyle.isEnabled = condition
+        }
+    }
+
+    private fun deselectedStyle() {
+        viewBinding.apply {
+            style.visibility = View.VISIBLE
+            styleSelected.visibility = View.GONE
+        }
+
+        deselectedWeight()
+    }
+
+    private fun setupStateWeight(condition: Boolean) {
+        viewBinding.apply {
+            weight.setComponentEnabled(condition)
+            weight.isEnabled = condition
+            textWeight.isEnabled = condition
+        }
+    }
+
+    private fun deselectedWeight() {
+        viewBinding.apply {
+            weight.visibility = View.VISIBLE
+            weightSelected.visibility = View.GONE
+        }
+
+        setupStateWeight(false)
     }
 
     private fun setupBack() {

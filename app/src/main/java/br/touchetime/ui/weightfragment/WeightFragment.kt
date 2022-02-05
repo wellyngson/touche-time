@@ -34,7 +34,6 @@ class WeightFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
         readArgs()
         setupAdapter()
-        setupFinishBottomSheet()
     }
 
     private fun readArgs() {
@@ -56,11 +55,7 @@ class WeightFragment : BottomSheetDialogTransparentBackgroundFragment() {
                     fight
                 )
             }
-        }
-    }
 
-    private fun setupFinishBottomSheet() {
-        viewBinding.finish.setOnClickListener {
             parentFragmentManager.setFragmentResult(VIEW_WEIGHT_SELECTED, bundleOf())
             dismiss()
         }

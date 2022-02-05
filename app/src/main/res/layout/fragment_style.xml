@@ -27,14 +27,6 @@
             tools:itemCount="3"
             tools:listitem="@layout/category_item" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/finish"
-            style="@style/ButtonAppCompat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_xx_large"
-            android:background="@drawable/background_button"
-            android:text="@string/choose" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </br.touchetime.ui.common.DefaultBottomSheetLayout>

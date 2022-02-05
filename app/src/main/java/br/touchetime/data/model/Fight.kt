@@ -7,5 +7,11 @@ import kotlinx.android.parcel.Parcelize
 data class Fight(
     var category: String?,
     var style: String?,
-    var weight: Int?
+    var weight: Int?,
+    var state: UiStateFight
 ) : Parcelable
+
+enum class UiStateFight {
+    Default,
+    Changed
+}

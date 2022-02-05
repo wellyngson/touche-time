@@ -35,7 +35,6 @@ class StyleFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
         readArgs()
         setupAdapter()
-        setupFinishBottomSheet()
     }
 
     private fun readArgs() {
@@ -57,11 +56,7 @@ class StyleFragment : BottomSheetDialogTransparentBackgroundFragment() {
                     fight
                 )
             }
-        }
-    }
 
-    private fun setupFinishBottomSheet() {
-        viewBinding.finish.setOnClickListener {
             parentFragmentManager.setFragmentResult(VIEW_STYLE_SELECTED, bundleOf())
             dismiss()
         }
