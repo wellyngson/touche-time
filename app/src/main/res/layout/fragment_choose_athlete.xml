@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/spacing_normal"
+    android:paddingTop="@dimen/spacing_x_large">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/back"
+        style="@style/TextViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_arrow_left"
+        android:drawablePadding="@dimen/spacing_normal"
+        android:text="@string/create_or_choose_athletes" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/TextViewTitleFragmentCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:text="@string/red_athlete" />
+
+    <br.touchetime.ui.common.ChooseFight
+        android:id="@+id/red_athlete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/TextViewTitleFragmentCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:text="@string/blue_athlete" />
+
+    <br.touchetime.ui.common.ChooseFight
+        android:id="@+id/blue_athlete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

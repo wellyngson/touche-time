@@ -73,6 +73,9 @@ dependencies {
     implementation 'com.airbnb.android:paris:2.0.0'
     kapt 'com.airbnb.android:paris-processor:2.0.0'
 
+    // Lottie Animation
+    implementation 'com.airbnb.android:lottie:3.7.0'
+
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"

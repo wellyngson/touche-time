@@ -32,4 +32,9 @@
         <attr name="removeFoul" format="reference"/>
         <attr name="isScore" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="AthletesLoadingListView">
+        <attr name="loadingSize" format="integer" />
+        <attr name="skeletonMaskColor" format="integer" />
+    </declare-styleable>
 </resources>

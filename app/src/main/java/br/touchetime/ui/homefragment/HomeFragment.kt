@@ -1,7 +1,6 @@
 package br.touchetime.ui.homefragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,8 @@ import androidx.fragment.app.viewModels
 import br.touchetime.MainActivity
 import br.touchetime.R
 import br.touchetime.R.drawable
-import br.touchetime.data.model.NetworkState
 import br.touchetime.databinding.FragmentHomeBinding
-import br.touchetime.ui.createfight.CreateFightFragment
+import br.touchetime.ui.chooseathlete.ChooseAthleteFragment
 import br.touchetime.ui.scorefragment.ScoreFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +26,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         viewBinding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         return viewBinding.root
@@ -39,32 +37,6 @@ class HomeFragment : Fragment() {
         setupScoreFragmentDefault()
         setupScoreFragmentCustom()
         setupChooseFightAndCustom()
-        setupObserverAthletesAndState()
-    }
-
-    private fun setupObserverAthletesAndState() {
-        viewModel.athletes.observe(viewLifecycleOwner) {
-            it.forEach { athlete ->
-                Log.d("listAthlete", athlete.name)
-            }
-        }
-
-        viewModel.athletesLoadState.observe(viewLifecycleOwner) {
-            when (it) {
-                is NetworkState.Loading -> {
-                    Log.d("athlete", "Loading")
-                }
-                is NetworkState.Loaded -> {
-                    Log.d("athlete", "Loaded")
-                }
-                is NetworkState.Failed -> {
-                    it.exception.message?.let { message -> Log.d("athlete", message) }
-                }
-                is NetworkState.Idle -> {
-                    Log.d("athlete", "Idle")
-                }
-            }
-        }
     }
 
     private fun setupScoreFragmentCustom() {
@@ -95,7 +67,7 @@ class HomeFragment : Fragment() {
     private fun setupScoreFragmentDefault() {
         viewBinding.fight.setOnClickListener {
             mainActivity?.typeFight = DEFAULT_FIGHT
-            navigateToFragment(CreateFightFragment.newInstance(), CreateFightFragment.TAG)
+            navigateToFragment(ChooseAthleteFragment.newInstance(), ChooseAthleteFragment.TAG)
         }
     }
 
