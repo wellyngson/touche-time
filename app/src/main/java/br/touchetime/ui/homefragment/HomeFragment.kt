@@ -1,21 +1,27 @@
 package br.touchetime.ui.homefragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import br.touchetime.MainActivity
 import br.touchetime.R
 import br.touchetime.R.drawable
+import br.touchetime.data.model.NetworkState
 import br.touchetime.databinding.FragmentHomeBinding
 import br.touchetime.ui.createfight.CreateFightFragment
 import br.touchetime.ui.scorefragment.ScoreFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var viewBinding: FragmentHomeBinding
+    private val viewModel: HomeViewModel by viewModels()
     private val mainActivity: MainActivity?
         get() = activity as? MainActivity
 
@@ -33,6 +39,32 @@ class HomeFragment : Fragment() {
         setupScoreFragmentDefault()
         setupScoreFragmentCustom()
         setupChooseFightAndCustom()
+        setupObserverAthletesAndState()
+    }
+
+    private fun setupObserverAthletesAndState() {
+        viewModel.athletes.observe(viewLifecycleOwner) {
+            it.forEach { athlete ->
+                Log.d("listAthlete", athlete.name)
+            }
+        }
+
+        viewModel.athletesLoadState.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkState.Loading -> {
+                    Log.d("athlete", "Loading")
+                }
+                is NetworkState.Loaded -> {
+                    Log.d("athlete", "Loaded")
+                }
+                is NetworkState.Failed -> {
+                    it.exception.message?.let { message -> Log.d("athlete", message) }
+                }
+                is NetworkState.Idle -> {
+                    Log.d("athlete", "Idle")
+                }
+            }
+        }
     }
 
     private fun setupScoreFragmentCustom() {

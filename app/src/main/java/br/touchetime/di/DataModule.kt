@@ -1,5 +1,7 @@
 package br.touchetime.di
 
+import br.touchetime.data.repository.AthleteRepository
+import br.touchetime.data.repository.AthleteRepositoryImpl
 import br.touchetime.data.repository.ScoreRepository
 import br.touchetime.data.repository.ScoreRepositoryImpl
 import dagger.Binds
@@ -15,6 +17,12 @@ abstract class DataModule {
     @Singleton
     @Binds
     abstract fun bindScoreRepository(
-        scoreRepository: ScoreRepositoryImpl
+        scoreRepository: ScoreRepositoryImpl,
     ): ScoreRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindAthleteRepository(
+        athleteRepository: AthleteRepositoryImpl,
+    ): AthleteRepository
 }

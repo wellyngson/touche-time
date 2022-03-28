@@ -1,6 +1,5 @@
 package br.touchetime.ui.categoryfragment
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import br.touchetime.data.model.CategoryFight
 import br.touchetime.data.model.Fight

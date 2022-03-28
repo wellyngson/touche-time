@@ -11,9 +11,10 @@ data class Athlete(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val name: String,
-    val years: Int,
-    val weight: Int,
+    val years: String,
     val style: String,
-    val score: Int,
-    val foul: Int
+    val weight: Int,
+    val defeat: Int,
+    val win: Int,
+    val fight: Int,
 ) : Parcelable
