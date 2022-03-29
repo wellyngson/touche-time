@@ -16,7 +16,9 @@ class SelectAthleteViewModel @Inject constructor(
     private val athleteRepository: AthleteRepository,
 ) : ViewModel() {
 
-    var athleteSelected: String? = null
+    var athlete: Athlete? = null
+        private set
+    var colorAthleteSelected: String? = null
         private set
     val athletes: LiveData<List<Athlete>>
         get() = athleteRepository.athletes.asLiveData()
@@ -27,13 +29,35 @@ class SelectAthleteViewModel @Inject constructor(
         getAthletes()
     }
 
-    fun setupAthleteSelected(athleteSelected: String) {
-        this.athleteSelected = athleteSelected
+    fun setupAthlete(athlete: Athlete) {
+        this.athlete = athlete
+    }
+
+    fun setupColorAthleteSelected(athleteSelected: String) {
+        this.colorAthleteSelected = athleteSelected
     }
 
     private fun getAthletes() {
         viewModelScope.launch {
             athleteRepository.getAthletes()
+        }
+    }
+
+    fun deleteAthlete() {
+        viewModelScope.launch {
+            athlete?.id?.let { athleteRepository.deleteAthleteById(it) }
+        }
+    }
+
+    fun updateAthlete(athlete: Athlete) {
+        viewModelScope.launch {
+            athleteRepository.updateAthlete(athlete)
+        }
+    }
+
+    fun createAthlete(athlete: Athlete) {
+        viewModelScope.launch {
+            athleteRepository.createAthlete(athlete)
         }
     }
 }

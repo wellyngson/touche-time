@@ -15,4 +15,7 @@ interface AthleteRepository {
 
     suspend fun getAthletes()
     suspend fun getAthletesById(id: Int)
+    suspend fun deleteAthleteById(id: Int)
+    suspend fun updateAthlete(athlete: Athlete)
+    suspend fun createAthlete(athlete: Athlete)
 }

@@ -52,4 +52,52 @@ class AthleteRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun deleteAthleteById(id: Int) {
+        withContext(Dispatchers.IO) {
+            try {
+                service.deleteAthleteById(id)
+
+                refreshAthletes()
+            } catch (e: Exception) {
+            }
+        }
+    }
+
+    override suspend fun updateAthlete(athlete: Athlete) {
+        withContext(Dispatchers.IO) {
+            try {
+                service.updateAthlete(athlete)
+
+                refreshAthletes()
+            } catch (e: Exception) {
+            }
+        }
+    }
+
+    override suspend fun createAthlete(athlete: Athlete) {
+        withContext(Dispatchers.IO) {
+            try {
+                service.createAthlete(athlete)
+
+                refreshAthletes()
+            } catch (e: Exception) {
+            }
+        }
+    }
+
+    suspend fun refreshAthletes() {
+        withContext(Dispatchers.IO) {
+            try {
+                _athletesLoadState.value = NetworkState.Loading
+
+                val listAthlete = service.getListAthlete()
+
+                _athletesLoadState.value = NetworkState.Loaded
+
+                _athletes.value = listAthlete
+            } catch (e: Exception) {
+            }
+        }
+    }
 }

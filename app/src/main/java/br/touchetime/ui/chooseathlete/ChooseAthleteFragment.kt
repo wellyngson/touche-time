@@ -67,7 +67,7 @@ class ChooseAthleteFragment : Fragment() {
         bundle.getParcelable<Athlete>(SelectAthleteFragment.ATHLETE)?.let {
             viewModel.setupRedAthlete(it)
 
-            Log.d("athleteSelected", it.name)
+            Log.d("athleteSelected", it.name + " - RED")
         }
     }
 
@@ -75,7 +75,7 @@ class ChooseAthleteFragment : Fragment() {
         bundle.getParcelable<Athlete>(SelectAthleteFragment.ATHLETE)?.let {
             viewModel.setupBlueAthlete(it)
 
-            Log.d("athleteSelected", it.name)
+            Log.d("athleteSelected", it.name + " - BLUE")
         }
     }
 

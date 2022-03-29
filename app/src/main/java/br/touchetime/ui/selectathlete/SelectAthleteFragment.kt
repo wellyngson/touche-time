@@ -12,6 +12,7 @@ import br.touchetime.data.model.Athlete
 import br.touchetime.data.model.NetworkState
 import br.touchetime.databinding.FragmentSelectAthleteBinding
 import br.touchetime.ui.bottomcontrol.BottomSheetDialogTransparentBackgroundFragment
+import br.touchetime.ui.common.ConfirmDeletionDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +20,9 @@ class SelectAthleteFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
     private lateinit var viewBinding: FragmentSelectAthleteBinding
     private val viewModel: SelectAthleteViewModel by viewModels()
+    private val resultKeys = arrayOf(
+        ConfirmDeletionDialog.DELETE_ATHLETE
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,27 +38,30 @@ class SelectAthleteFragment : BottomSheetDialogTransparentBackgroundFragment() {
         readArgs()
         setupRecyclerView()
         setupObserverAthletesAndState()
+        setupResultKeysListeners()
     }
 
     private fun readArgs() {
         (arguments?.getSerializable(ARG) as? String)?.let {
-            viewModel.setupAthleteSelected(it)
+            viewModel.setupColorAthleteSelected(it)
         }
     }
 
     private fun setupRecyclerView() {
         viewBinding.athletes.adapter = AthleteAdapter(object : AthleteAdapter.AthleteHandler {
             override fun onClick(athlete: Athlete) {
-                viewModel.athleteSelected?.let {
+                viewModel.colorAthleteSelected?.let {
                     athleteChosen(it, athlete)
                 }
 
+                // TODO: This dismiss should be removed of here and go for the state response
                 dismiss()
             }
 
             override fun onLongClick(athlete: Athlete) {
-                // TODO: Delete athlete
-                dismiss()
+                viewModel.setupAthlete(athlete)
+
+                ConfirmDeletionDialog.show(childFragmentManager)
             }
         })
     }
@@ -105,6 +112,29 @@ class SelectAthleteFragment : BottomSheetDialogTransparentBackgroundFragment() {
 
     private fun submitAthletes(athletes: List<Athlete>) {
         (viewBinding.athletes.adapter as? AthleteAdapter)?.submitList(athletes)
+    }
+
+    private fun setupResultKeysListeners() {
+        resultKeys.forEach {
+            when (it) {
+                ConfirmDeletionDialog.DELETE_ATHLETE -> childFragmentManager
+                else -> activity?.supportFragmentManager
+            }?.setFragmentResultListener(
+                it,
+                viewLifecycleOwner,
+                ::handleResultKey
+            )
+        }
+    }
+
+    private fun handleResultKey(key: String, bundle: Bundle) {
+        when (key) {
+            ConfirmDeletionDialog.DELETE_ATHLETE -> deleteAthlete()
+        }
+    }
+
+    private fun deleteAthlete() {
+        viewModel.deleteAthlete()
     }
 
     companion object {
