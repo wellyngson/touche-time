@@ -11,24 +11,22 @@ import br.touchetime.databinding.ItemAthleteBinding
 import br.touchetime.extension.inflate
 
 class AthleteAdapter(
-    private val athleteHandler: AthleteHandler
-) : ListAdapter<Athlete, AthleteAdapter.AthleteViewHolder>(DiffCallback()) {
+    private val athleteHandler: AthleteHandler,
+) : ListAdapter<Athlete, AthleteAdapter.AthleteViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AthleteViewHolder =
         AthleteViewHolder(
-            parent.inflate(R.layout.item_athlete),
+            parent.inflate(R.layout.item_athlete, false),
             athleteHandler
         )
 
     override fun onBindViewHolder(holder: AthleteViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        holder.bind(getItem(position))
     }
-
-    override fun getItemCount(): Int = currentList.size
 
     inner class AthleteViewHolder(
         view: View,
-        athleteHandler: AthleteHandler
+        athleteHandler: AthleteHandler,
     ) : RecyclerView.ViewHolder(view) {
 
         private var athlete: Athlete? = null
@@ -49,17 +47,19 @@ class AthleteAdapter(
 
             viewBinding.apply {
                 name.text = athlete.name
-                style.text = athlete.name
+                style.text = athlete.style
             }
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<Athlete>() {
-        override fun areItemsTheSame(oldItem: Athlete, newItem: Athlete): Boolean =
-            oldItem.id == newItem.id
+    companion object {
+        val diffCallback = object : DiffUtil.ItemCallback<Athlete>() {
+            override fun areItemsTheSame(oldItem: Athlete, newItem: Athlete): Boolean =
+                oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: Athlete, newItem: Athlete): Boolean =
-            oldItem == newItem
+            override fun areContentsTheSame(oldItem: Athlete, newItem: Athlete): Boolean =
+                oldItem == newItem
+        }
     }
 
     interface AthleteHandler {

@@ -11,12 +11,12 @@ import androidx.fragment.app.viewModels
 import br.touchetime.data.model.Athlete
 import br.touchetime.data.model.NetworkState
 import br.touchetime.databinding.FragmentSelectAthleteBinding
-import br.touchetime.ui.bottomcontrol.BottomSheetDialogTransparentBackgroundFragment
+import br.touchetime.ui.basedialogfragment.BaseBottomSheetDialogFragment
 import br.touchetime.ui.common.ConfirmDeletionDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SelectAthleteFragment : BottomSheetDialogTransparentBackgroundFragment() {
+class SelectAthleteFragment : BaseBottomSheetDialogFragment() {
 
     private lateinit var viewBinding: FragmentSelectAthleteBinding
     private val viewModel: SelectAthleteViewModel by viewModels()

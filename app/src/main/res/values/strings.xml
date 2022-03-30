@@ -9,6 +9,7 @@
     <string name="go_fight_today">Vamos lutar \nhoje?</string>
     <string name="official_fight">Luta oficial</string>
     <string name="create_or_choose_athletes">Criar/Escolher atletas</string>
+    <string name="create_athlete">Criar atleta</string>
     <string name="red_athlete">Atleta vermelho</string>
     <string name="blue_athlete">Atleta azul</string>
     <string name="select_athlete_title">Selecione seu atleta</string>
@@ -38,4 +39,6 @@
     <string name="category_u17">U17</string>
     <string name="category_u20">U20</string>
     <string name="category_senior">Sênior</string>
+    <string name="years">Idade</string>
+    <string name="name">Nome</string>
 </resources>

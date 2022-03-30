@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import br.touchetime.MainActivity
 import br.touchetime.R
 import br.touchetime.data.model.Athlete
-import br.touchetime.data.model.NetworkState
 import br.touchetime.databinding.FragmentChooseAthleteBinding
+import br.touchetime.ui.createathlete.CreateAthleteFragment
 import br.touchetime.ui.selectathlete.SelectAthleteFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,6 +20,8 @@ class ChooseAthleteFragment : Fragment() {
 
     private lateinit var viewBinding: FragmentChooseAthleteBinding
     private val viewModel: ChooseAthleteViewModel by viewModels()
+    private val mainActivity: MainActivity?
+        get() = activity as? MainActivity
     private val resultKeys = arrayOf(
         SelectAthleteFragment.RED,
         SelectAthleteFragment.BLUE
@@ -40,13 +43,24 @@ class ChooseAthleteFragment : Fragment() {
         setupRedBlueAthlete()
         setupRedAthete()
         setupBlueAthlete()
+        setupCreateAthlete()
+    }
+
+    private fun setupCreateAthlete() {
+        viewBinding.createAthlete.setOnClickListener {
+            mainActivity?.navigateToFragment(
+                CreateAthleteFragment.newInstance(),
+                CreateAthleteFragment.TAG
+            )
+        }
     }
 
     private fun setupResultKeyListeners() {
         resultKeys.forEach {
             when (it) {
                 SelectAthleteFragment.RED,
-                SelectAthleteFragment.BLUE -> childFragmentManager
+                SelectAthleteFragment.BLUE,
+                -> childFragmentManager
                 else -> activity?.supportFragmentManager
             }?.setFragmentResultListener(
                 it,
