@@ -26,7 +26,7 @@ class CreateFightFragment : Fragment() {
         get() = activity as? MainActivity
 
     private val resultKeys = arrayOf(
-        CategoryFragment.CATEGORY_SELECTED,
+        CategoryFragment.CATEGORY_SELECTED_FIGHT,
         CategoryFragment.VIEW_CATEGORY,
         StyleFragment.STYLE_SELECTED,
         StyleFragment.VIEW_STYLE_SELECTED,
@@ -195,7 +195,7 @@ class CreateFightFragment : Fragment() {
 
     private fun handleFragmentResult(key: String, bundle: Bundle) {
         when (key) {
-            CategoryFragment.CATEGORY_SELECTED -> {
+            CategoryFragment.CATEGORY_SELECTED_FIGHT -> {
                 bundle.getParcelable<Fight>(CategoryFragment.CATEGORY)?.let { fight ->
                     fight.category?.let {
                         viewModel.setCategory(it)

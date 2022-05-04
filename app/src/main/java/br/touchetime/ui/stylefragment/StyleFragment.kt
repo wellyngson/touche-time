@@ -88,7 +88,7 @@ class StyleFragment : BottomSheetDialogTransparentBackgroundFragment() {
             )
         }
 
-        fun show(fragmentManager: FragmentManager, fight: Fight?) =
+        fun show(fragmentManager: FragmentManager, fight: Fight? = null) =
             newInstance(fight).show(fragmentManager, TAG)
     }
 }

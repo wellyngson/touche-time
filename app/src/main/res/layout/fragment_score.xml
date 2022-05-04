@@ -117,7 +117,7 @@
                 android:layout_marginEnd="@dimen/spacing_normal"
                 android:background="@drawable/item_chronometer_background"
                 android:gravity="center|end"
-                android:text="3" />
+                android:text="2" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

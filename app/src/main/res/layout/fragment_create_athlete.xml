@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?colorBackgroundDefault"
     android:clickable="true"
     android:focusable="true"
@@ -24,24 +25,66 @@
         android:layout_height="wrap_content"
         android:text="@string/name" />
 
+    <EditText
+        android:id="@+id/name_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:nextFocusDown="@id/category_text"
+        android:textColor="?colorTextPrimary" />
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/TextViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
         android:text="@string/category" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        style="@style/TextViewTitle"
-        android:layout_width="wrap_content"
+        android:id="@+id/category_text"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/style" />
+        android:layout_marginTop="@dimen/spacing_small"
+        android:background="@drawable/background_button_outlined"
+        android:padding="@dimen/spacing_normal"
+        android:textColor="?colorTextPrimary"
+        tools:text="@string/category_u20" />
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/TextViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/years" />
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:text="@string/style" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/style_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:background="@drawable/background_button_outlined"
+        android:padding="@dimen/spacing_normal"
+        android:textColor="?colorTextPrimary"
+        tools:text="@string/greco_roman" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/TextViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:text="@string/weight" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/weight_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:background="@drawable/background_button_outlined"
+        android:padding="@dimen/spacing_normal"
+        android:textColor="?colorTextPrimary"
+        tools:text="77Kg" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

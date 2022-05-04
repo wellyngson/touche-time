@@ -53,10 +53,12 @@ class CategoryFragment : BottomSheetDialogTransparentBackgroundFragment() {
                 getString(listCategory[position])
             )
 
-            viewModel.getFight()?.let { fight ->
-                onCategorySelected(
-                    fight
-                )
+            viewModel.getFight().let {
+                if (it != null) {
+                    onCategorySelectedResultFight(it)
+                } else {
+                    onCategorySelectedResult(listCategory[position])
+                }
             }
 
             parentFragmentManager.setFragmentResult(VIEW_CATEGORY, bundleOf())
@@ -64,15 +66,20 @@ class CategoryFragment : BottomSheetDialogTransparentBackgroundFragment() {
         }
     }
 
-    private fun onCategorySelected(fight: Fight) {
-        onCategorySelectedResult(fight)
+    private fun onCategorySelectedResultFight(fight: Fight) {
+        parentFragmentManager.setFragmentResult(
+            CATEGORY_SELECTED_FIGHT,
+            bundleOf(
+                CATEGORY to fight
+            )
+        )
     }
 
-    private fun onCategorySelectedResult(fight: Fight) {
+    private fun onCategorySelectedResult(category: Int) {
         parentFragmentManager.setFragmentResult(
             CATEGORY_SELECTED,
             bundleOf(
-                CATEGORY to fight
+                CATEGORY to category
             )
         )
     }
@@ -80,6 +87,7 @@ class CategoryFragment : BottomSheetDialogTransparentBackgroundFragment() {
     companion object {
         const val TAG = "br.touchetime.ui.categoryfragment"
         const val CATEGORY = "CATEGORY"
+        const val CATEGORY_SELECTED_FIGHT = "CATEGORY_SELECTED_FIGHT"
         const val CATEGORY_SELECTED = "CATEGORY_SELECTED"
         const val VIEW_CATEGORY = "VIEW_CATEGORY"
         private const val ARG_FIGHT = "ARG_FIGHT"
@@ -90,7 +98,7 @@ class CategoryFragment : BottomSheetDialogTransparentBackgroundFragment() {
             )
         }
 
-        fun show(fragmentManager: FragmentManager, fight: Fight?) =
+        fun show(fragmentManager: FragmentManager, fight: Fight? = null) =
             newInstance(fight).show(fragmentManager, TAG)
     }
 }

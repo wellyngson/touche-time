@@ -261,7 +261,7 @@ class ScoreFragment : Fragment() {
         const val RED = "red"
         const val BLUE = "blue"
 
-        const val START_ROUND = 180000L // 10000L - 180000L
+        const val START_ROUND = 120000L // 10000L - 180000L
         const val START_INTERVAL = 30000L // 5000L - 30000L
 
         fun newInstance() = ScoreFragment()
