@@ -11,6 +11,7 @@ data class Athlete(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
+    // Senior
     val years: String,
     val style: String,
     val weight: Int,

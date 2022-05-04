@@ -30,7 +30,41 @@ object WeightFight {
                 womanWrestlingJrSenior
             }
             else -> {
-                listOf(55555)
+                emptyList()
+            }
+        }
+
+    fun getListWeightSelected(style: Int, category: Int): List<Int> =
+        when (style) {
+            R.string.greco_roman -> {
+                when (category) {
+                    R.string.category_u20, R.string.category_senior -> {
+                        grecoRomanJrSenior
+                    }
+                    else -> {
+                        emptyList()
+                    }
+                }
+            }
+            R.string.woman_wrestling -> {
+                when (category) {
+                    R.string.category_u20, R.string.category_senior -> {
+                        womanWrestlingJrSenior
+                    }
+                    else -> {
+                        emptyList()
+                    }
+                }
+            }
+            else -> {
+                when (category) {
+                    R.string.category_u20, R.string.category_senior -> {
+                        freeStyleJrSenior
+                    }
+                    else -> {
+                        emptyList()
+                    }
+                }
             }
         }
 }

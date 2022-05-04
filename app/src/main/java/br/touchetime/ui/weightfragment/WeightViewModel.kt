@@ -8,6 +8,10 @@ import br.touchetime.data.model.WeightFight
 class WeightViewModel : ViewModel() {
 
     private var fight: Fight? = null
+    var style: Int? = null
+        private set
+    var category: Int? = null
+        private set
 
     fun setFight(fight: Fight) {
         this.fight = fight
@@ -21,4 +25,19 @@ class WeightViewModel : ViewModel() {
 
     fun getListWeight(context: Context): List<Int> =
         WeightFight.getListWeight(fight, context)
+
+    fun getListWeightSelected(): List<Int>? =
+        this.style?.let { style ->
+            this.category?.let { category ->
+                WeightFight.getListWeightSelected(style, category)
+            }
+        }
+
+    fun setStyle(style: Int) {
+        this.style = style
+    }
+
+    fun setCategory(category: Int) {
+        this.category = category
+    }
 }

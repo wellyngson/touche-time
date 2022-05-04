@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
-import br.touchetime.R
 import br.touchetime.data.model.Fight
 import br.touchetime.databinding.FragmentStyleBinding
 import br.touchetime.ui.bottomcontrol.BottomSheetDialogTransparentBackgroundFragment
@@ -51,10 +50,12 @@ class StyleFragment : BottomSheetDialogTransparentBackgroundFragment() {
         ) { position ->
             viewModel.setStyleSelected(getString(listStyle[position]))
 
-            viewModel.getFight()?.let { fight ->
-                onStyleSelected(
-                    fight
-                )
+            viewModel.getFight().let {
+                if (it != null) {
+                    onStyleSelectedResultFight(it)
+                } else {
+                    onStyleSelectedResult(listStyle[position])
+                }
             }
 
             parentFragmentManager.setFragmentResult(VIEW_STYLE_SELECTED, bundleOf())
@@ -62,15 +63,20 @@ class StyleFragment : BottomSheetDialogTransparentBackgroundFragment() {
         }
     }
 
-    private fun onStyleSelected(fight: Fight) {
-        onStyleSelectedResult(fight)
+    private fun onStyleSelectedResultFight(fight: Fight) {
+        parentFragmentManager.setFragmentResult(
+            STYLE_SELECTED_FIGHT,
+            bundleOf(
+                FIGHT to fight
+            )
+        )
     }
 
-    private fun onStyleSelectedResult(fight: Fight) {
+    private fun onStyleSelectedResult(style: Int) {
         parentFragmentManager.setFragmentResult(
             STYLE_SELECTED,
             bundleOf(
-                FIGHT to fight
+                STYLE to style
             )
         )
     }
@@ -78,7 +84,9 @@ class StyleFragment : BottomSheetDialogTransparentBackgroundFragment() {
     companion object {
         const val TAG = "br.touchetime.ui.stylefragment"
         const val FIGHT = "FIGHT"
+        const val STYLE = "STYLE"
         const val STYLE_SELECTED = "STYLE_SELECTED"
+        const val STYLE_SELECTED_FIGHT = "STYLE_SELECTED_FIGHT"
         const val VIEW_STYLE_SELECTED = "VIEW_STYLE_SELECTED"
         private const val ARG_FIGHT = "ARG_FIGHT"
 

@@ -14,6 +14,25 @@ class CreateAthleteViewModel @Inject constructor(
     private val athleteRepository: AthleteRepository,
 ) : ViewModel() {
 
+    var style: Int? = null
+        private set
+    var category: Int? = null
+        private set
+    var weight: Int? = null
+        private set
+
+    fun setStyle(style: Int) {
+        this.style = style
+    }
+
+    fun setCategory(category: Int) {
+        this.category = category
+    }
+
+    fun setWeight(weight: Int) {
+        this.weight = weight
+    }
+
     fun createAthlete(athlete: Athlete) {
         viewModelScope.launch {
             athleteRepository.createAthlete(athlete)

@@ -28,9 +28,9 @@ class CreateFightFragment : Fragment() {
     private val resultKeys = arrayOf(
         CategoryFragment.CATEGORY_SELECTED_FIGHT,
         CategoryFragment.VIEW_CATEGORY,
-        StyleFragment.STYLE_SELECTED,
+        StyleFragment.STYLE_SELECTED_FIGHT,
         StyleFragment.VIEW_STYLE_SELECTED,
-        WeightFragment.WEIGHT_SELECTED,
+        WeightFragment.WEIGHT_SELECTED_FIGHT,
         WeightFragment.VIEW_WEIGHT_SELECTED
     )
 
@@ -205,7 +205,7 @@ class CreateFightFragment : Fragment() {
             CategoryFragment.VIEW_CATEGORY -> {
                 viewCategorySelected()
             }
-            StyleFragment.STYLE_SELECTED -> {
+            StyleFragment.STYLE_SELECTED_FIGHT -> {
                 bundle.getParcelable<Fight>(StyleFragment.FIGHT)?.let { fight ->
                     fight.style?.let {
                         viewModel.setStyle(it)
@@ -215,7 +215,7 @@ class CreateFightFragment : Fragment() {
             StyleFragment.VIEW_STYLE_SELECTED -> {
                 viewStyleSelected()
             }
-            WeightFragment.WEIGHT_SELECTED -> {
+            WeightFragment.WEIGHT_SELECTED_FIGHT -> {
                 bundle.getParcelable<Fight>(WeightFragment.FIGHT)?.let { fight ->
                     fight.weight?.let {
                         viewModel.setWeight(it)

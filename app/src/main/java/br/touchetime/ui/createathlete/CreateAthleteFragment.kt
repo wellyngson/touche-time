@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import br.touchetime.MainActivity
 import br.touchetime.data.model.Athlete
 import br.touchetime.databinding.FragmentCreateAthleteBinding
 import br.touchetime.ui.categoryfragment.CategoryFragment
+import br.touchetime.ui.chooseathlete.ChooseAthleteFragment
 import br.touchetime.ui.stylefragment.StyleFragment
 import br.touchetime.ui.weightfragment.WeightFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,8 +20,12 @@ class CreateAthleteFragment : Fragment() {
 
     private lateinit var viewBinding: FragmentCreateAthleteBinding
     private val viewModel: CreateAthleteViewModel by viewModels()
+    private val mainActivity: MainActivity?
+        get() = activity as? MainActivity
     private val resultKeys = arrayOf(
-        CategoryFragment.CATEGORY_SELECTED
+        CategoryFragment.CATEGORY_SELECTED,
+        StyleFragment.STYLE_SELECTED,
+        WeightFragment.WEIGHT_SELECTED
     )
 
     override fun onCreateView(
@@ -44,7 +50,10 @@ class CreateAthleteFragment : Fragment() {
     private fun setupResultKeysListeners() {
         resultKeys.forEach {
             when (it) {
-                CategoryFragment.CATEGORY_SELECTED -> childFragmentManager
+                CategoryFragment.CATEGORY_SELECTED,
+                StyleFragment.STYLE_SELECTED,
+                WeightFragment.WEIGHT_SELECTED,
+                -> childFragmentManager
                 else -> activity?.supportFragmentManager
             }?.setFragmentResultListener(
                 it,
@@ -57,23 +66,35 @@ class CreateAthleteFragment : Fragment() {
     private fun handleResultKey(key: String, bundle: Bundle) {
         when (key) {
             CategoryFragment.CATEGORY_SELECTED -> selectCategory(bundle)
+            StyleFragment.STYLE_SELECTED -> selectStyle(bundle)
+            WeightFragment.WEIGHT_SELECTED -> selectWeight(bundle)
         }
     }
 
     private fun setupCreateAthlete() {
         viewBinding.apply {
             createAthlete.setOnClickListener {
-                val athlete = Athlete(
-                    name = nameText.text.toString(),
-                    style = styleText.text.toString(),
-                    years = categoryText.text.toString(),
-                    weight = weightText.text.toString().toInt(),
-                    defeat = 0,
-                    win = 0,
-                    fight = 0,
-                )
+                viewModel.apply {
+                    style?.let { style ->
+                        category?.let { category ->
+                            weight?.let { weight ->
+                                createAthlete(
+                                    Athlete(
+                                        name = nameText.text.toString(),
+                                        style = getString(style),
+                                        years = getString(category),
+                                        weight = weight,
+                                        defeat = 0,
+                                        win = 0,
+                                        fight = 0,
+                                    )
+                                )
+                            }
+                        }
+                    }
+                }
 
-                viewModel.createAthlete(athlete)
+                navigateToCreateAthlete()
             }
         }
     }
@@ -92,14 +113,41 @@ class CreateAthleteFragment : Fragment() {
 
     private fun setupWeight() {
         viewBinding.weightText.setOnClickListener {
-            WeightFragment.show(childFragmentManager)
+            WeightFragment.show(
+                fragmentManager = childFragmentManager,
+                style = viewModel.style,
+                category = viewModel.category
+            )
         }
     }
 
     private fun selectCategory(bundle: Bundle) {
         (bundle.getSerializable(CategoryFragment.CATEGORY) as? Int)?.let {
-            viewBinding.categoryText.text = getString(it)
+            viewModel.setCategory(it)
+            viewBinding.categoryText.text =
+                viewModel.category?.let { category -> getString(category) }
         }
+    }
+
+    private fun selectStyle(bundle: Bundle) {
+        (bundle.getSerializable(StyleFragment.STYLE) as? Int)?.let {
+            viewModel.setStyle(it)
+            viewBinding.styleText.text = viewModel.style?.let { style -> getString(style) }
+        }
+    }
+
+    private fun selectWeight(bundle: Bundle) {
+        (bundle.getSerializable(WeightFragment.WEIGHT) as? Int)?.let {
+            viewModel.setWeight(it)
+            viewBinding.weightText.text = it.toString() + "KG"
+        }
+    }
+
+    private fun navigateToCreateAthlete() {
+        mainActivity?.navigateToFragment(
+            ChooseAthleteFragment.newInstance(),
+            ChooseAthleteFragment.TAG
+        )
     }
 
     companion object {
