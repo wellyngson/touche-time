@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipChildren="false"
-    android:clipToPadding="false"
+    android:clickable="true"
+    android:clipToPadding="true"
+    android:focusable="true"
     android:orientation="vertical"
-    android:paddingHorizontal="@dimen/spacing_normal">
+    android:padding="@dimen/spacing_normal">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/settings_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_xx_large"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -43,157 +44,169 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <include
-        android:id="@+id/red"
-        layout="@layout/view_individual_score_red"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_x_large"
-        android:layout_marginBottom="@dimen/spacing_normal" />
+        android:overScrollMode="never"
+        android:paddingVertical="@dimen/spacing_x_large">
 
-    <include
-        android:id="@+id/blue"
-        layout="@layout/view_individual_score_blue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_middle"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/spacing_middle"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/round"
-            style="@style/TextViewRoundChronometer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/spacing_normal"
-            android:text="@string/round_1" />
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="2dp"
-            android:background="@color/gray_primary" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/chronometer_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        tools:background="?background">
-
-        <LinearLayout
-            android:id="@+id/timer_container"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/ten_minutes_chronometer"
-                style="@style/TextChronometer"
+            <include
+                android:id="@+id/red"
+                layout="@layout/view_individual_score_red"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_normal" />
+
+            <include
+                android:id="@+id/blue"
+                layout="@layout/view_individual_score_blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="@dimen/min_width_number_chronometer"
-                android:layout_marginEnd="@dimen/spacing_small"
-                android:background="@drawable/item_chronometer_background"
-                android:gravity="center|end"
-                android:text="0" />
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:layout_marginBottom="@dimen/spacing_middle"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/minutes_chronometer"
-                style="@style/TextChronometer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="@dimen/min_width_number_chronometer"
-                android:layout_marginEnd="@dimen/spacing_normal"
-                android:background="@drawable/item_chronometer_background"
-                android:gravity="center|end"
-                android:text="2" />
+                <TextView
+                    android:id="@+id/round"
+                    style="@style/TextViewRoundChronometer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:text="@string/round_1" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:background="@color/gray_primary" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:id="@+id/chronometer_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:background="?background">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="@dimen/spacing_normal"
-                    android:layout_height="@dimen/spacing_normal"
-                    android:layout_marginBottom="@dimen/spacing_small"
-                    android:background="@drawable/background_point_chronometer" />
+                <LinearLayout
+                    android:id="@+id/timer_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="@dimen/spacing_normal"
-                    android:layout_height="@dimen/spacing_normal"
-                    android:background="@drawable/background_point_chronometer" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/ten_minutes_chronometer"
+                        style="@style/TextChronometer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_small"
+                        android:background="@drawable/item_chronometer_background"
+                        android:gravity="center|end"
+                        android:minWidth="@dimen/min_width_number_chronometer"
+                        android:text="0" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/minutes_chronometer"
+                        style="@style/TextChronometer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:background="@drawable/item_chronometer_background"
+                        android:gravity="center|end"
+                        android:minWidth="@dimen/min_width_number_chronometer"
+                        android:text="2" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="@dimen/spacing_normal"
+                            android:layout_height="@dimen/spacing_normal"
+                            android:layout_marginBottom="@dimen/spacing_small"
+                            android:background="@drawable/background_point_chronometer" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="@dimen/spacing_normal"
+                            android:layout_height="@dimen/spacing_normal"
+                            android:background="@drawable/background_point_chronometer" />
+
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/ten_seconds_chronometer"
+                        style="@style/TextChronometer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_normal"
+                        android:layout_marginEnd="@dimen/spacing_small"
+                        android:background="@drawable/item_chronometer_background"
+                        android:gravity="center|end"
+                        android:minWidth="@dimen/min_width_number_chronometer"
+                        android:text="0" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/seconds_chronometer"
+                        style="@style/TextChronometer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/item_chronometer_background"
+                        android:gravity="center|end"
+                        android:minWidth="@dimen/min_width_number_chronometer"
+                        android:text="0" />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/chronometer_controller_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/refresh"
+                        android:layout_width="@dimen/spacing_big"
+                        android:layout_height="@dimen/spacing_big"
+                        android:background="@drawable/background_circle_gray"
+                        android:src="@drawable/refresh_enabled_or_disabled" />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/play_or_pause"
+                        android:layout_width="@dimen/ic_play_chronometer"
+                        android:layout_height="@dimen/ic_play_chronometer"
+                        android:layout_marginHorizontal="@dimen/spacing_normal"
+                        android:background="@drawable/background_circle_gray"
+                        android:src="@drawable/icon_play_pause" />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/edit"
+                        android:layout_width="@dimen/spacing_big"
+                        android:layout_height="@dimen/spacing_big"
+                        android:background="@drawable/background_circle_gray"
+                        android:src="@drawable/edit_enabled_or_disabled" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/ten_seconds_chronometer"
-                style="@style/TextChronometer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_normal"
-                android:minWidth="@dimen/min_width_number_chronometer"
-                android:layout_marginEnd="@dimen/spacing_small"
-                android:background="@drawable/item_chronometer_background"
-                android:gravity="center|end"
-                android:text="0" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/seconds_chronometer"
-                style="@style/TextChronometer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="@dimen/min_width_number_chronometer"
-                android:background="@drawable/item_chronometer_background"
-                android:gravity="center|end"
-                android:text="0" />
-
-        </LinearLayout>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/chronometer_controller_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/refresh"
-                android:layout_width="@dimen/spacing_big"
-                android:layout_height="@dimen/spacing_big"
-                android:background="@drawable/background_circle_gray"
-                android:src="@drawable/refresh_enabled_or_disabled" />
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/play_or_pause"
-                android:layout_width="@dimen/ic_play_chronometer"
-                android:layout_height="@dimen/ic_play_chronometer"
-                android:layout_marginHorizontal="@dimen/spacing_normal"
-                android:background="@drawable/background_circle_gray"
-                android:src="@drawable/icon_play_pause" />
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/edit"
-                android:layout_width="@dimen/spacing_big"
-                android:layout_height="@dimen/spacing_big"
-                android:background="@drawable/background_circle_gray"
-                android:src="@drawable/edit_enabled_or_disabled" />
-
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </LinearLayout>
+    </ScrollView>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
