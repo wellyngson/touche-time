@@ -21,6 +21,7 @@
         <item name="colorBackgroundComponentsGraySecondary">@color/gray_quaternary</item>
         <item name="colorBackgroundCategory">@color/gray_background_category</item>
         <item name="colorBackgroundButton">@color/orange_primary</item>
+        <item name="colorBackgroundButtonDisable">@color/orange_secondary</item>
         <item name="colorBackgroundButtonSelected">@color/white</item>
         <item name="colorBackgroundButtonItem">@color/gray_background_category_item</item>
         <item name="colorTextPrimary">@color/white</item>

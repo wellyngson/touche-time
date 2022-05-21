@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import br.touchetime.MainActivity
 import br.touchetime.R
+import br.touchetime.data.model.Athlete
 import br.touchetime.data.model.UiState
 import br.touchetime.databinding.FragmentScoreBinding
 import br.touchetime.ui.editfightfragment.EditFightBottomSheetFragment
@@ -48,6 +50,9 @@ class ScoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        readArgs()
+        setupAthleteRedObserver()
+        setupAthleteBlueObserver()
         setupTypeFight()
         setupListenersRed()
         setupListenersBlue()
@@ -55,6 +60,28 @@ class ScoreFragment : Fragment() {
         setupListenersRefreshAndEdit()
         setupObservers()
         setupHomeFragment()
+    }
+
+    private fun readArgs() {
+        (arguments?.getParcelable<Athlete>(ATHLETE_RED))?.let {
+            viewModel.setupAthleteRed(it)
+        }
+
+        (arguments?.getParcelable<Athlete>(ATHLETE_BLUE))?.let {
+            viewModel.setupAthleteBlue(it)
+        }
+    }
+
+    private fun setupAthleteRedObserver() {
+        viewModel.athleteRed.observe(viewLifecycleOwner) {
+            viewBinding.red.name.text = it.name
+        }
+    }
+
+    private fun setupAthleteBlueObserver() {
+        viewModel.athleteBlue.observe(viewLifecycleOwner) {
+            viewBinding.blue.name.text = it.name
+        }
     }
 
     private fun setupTypeFight() {
@@ -260,10 +287,20 @@ class ScoreFragment : Fragment() {
         const val TAG = "br.wrestling.ui.scorefragment"
         const val RED = "red"
         const val BLUE = "blue"
+        const val ATHLETE_RED = "athlete_red"
+        const val ATHLETE_BLUE = "athlete_blue"
 
         const val START_ROUND = 120000L // 10000L - 180000L
         const val START_INTERVAL = 30000L // 5000L - 30000L
 
-        fun newInstance() = ScoreFragment()
+        fun newInstance(
+            athleteRed: Athlete? = null,
+            athleteBlue: Athlete? = null,
+        ) = ScoreFragment().apply {
+            arguments = bundleOf(
+                ATHLETE_RED to athleteRed,
+                ATHLETE_BLUE to athleteBlue
+            )
+        }
     }
 }

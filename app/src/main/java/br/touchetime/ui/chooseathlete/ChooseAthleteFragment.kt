@@ -1,19 +1,20 @@
 package br.touchetime.ui.chooseathlete
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import br.touchetime.MainActivity
 import br.touchetime.R
 import br.touchetime.data.model.Athlete
 import br.touchetime.databinding.FragmentChooseAthleteBinding
-import br.touchetime.ui.createathlete.CreateAthleteFragment
+import br.touchetime.ui.scorefragment.ScoreFragment
 import br.touchetime.ui.selectathlete.SelectAthleteFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_score.*
 
 @AndroidEntryPoint
 class ChooseAthleteFragment : Fragment() {
@@ -39,18 +40,28 @@ class ChooseAthleteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupAthleteSelected(RED)
         setupResultKeyListeners()
         setupRedBlueAthlete()
         setupRedAthete()
+        setupRedObserver()
         setupBlueAthlete()
+        setupBlueObserver()
         setupCreateAthlete()
     }
 
+    private fun setupAthleteSelected(const: String) {
+        viewModel.setupAthleteSelected(const)
+    }
+
     private fun setupCreateAthlete() {
-        viewBinding.createAthlete.setOnClickListener {
+        viewBinding.startFight.setOnClickListener {
             mainActivity?.navigateToFragment(
-                CreateAthleteFragment.newInstance(),
-                CreateAthleteFragment.TAG
+                ScoreFragment.newInstance(
+                    viewModel.athleteRed.value,
+                    viewModel.athleteBlue.value
+                ),
+                ScoreFragment.TAG,
             )
         }
     }
@@ -80,16 +91,12 @@ class ChooseAthleteFragment : Fragment() {
     private fun setRedAthlete(bundle: Bundle) {
         bundle.getParcelable<Athlete>(SelectAthleteFragment.ATHLETE)?.let {
             viewModel.setupRedAthlete(it)
-
-            Log.d("athleteSelected", it.name + " - RED")
         }
     }
 
     private fun setBlueAthlete(bundle: Bundle) {
         bundle.getParcelable<Athlete>(SelectAthleteFragment.ATHLETE)?.let {
             viewModel.setupBlueAthlete(it)
-
-            Log.d("athleteSelected", it.name + " - BLUE")
         }
     }
 
@@ -109,13 +116,33 @@ class ChooseAthleteFragment : Fragment() {
 
     private fun setupRedAthete() {
         viewBinding.redAthlete.setOnClickListener {
+            setupAthleteSelected(RED)
             openSelectAthlete(SelectAthleteFragment.RED)
+        }
+    }
+
+    private fun setupRedObserver() {
+        viewModel.athleteRed.observe(viewLifecycleOwner) {
+            viewBinding.apply {
+                redAthleteSelected.isVisible = it != null
+                redAthleteSelected.text = it.name
+            }
         }
     }
 
     private fun setupBlueAthlete() {
         viewBinding.blueAthlete.setOnClickListener {
+            setupAthleteSelected(BLUE)
             openSelectAthlete(SelectAthleteFragment.BLUE)
+        }
+    }
+
+    private fun setupBlueObserver() {
+        viewModel.athleteBlue.observe(viewLifecycleOwner) {
+            viewBinding.apply {
+                blueAthleteSelected.isVisible = it != null
+                blueAthleteSelected.text = it.name
+            }
         }
     }
 
@@ -125,6 +152,8 @@ class ChooseAthleteFragment : Fragment() {
 
     companion object {
         const val TAG = "br.touchetime.ui.chooseathlete"
+        const val RED = "red"
+        const val BLUE = "blue"
 
         fun newInstance() = ChooseAthleteFragment()
     }

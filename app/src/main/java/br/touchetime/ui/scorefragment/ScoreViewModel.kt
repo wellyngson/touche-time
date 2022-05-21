@@ -1,7 +1,10 @@
 package br.touchetime.ui.scorefragment
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.touchetime.data.model.Athlete
 import br.touchetime.data.model.UiState
 import br.touchetime.data.model.UiStateScore
 import br.touchetime.data.repository.ScoreRepository
@@ -20,10 +23,26 @@ class ScoreViewModel @Inject constructor(
     private val _scoreRed = MutableStateFlow(UiStateScore(scoreRepository.getScoreRed(), UiState.Initial))
     private val _scoreBlue = MutableStateFlow(UiStateScore(scoreRepository.getScoreBlue(), UiState.Initial))
     private val _technicalSuperiority = MutableStateFlow(UiStateScore(scoreRepository.getTechnicalSuperiority(), UiState.Initial))
+    private val _athleteRed = MutableLiveData<Athlete>()
+    private val _athleteBlue = MutableLiveData<Athlete>()
 
     val scoreRed: StateFlow<UiStateScore<Int>> get() = _scoreRed
     val scoreBlue: StateFlow<UiStateScore<Int>> get() = _scoreBlue
     val technicalSuperiority: StateFlow<UiStateScore<Int>> get() = _technicalSuperiority
+    val athleteRed: LiveData<Athlete> = _athleteRed
+    val athleteBlue: LiveData<Athlete> = _athleteBlue
+
+    fun setupAthleteRed(athlete: Athlete) {
+        viewModelScope.launch {
+            _athleteRed.postValue(athlete)
+        }
+    }
+
+    fun setupAthleteBlue(athlete: Athlete) {
+        viewModelScope.launch {
+            _athleteBlue.postValue(athlete)
+        }
+    }
 
     // Change Red
 

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
@@ -33,11 +34,30 @@
             android:layout_marginTop="@dimen/spacing_normal"
             android:text="@string/red_athlete" />
 
-        <br.touchetime.ui.common.ChooseFight
-            android:id="@+id/red_athlete"
+        <FrameLayout
+            android:id="@+id/red_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_normal" />
+            android:layout_marginTop="@dimen/spacing_normal">
+
+            <br.touchetime.ui.common.ChooseFight
+                android:id="@+id/red_athlete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/red_athlete_selected"
+                style="@style/TextViewCategory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_category_style_weight"
+                android:gravity="center"
+                android:text="@string/greco_roman"
+                android:textColor="?colorTextSecondary"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+        </FrameLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/TextViewTitleFragmentCategory"
@@ -46,21 +66,41 @@
             android:layout_marginTop="@dimen/spacing_normal"
             android:text="@string/blue_athlete" />
 
-        <br.touchetime.ui.common.ChooseFight
-            android:id="@+id/blue_athlete"
+        <FrameLayout
+            android:id="@+id/blue_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_normal" />
+            android:layout_marginTop="@dimen/spacing_normal">
+
+            <br.touchetime.ui.common.ChooseFight
+                android:id="@+id/blue_athlete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/blue_athlete_selected"
+                style="@style/TextViewCategory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_category_style_weight"
+                android:gravity="center"
+                android:text="@string/greco_roman"
+                android:textColor="?colorTextSecondary"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+        </FrameLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/create_athlete"
+        android:id="@+id/start_fight"
         style="@style/ButtonAppCompat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_button"
-        android:text="@string/create_athlete"
+        android:text="@string/start_fight"
+        android:enabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

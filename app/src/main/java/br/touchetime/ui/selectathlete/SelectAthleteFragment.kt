@@ -86,6 +86,7 @@ class SelectAthleteFragment : BaseBottomSheetDialogFragment() {
                     viewBinding.apply {
                         loading.isVisible = true
                         athletes.isVisible = false
+                        emptyList.isVisible = false
                     }
                 }
                 is NetworkState.Loaded -> {
@@ -98,6 +99,7 @@ class SelectAthleteFragment : BaseBottomSheetDialogFragment() {
                     viewBinding.apply {
                         loading.isVisible = false
                         athletes.isVisible = false
+                        emptyList.isVisible = true
                     }
                 }
                 is NetworkState.Idle -> {

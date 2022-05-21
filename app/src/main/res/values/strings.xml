@@ -41,4 +41,5 @@
     <string name="category_senior">Sênior</string>
     <string name="years">Idade</string>
     <string name="name">Nome</string>
+    <string name="athlete_not_found">Nenhum atleta cadastrado</string>
 </resources>

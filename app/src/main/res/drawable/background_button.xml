@@ -2,9 +2,25 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="@color/colorRippleEffect">
     <item>
-        <shape>
-            <solid android:color="?colorBackgroundButton" />
-            <corners android:radius="@dimen/spacing_small" />
-        </shape>
+        <selector>
+            <item android:state_enabled="true">
+                <shape>
+                    <solid android:color="?colorBackgroundButton" />
+                    <corners android:radius="@dimen/spacing_small" />
+                </shape>
+            </item>
+            <item android:state_enabled="false">
+                <shape>
+                    <solid android:color="?colorBackgroundButtonDisable" />
+                    <corners android:radius="@dimen/spacing_small" />
+                </shape>
+            </item>
+            <item>
+                <shape>
+                    <solid android:color="?colorBackgroundButtonDisable" />
+                    <corners android:radius="@dimen/spacing_small" />
+                </shape>
+            </item>
+        </selector>
     </item>
 </ripple>

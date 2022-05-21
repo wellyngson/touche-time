@@ -63,32 +63,15 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/name_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_normal"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/nationality"
-            android:fontFamily="@font/inter_medium"
-            android:layout_width="40dp"
-            android:layout_height="29dp"
-            android:layout_marginEnd="@dimen/spacing_small"
-            tools:src="@tools:sample/avatars" />
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/name"
+            android:layout_marginTop="@dimen/spacing_xx_large"
             style="@style/TextViewIndividualScoreName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:text="@string/gabriel_ferreira"/>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/score"
@@ -99,6 +82,6 @@
         style="@style/TextViewIndividualScore"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/score_container"
-        app:layout_constraintTop_toBottomOf="@id/name_container" />
+        app:layout_constraintTop_toBottomOf="@id/name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
