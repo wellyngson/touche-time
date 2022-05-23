@@ -1,11 +1,14 @@
 package br.touchetime.ui.scorefragment
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.touchetime.data.model.Athlete
 import br.touchetime.data.model.UiState
 import br.touchetime.data.model.UiStateScore
 import br.touchetime.data.repository.ScoreRepository
-import br.touchetime.extension.changeTimer
+import br.touchetime.extension.checkVictory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,13 +20,29 @@ class ScoreViewModel @Inject constructor(
     private val scoreRepository: ScoreRepository
 ) : ViewModel() {
 
-    private val _scoreRed = MutableStateFlow(UiStateScore(0, UiState.Initial))
-    private val _scoreBlue = MutableStateFlow(UiStateScore(0, UiState.Initial))
-    private val _technicalSuperiority = MutableStateFlow(UiStateScore(8, UiState.Initial))
+    private val _scoreRed = MutableStateFlow(UiStateScore(scoreRepository.getScoreRed(), UiState.Initial))
+    private val _scoreBlue = MutableStateFlow(UiStateScore(scoreRepository.getScoreBlue(), UiState.Initial))
+    private val _technicalSuperiority = MutableStateFlow(UiStateScore(scoreRepository.getTechnicalSuperiority(), UiState.Initial))
+    private val _athleteRed = MutableLiveData<Athlete>()
+    private val _athleteBlue = MutableLiveData<Athlete>()
 
     val scoreRed: StateFlow<UiStateScore<Int>> get() = _scoreRed
     val scoreBlue: StateFlow<UiStateScore<Int>> get() = _scoreBlue
     val technicalSuperiority: StateFlow<UiStateScore<Int>> get() = _technicalSuperiority
+    val athleteRed: LiveData<Athlete> = _athleteRed
+    val athleteBlue: LiveData<Athlete> = _athleteBlue
+
+    fun setupAthleteRed(athlete: Athlete) {
+        viewModelScope.launch {
+            _athleteRed.postValue(athlete)
+        }
+    }
+
+    fun setupAthleteBlue(athlete: Athlete) {
+        viewModelScope.launch {
+            _athleteBlue.postValue(athlete)
+        }
+    }
 
     // Change Red
 
@@ -31,13 +50,18 @@ class ScoreViewModel @Inject constructor(
         val scoreRedRepository = scoreRepository.addScoreRed()
         _scoreRed.value = UiStateScore(scoreRedRepository, UiState.Success)
 
-        if (checkVictory(scoreRedRepository, _scoreBlue.value.score)) {
+        if (checkVictory(
+                scoreRedRepository,
+                _scoreBlue.value.score,
+                scoreRepository.getTechnicalSuperiority()
+            )
+        ) {
             _scoreRed.value = UiStateScore(scoreRedRepository, UiState.Finish)
         }
     }
 
     fun removeScoreRed() = viewModelScope.launch {
-        val scoreRedInitial = _scoreRed.value.score
+        val scoreRedInitial = scoreRepository.getScoreRed()
 
         if (scoreRedInitial > 0) {
             _scoreRed.value = UiStateScore(scoreRepository.removeScoreRed(), UiState.Success)
@@ -52,13 +76,18 @@ class ScoreViewModel @Inject constructor(
         val scoreBlueRepository = scoreRepository.addScoreBlue()
         _scoreBlue.value = UiStateScore(scoreBlueRepository, UiState.Success)
 
-        if (checkVictory(scoreBlueRepository, _scoreRed.value.score)) {
+        if (checkVictory(
+                scoreBlueRepository,
+                _scoreRed.value.score,
+                scoreRepository.getTechnicalSuperiority()
+            )
+        ) {
             _scoreBlue.value = UiStateScore(scoreBlueRepository, UiState.Finish)
         }
     }
 
     fun removeScoreBlue() = viewModelScope.launch {
-        val scoreBlueInitial = _scoreBlue.value.score
+        val scoreBlueInitial = scoreRepository.getScoreBlue()
 
         if (scoreBlueInitial > 0) {
             _scoreBlue.value = UiStateScore(scoreRepository.removeScoreBlue(), UiState.Success)
@@ -67,99 +96,9 @@ class ScoreViewModel @Inject constructor(
         }
     }
 
-    // Technical Superiority Change
+    // Params
 
-    fun changeParameters() = viewModelScope.launch {
-        val scoreRedInitial = scoreRed.value.score
-        val scoreBlueInitial = scoreBlue.value.score
+    fun getTimeRound(): String = scoreRepository.getTimeRound()
 
-        _technicalSuperiority.value = UiStateScore(
-            technicalSuperiorityEditFight.value.score,
-            UiState.Success
-        )
-
-        if (checkVictory(scoreRedInitial, scoreBlueInitial)) {
-            _scoreRed.value = UiStateScore(scoreRedInitial, UiState.Finish)
-        } else if (checkVictory(scoreBlueInitial, scoreRedInitial)) {
-            _scoreBlue.value = UiStateScore(scoreBlueInitial, UiState.Finish)
-        }
-    }
-
-    private fun checkVictory(scoreAthleteOne: Int, scoreAthleteTwo: Int): Boolean {
-        val technicalSuperiorityInitial = _technicalSuperiority.value.score
-
-        return (scoreAthleteOne - scoreAthleteTwo) >= technicalSuperiorityInitial
-    }
-
-    // EditFightFragment
-
-    private val _technicalSuperiorityEditFight = MutableStateFlow(UiStateScore(8, UiState.Initial))
-    private val _numberRoundEditFight = MutableStateFlow(UiStateScore(2, UiState.Initial))
-    private val _timeRoundEditFight = MutableStateFlow(UiStateScore("03:00", UiState.Initial))
-    private val _timeIntervalEditFight = MutableStateFlow(UiStateScore("00:30", UiState.Initial))
-
-    val technicalSuperiorityEditFight: StateFlow<UiStateScore<Int>> get() = _technicalSuperiorityEditFight
-    val numberRoundEditFight: StateFlow<UiStateScore<Int>> get() = _numberRoundEditFight
-    val timeRoundEditFight: StateFlow<UiStateScore<String>> get() = _timeRoundEditFight
-    val timeIntervalEditFight: StateFlow<UiStateScore<String>> = _timeIntervalEditFight
-
-    fun addTechnicalSuperiority() = viewModelScope.launch {
-        var technicalSuperiorityFinal = _technicalSuperiorityEditFight.value.score
-
-        _technicalSuperiorityEditFight.value = UiStateScore(++technicalSuperiorityFinal, UiState.Success)
-    }
-
-    fun removeTechnicalSuperiority() = viewModelScope.launch {
-        var technicalSuperiorityFinal = _technicalSuperiorityEditFight.value.score
-
-        if (technicalSuperiorityFinal > 1) {
-            _technicalSuperiorityEditFight.value = UiStateScore(--technicalSuperiorityFinal, UiState.Success)
-        } else {
-            _technicalSuperiorityEditFight.value = UiStateScore(1, UiState.Success)
-        }
-    }
-
-    fun addNumberRounds() = viewModelScope.launch {
-        var numberRoundFinal = _numberRoundEditFight.value.score
-
-        _numberRoundEditFight.value = UiStateScore(++numberRoundFinal, UiState.Success)
-    }
-
-    fun removeNumberRound() = viewModelScope.launch {
-        var numberRoundFinal = _numberRoundEditFight.value.score
-
-        if (numberRoundFinal > 1) {
-            _numberRoundEditFight.value = UiStateScore(--numberRoundFinal, UiState.Success)
-        } else {
-            _numberRoundEditFight.value = UiStateScore(1, UiState.Success)
-        }
-    }
-
-    fun addTimeRound() = viewModelScope.launch {
-        val minutes = _timeRoundEditFight.value.score.substring(0, 2).toInt()
-        val seconds = _timeRoundEditFight.value.score.substring(3).toInt()
-
-        _timeRoundEditFight.value = UiStateScore(changeTimer(minutes, seconds, 10), UiState.Success)
-    }
-
-    fun removeTimeRound() = viewModelScope.launch {
-        val minutes = _timeRoundEditFight.value.score.substring(0, 2).toInt()
-        val seconds = _timeRoundEditFight.value.score.substring(3).toInt()
-
-        _timeRoundEditFight.value = UiStateScore(changeTimer(minutes, seconds, -10), UiState.Success)
-    }
-
-    fun addTimeInterval() {
-        val minutes = _timeIntervalEditFight.value.score.substring(0, 2).toInt()
-        val seconds = _timeIntervalEditFight.value.score.substring(3).toInt()
-
-        _timeIntervalEditFight.value = UiStateScore(changeTimer(minutes, seconds, 10), UiState.Success)
-    }
-
-    fun removeTimeInterval() {
-        val minutes = _timeIntervalEditFight.value.score.substring(0, 2).toInt()
-        val seconds = _timeIntervalEditFight.value.score.substring(3).toInt()
-
-        _timeIntervalEditFight.value = UiStateScore(changeTimer(minutes, seconds, -10), UiState.Success)
-    }
+    fun getTimeInterval(): String = scoreRepository.getTimeInterval()
 }

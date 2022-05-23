@@ -20,6 +20,7 @@
     // Colors
     <color name="black_primary">#151515</color>
     <color name="black_secondary">#222222</color>
+    <color name="black_tertiary">#191919</color>
     <color name="red_primary">#EA222D</color>
     <color name="red_secondary">#FF424C</color>
     <color name="blue_primary">#1565FF</color>
@@ -29,7 +30,9 @@
     <color name="gray_tertiary">#272727</color>
     <color name="gray_quaternary">#343434</color>
     <color name="gray_background_category">#1C1C1C</color>
+    <color name="gray_background_category_item">#3A3A3A</color>
     <color name="orange_primary">#FE7E16</color>
+    <color name="orange_secondary">#65452B</color>
     <color name="smoke">#666666</color>
     <color name="color_control_highlight">#40FFFFFF</color>
 

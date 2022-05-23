@@ -5,9 +5,9 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/background_score_blue"
     android:paddingStart="@dimen/spacing_x_large"
-    android:paddingEnd="@dimen/spacing_normal"
-    android:background="@drawable/background_score_blue">
+    android:paddingEnd="@dimen/spacing_normal">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/foul_container"
@@ -32,7 +32,7 @@
             style="@style/TextViewIndividualScoreFoul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"/>
+            android:text="0" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -42,63 +42,46 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_middle"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/score"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/score"
-        app:layout_constraintBottom_toBottomOf="@id/score">
+        app:layout_constraintTop_toTopOf="@id/score">
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/add_score"
             android:layout_width="@dimen/spacing_xxx_large"
             android:layout_height="@dimen/spacing_xxx_large"
             android:layout_marginBottom="@dimen/spacing_small"
-            android:src="@drawable/ic_add"
-            android:background="@drawable/background_components_blue" />
+            android:background="@drawable/background_components_blue"
+            android:src="@drawable/ic_add" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/remove_score"
             android:layout_width="@dimen/spacing_xxx_large"
             android:layout_height="@dimen/spacing_xxx_large"
-            android:src="@drawable/ic_remove"
-            android:background="@drawable/background_components_blue" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/name_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_normal"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/nationality"
-            android:fontFamily="@font/inter_medium"
-            android:layout_width="40dp"
-            android:layout_height="29dp"
-            android:layout_marginEnd="@dimen/spacing_small"
-            tools:src="@tools:sample/avatars" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/name"
-            style="@style/TextViewIndividualScoreName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/gabriel_ferreira"/>
+            android:background="@drawable/background_components_blue"
+            android:src="@drawable/ic_remove" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/name"
+        style="@style/TextViewIndividualScoreName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gabriel_ferreira"
+        android:layout_marginTop="@dimen/spacing_xx_large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/score"
+        style="@style/TextViewIndividualScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/spacing_xx_large"
         android:text="0"
-        style="@style/TextViewIndividualScore"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/score_container"
-        app:layout_constraintTop_toBottomOf="@id/name_container" />
+        app:layout_constraintTop_toBottomOf="@id/name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

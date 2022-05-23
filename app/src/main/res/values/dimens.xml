@@ -9,6 +9,8 @@
     <dimen name="bottom_sheet_thumb_indicator_height">4dp</dimen>
     <dimen name="bottom_sheet_thumb_indicator_width">64dp</dimen>
     <dimen name="bottom_sheet_thumb_indicator_top_offset">14dp</dimen>
+    <dimen name="max_height_bottom_sheet">400dp</dimen>
+    <dimen name="base_bottom_sheet_min_height">380dp</dimen>
 
     <dimen name="font_title_score">64sp</dimen>
     <dimen name="font_foul_size">40sp</dimen>

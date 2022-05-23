@@ -2,19 +2,28 @@
 <resources>
     <attr name="colorBackgroundDefault" format="color" />
     <attr name="colorBackgroundComponents" format="color" />
+    <attr name="colorBackgroundComponentsDisable" format="color" />
     <attr name="colorBackgroundComponentsGray" format="color" />
     <attr name="colorBackgroundComponentsGraySecondary" format="color" />
     <attr name="colorBackgroundCategory" format="color" />
     <attr name="colorBackgroundButton" format="color" />
+    <attr name="colorBackgroundButtonDisable" format="color" />
+    <attr name="colorBackgroundButtonSelected" format="color" />
+    <attr name="colorBackgroundButtonItem" format="color" />
     <attr name="colorTextPrimary" format="color" />
+    <attr name="colorTextSecondary" format="color" />
     <attr name="colorDescriptionChooseFight" format="color" />
+    <attr name="colorDescriptionChooseFightDisabled" format="color" />
     <attr name="colorDialogBackground" format="color"/>
     <attr name="colorBottomSheetThumbIndicator" format="color"/>
+    <attr name="maxHeightRecyclerViewBottomSheet" format="integer" />
 
     <declare-styleable name="ChooseFight">
         <attr name="title" format="string"/>
         <attr name="icon" format="reference"/>
         <attr name="description" format="string"/>
+        <attr name="visible" format="boolean" />
+        <attr name="enabled" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="EditFightCharacteristics">
@@ -23,5 +32,10 @@
         <attr name="addFoul" format="reference"/>
         <attr name="removeFoul" format="reference"/>
         <attr name="isScore" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="AthletesLoadingListView">
+        <attr name="loadingSize" format="integer" />
+        <attr name="skeletonMaskColor" format="integer" />
     </declare-styleable>
 </resources>

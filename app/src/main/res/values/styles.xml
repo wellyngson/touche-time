@@ -16,14 +16,21 @@
 
         <item name="colorBackgroundDefault">@color/color_default_background</item>
         <item name="colorBackgroundComponents">@color/black_secondary</item>
+        <item name="colorBackgroundComponentsDisable">@color/black_tertiary</item>
         <item name="colorBackgroundComponentsGray">@color/gray_primary</item>
         <item name="colorBackgroundComponentsGraySecondary">@color/gray_quaternary</item>
         <item name="colorBackgroundCategory">@color/gray_background_category</item>
         <item name="colorBackgroundButton">@color/orange_primary</item>
+        <item name="colorBackgroundButtonDisable">@color/orange_secondary</item>
+        <item name="colorBackgroundButtonSelected">@color/white</item>
+        <item name="colorBackgroundButtonItem">@color/gray_background_category_item</item>
         <item name="colorTextPrimary">@color/white</item>
+        <item name="colorTextSecondary">@color/colorPrimary</item>
         <item name="colorDescriptionChooseFight">@color/gray_secondary</item>
+        <item name="colorDescriptionChooseFightDisabled">@color/gray_tertiary</item>
         <item name="colorDialogBackground">@color/gray_quaternary</item>
         <item name="colorBottomSheetThumbIndicator">@color/smoke</item>
+        <item name="maxHeightRecyclerViewBottomSheet">@dimen/max_height_bottom_sheet</item>
     </style>
 
     <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -31,6 +38,13 @@
         <item name="android:windowBackground">@drawable/splash_screen_background</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowMinWidthMajor">500dp</item>
+        <item name="android:windowMinWidthMinor">90%</item>
     </style>
 
     <style name="TextViewBasic">
@@ -55,7 +69,6 @@
     </style>
 
     <style name="TextViewDescriptionChooseFight">
-        <item name="android:textColor">?colorDescriptionChooseFight</item>
         <item name="android:letterSpacing">0.02</item>
     </style>
 

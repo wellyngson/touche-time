@@ -9,25 +9,13 @@ import kotlinx.android.parcel.Parcelize
 @Entity
 data class Athlete(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int = 0,
     val name: String,
-    val years: Years,
-    val weight: Weight,
-    val style: Style,
-    val score: Int,
-    val foul: Int,
+    // Senior
+    val years: String,
+    val style: String,
+    val weight: Int,
+    val defeat: Int,
+    val win: Int,
+    val fight: Int,
 ) : Parcelable
-
-enum class Years(val years: String) {
-    // Infantil, escolar, cadete...
-}
-
-enum class Weight(val weight: Int) {
-    // 66,55...
-}
-
-enum class Style(val style: String) {
-    GrecoRoman("grecoRoman"),
-    WomanWrestling("womanWrestling"),
-    FreeStyle("freeStyle")
-}

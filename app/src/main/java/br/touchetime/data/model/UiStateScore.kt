@@ -11,10 +11,3 @@ enum class UiState {
     Finish,
     Error
 }
-
-// sealed class UiStateScore<T> {
-//    data class Initial<T>(val score: T) : UiStateScore<T>()
-//    data class Success<T>(val score: T) : UiStateScore<T>()
-//    data class Finish<T>(val score: T) : UiStateScore<T>()
-//    data class Error<T>(val score: T) : UiStateScore<T>()
-// }

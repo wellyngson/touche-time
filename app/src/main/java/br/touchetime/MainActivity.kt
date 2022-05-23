@@ -32,8 +32,10 @@ class MainActivity : AppCompatActivity() {
         fragment: Fragment,
         tag: String,
     ) {
-        supportFragmentManager.commit(true) {
-            replace(viewBinding.container.id, fragment, tag)
-        }
+        supportFragmentManager
+            .beginTransaction()
+            .replace(viewBinding.container.id, fragment, tag)
+            .addToBackStack(null)
+            .commit()
     }
 }

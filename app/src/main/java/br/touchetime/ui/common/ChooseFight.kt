@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import br.touchetime.R
 import br.touchetime.databinding.ChooseFightBinding
@@ -41,5 +42,25 @@ class ChooseFight @JvmOverloads constructor(
     @Attr(R.styleable.ChooseFight_icon)
     fun setIcon(icon: Drawable?) {
         viewBindingComponent.icon.setImageDrawable(icon)
+    }
+
+    @Attr(R.styleable.ChooseFight_visible)
+    fun setIconVisibility(condition: Boolean) {
+        viewBindingComponent.icon.visibility = if (condition) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
+    }
+
+    @Attr(R.styleable.ChooseFight_enabled)
+    fun setComponentEnabled(condition: Boolean) {
+        condition.let {
+            viewBindingComponent.apply {
+                container.isEnabled = it
+                title.isEnabled = it
+                description.isEnabled = it
+            }
+        }
     }
 }

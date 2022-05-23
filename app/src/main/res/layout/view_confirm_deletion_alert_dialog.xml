@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_category"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_normal">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        style="@style/TextViewTitleFragmentCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deseja descartar?" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/description"
+        style="@style/TextViewRoundChronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:text="Essa ação não poderá ser desfeita" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancel"
+        style="@style/ButtonAppCompat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_x_large"
+        android:background="@drawable/background_button"
+        android:paddingHorizontal="@dimen/spacing_normal"
+        android:text="Cancelar" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirm"
+        style="@style/ButtonAppCompat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:background="@drawable/background_button_outlined"
+        android:paddingHorizontal="@dimen/spacing_normal"
+        android:text="Confirmar"
+        android:textColor="?colorTextPrimary" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

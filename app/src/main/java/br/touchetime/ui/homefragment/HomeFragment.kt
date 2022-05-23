@@ -6,22 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import br.touchetime.MainActivity
 import br.touchetime.R
 import br.touchetime.R.drawable
 import br.touchetime.databinding.FragmentHomeBinding
+import br.touchetime.ui.chooseathlete.ChooseAthleteFragment
 import br.touchetime.ui.scorefragment.ScoreFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var viewBinding: FragmentHomeBinding
+    private val viewModel: HomeViewModel by viewModels()
     private val mainActivity: MainActivity?
         get() = activity as? MainActivity
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         viewBinding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         return viewBinding.root
@@ -36,8 +41,8 @@ class HomeFragment : Fragment() {
 
     private fun setupScoreFragmentCustom() {
         viewBinding.customFight.setOnClickListener {
-            navigateToScoreFragment()
             mainActivity?.typeFight = CUSTOM_FIGHT
+            navigateToFragment(ScoreFragment.newInstance(), ScoreFragment.TAG)
         }
     }
 
@@ -46,26 +51,30 @@ class HomeFragment : Fragment() {
             setTitle(context.getString(R.string.official_fight))
             setDescription(context.getString(R.string.choose_fight_description))
             setIcon(getDrawable(context, drawable.ic_users_fight))
+            setIconVisibility(true)
+            setComponentEnabled(true)
         }
 
         viewBinding.customFight.apply {
             setTitle(context.getString(R.string.custom_fight))
             setDescription(context.getString(R.string.custom_fight_description))
             setIcon(getDrawable(context, drawable.ic_edit_fight))
+            setIconVisibility(true)
+            setComponentEnabled(true)
         }
     }
 
     private fun setupScoreFragmentDefault() {
         viewBinding.fight.setOnClickListener {
-            navigateToScoreFragment()
             mainActivity?.typeFight = DEFAULT_FIGHT
+            navigateToFragment(ChooseAthleteFragment.newInstance(), ChooseAthleteFragment.TAG)
         }
     }
 
-    private fun navigateToScoreFragment() {
+    private fun navigateToFragment(fragment: Fragment, key: String) {
         mainActivity?.navigateToFragment(
-            ScoreFragment.newInstance(),
-            ScoreFragment.TAG
+            fragment,
+            key
         )
     }
 
