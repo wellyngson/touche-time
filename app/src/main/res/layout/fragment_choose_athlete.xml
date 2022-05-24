@@ -91,6 +91,16 @@
 
         </FrameLayout>
 
+        <TextView
+            android:id="@+id/create_athlete"
+            style="@style/TextViewTitleFragmentCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_athlete"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:textAlignment="textEnd"
+            android:layout_gravity="end"/>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatButton
