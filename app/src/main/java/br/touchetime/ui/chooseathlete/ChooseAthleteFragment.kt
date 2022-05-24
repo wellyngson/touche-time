@@ -11,10 +11,10 @@ import br.touchetime.MainActivity
 import br.touchetime.R
 import br.touchetime.data.model.Athlete
 import br.touchetime.databinding.FragmentChooseAthleteBinding
+import br.touchetime.ui.createathlete.CreateAthleteFragment
 import br.touchetime.ui.scorefragment.ScoreFragment
 import br.touchetime.ui.selectathlete.SelectAthleteFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_score.*
 
 @AndroidEntryPoint
 class ChooseAthleteFragment : Fragment() {
@@ -47,14 +47,24 @@ class ChooseAthleteFragment : Fragment() {
         setupRedObserver()
         setupBlueAthlete()
         setupBlueObserver()
+        setupStartFight()
         setupCreateAthlete()
+    }
+
+    private fun setupCreateAthlete() {
+        viewBinding.createAthlete.setOnClickListener {
+            mainActivity?.navigateToFragment(
+                CreateAthleteFragment.newInstance(),
+                CreateAthleteFragment.TAG
+            )
+        }
     }
 
     private fun setupAthleteSelected(const: String) {
         viewModel.setupAthleteSelected(const)
     }
 
-    private fun setupCreateAthlete() {
+    private fun setupStartFight() {
         viewBinding.startFight.setOnClickListener {
             mainActivity?.navigateToFragment(
                 ScoreFragment.newInstance(
